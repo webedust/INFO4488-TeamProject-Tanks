@@ -4,12 +4,11 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Tank
 {
-    /// <summary>
-    /// Allows world objects to have collisions between them.
-    /// </summary>
+    /// <summary> Allows world objects to have collisions between them. </summary>
     internal class Collider
     {
         /// <summary> Shapes a collider can take. </summary>
@@ -19,6 +18,14 @@ namespace Tank
             Circle
         }
         #region Attributes
+        /// <summary> World position of the collider from the upper-left edge. </summary>
+        public Vector2 Pos
+        {
+            get 
+            {
+                return new(panel.Location.X, panel.Location.Y);
+            }
+        }
         Shapes shape = Shapes.Rectangle;
         /// <summary> The shape of this collider. </summary>
         /// <remarks> After being created a collider's shape should never change. </remarks>
@@ -40,6 +47,11 @@ namespace Tank
         #endregion
         #region References
         GameHandler gh;
+        /// <summary>
+        /// Invisible panel associated with this collider.
+        /// Used to track the collider's world space position.
+        /// </summary>
+        Panel panel;
         #endregion
         #region Events
         /// <summary>
@@ -63,6 +75,8 @@ namespace Tank
             this.shape = shape;
             this.size = size;
 
+            panel = InstantiateColliderPanel();
+
             ConnectGameHandler();
         }
         /// <summary> Creates a new collider object with the specified shape. </summary>
@@ -79,6 +93,22 @@ namespace Tank
             // Convert float to a vector to pass as a valid parameter
             Vector2 vSize = new(radius, radius);
             BaseConstruct(gh, Shapes.Circle, vSize);
+        }
+        /// <summary>
+        /// Instantiates a Windows Forms panel
+        /// that matches this collider's size and position
+        /// for easier tracking of the collider in world space.
+        /// </summary>
+        /// <returns> Panel for use with this collider. </returns>
+        Panel InstantiateColliderPanel()
+        {
+            Panel panel = new();
+
+            // TODO
+
+            // Add to the form last
+            gh.CurrentForm.Controls.Add(panel);
+            return panel;
         }
         #endregion
         #region Event connections

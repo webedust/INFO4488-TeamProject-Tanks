@@ -18,6 +18,13 @@ namespace Tank
         const int interval = 100;
         #endregion
         #region References
+        Form currentForm;
+        /// <summary> Form being used for the game. </summary>
+        public Form CurrentForm
+        {
+            get { return currentForm; }
+            set { currentForm = value; }
+        }
         List<Collider> cols;
         /// <summary> All colliders currently present in the map. </summary>
         public List<Collider> Colliders
