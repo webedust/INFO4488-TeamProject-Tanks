@@ -13,7 +13,7 @@ namespace Tank
         public static float enemyHealth;
         public static float fireRate;
         public static float projectileDamage;
-        public static bool isDead = false;
+        
         public static bool goLeft;
         public static bool goRight;
         public static bool goUp;
@@ -34,7 +34,7 @@ namespace Tank
         {
             if(playerHealth <= 0)
             {
-                isDead = true;
+               
                 //Display game over 
             }
         }
@@ -43,7 +43,7 @@ namespace Tank
         {
             if(enemyHealth <= 0)
             {
-                isDead = true;
+              
                 //Remove dead enemy from the map
             }
         }
