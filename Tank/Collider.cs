@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -19,12 +20,10 @@ namespace Tank
         }
         #region Attributes
         /// <summary> World position of the collider from the upper-left edge. </summary>
-        public Vector2 Pos
+        public Point Pos
         {
-            get 
-            {
-                return new(panel.Location.X, panel.Location.Y);
-            }
+            get { return panel.Location; }
+            set { panel.Location = value; }
         }
         Shapes shape = Shapes.Rectangle;
         /// <summary> The shape of this collider. </summary>
@@ -33,13 +32,13 @@ namespace Tank
         {
             get { return shape; }
         }
-        Vector2 size;
+        Size size;
         /// <summary> Size of the collider. </summary>
         /// <remarks>
         /// If using a circle collider then the 
         /// x and y will represent the radius and will always be equal.
         /// </remarks>
-        public Vector2 Size
+        public Size Size
         {
             get { return size; }
             private set { size = value; }
@@ -69,13 +68,13 @@ namespace Tank
         /// <param name="gh"> GameHandler object. </param>
         /// <param name="shape"> Shape the collider should take. </param>
         /// <param name="size"> How large the collider should be in pixels. </param>
-        void BaseConstruct(GameHandler gh, Shapes shape, Vector2 size)
+        /// <param name="panel"> Windows Form panel to use for this collider's world space coordinates. </param>
+        void BaseConstruct(GameHandler gh, Shapes shape, Size size, Panel panel)
         {
             this.gh = gh;
             this.shape = shape;
             this.size = size;
-
-            panel = InstantiateColliderPanel();
+            this.panel = panel;
 
             ConnectGameHandler();
         }
@@ -83,32 +82,19 @@ namespace Tank
         /// <param name="gh"> GameHandler object. </param>
         /// <param name="shape"> Shape the collider should take. </param>
         /// <param name="size"> How large the collider should be in pixels. </param>
-        internal Collider(GameHandler gh, Shapes shape, Vector2 size)
-            => BaseConstruct(gh, shape, size);
+        /// <param name="panel"> Windows Form panel to use for this collider's world space coordinates. </param>
+        internal Collider(GameHandler gh, Shapes shape, Size size, Panel panel)
+            => BaseConstruct(gh, shape, size, panel);
         /// <summary> Creates a circlular collider object. </summary>
         /// <param name="gh"> GameHandler object. </param>
         /// <param name="radius"> Radius (size) of the circle collider. </param>
-        internal Collider(GameHandler gh, float radius)
+        /// <param name="panel"> Windows Form panel to use for this collider's world space coordinates. </param>
+        internal Collider(GameHandler gh, float radius, Panel panel)
         {
             // Convert float to a vector to pass as a valid parameter
-            Vector2 vSize = new(radius, radius);
-            BaseConstruct(gh, Shapes.Circle, vSize);
-        }
-        /// <summary>
-        /// Instantiates a Windows Forms panel
-        /// that matches this collider's size and position
-        /// for easier tracking of the collider in world space.
-        /// </summary>
-        /// <returns> Panel for use with this collider. </returns>
-        Panel InstantiateColliderPanel()
-        {
-            Panel panel = new();
-
-            // TODO
-
-            // Add to the form last
-            gh.CurrentForm.Controls.Add(panel);
-            return panel;
+            int irad = (int)radius;
+            Size vSize = new(irad, irad);
+            BaseConstruct(gh, Shapes.Circle, vSize, panel);
         }
         #endregion
         #region Event connections
@@ -119,6 +105,7 @@ namespace Tank
         {
             foreach (Collider col in gh.Colliders)
             {
+                // TODO: Optimize on distance
                 if (col == this)
                     return;
 
