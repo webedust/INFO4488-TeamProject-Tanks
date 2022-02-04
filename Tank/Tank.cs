@@ -8,16 +8,16 @@ namespace Tank
 {
     class Tank
     {
-        public static float speed;
-        public static float playerHealth;
-        public static float enemyHealth;
-        public static float fireRate;
-        public static float projectileDamage;
+        public float speed;
+        public float playerHealth;
+        public float enemyHealth;
+        public float fireRate;
+        public float projectileDamage;
         
-        public static bool goLeft;
-        public static bool goRight;
-        public static bool goUp;
-        public static bool goDown;
+        public bool goLeft;
+        public bool goRight;
+        public bool goUp;
+        public bool goDown;
 
 
 
