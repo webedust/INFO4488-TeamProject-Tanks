@@ -29,9 +29,11 @@ namespace Tank
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.healthLabel = new System.Windows.Forms.Label();
             this.healthBar = new System.Windows.Forms.ProgressBar();
             this.playerTank = new System.Windows.Forms.PictureBox();
+            this.gameTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.playerTank)).BeginInit();
             this.SuspendLayout();
             // 
@@ -63,6 +65,10 @@ namespace Tank
             this.playerTank.TabIndex = 2;
             this.playerTank.TabStop = false;
             // 
+            // gameTimer
+            // 
+            this.gameTimer.Tick += new System.EventHandler(this.gameTimer_Tick);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -84,6 +90,7 @@ namespace Tank
         private System.Windows.Forms.Label healthLabel;
         private System.Windows.Forms.ProgressBar healthBar;
         private System.Windows.Forms.PictureBox playerTank;
+        private System.Windows.Forms.Timer gameTimer;
     }
 }
 
