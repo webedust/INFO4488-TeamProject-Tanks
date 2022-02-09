@@ -17,5 +17,10 @@ namespace Tank
             InitializeComponent();
         }
 
+
+        private void gameTimer_Tick(object sender, EventArgs e)
+        {
+
+        }
     }
 }
