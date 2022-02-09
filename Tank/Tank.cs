@@ -23,6 +23,7 @@ namespace Tank
         //public bool goDown;
         public bool gameOver;
         #region References
+        Collider selfCollider;
         GameHandler gh;
         PictureBox pictureBox;
         public PictureBox PictureBox
@@ -35,10 +36,12 @@ namespace Tank
 
         #region Initial
         /// <summary> Creates a new tank. </summary>
+        /// <param name="selfCollider"> Collider to use for this tank. </param>
         /// <param name="gh"> Reference to the GameHandler running the current form. </param>
         /// <param name="pic"> PictureBox to use for rendering this tank to the form. </param>
-        public Tank(GameHandler gh, PictureBox pic)
+        public Tank(Collider selfCollider, GameHandler gh, PictureBox pic)
         {
+            this.selfCollider = selfCollider;
             this.gh = gh;
             pictureBox = pic;
         }
@@ -129,26 +132,42 @@ namespace Tank
             //Add code for firing the projectile 
         }
         /// <summary> Attempts to move towards the specified position. </summary>
-        /// <param name="a"> Current position. </param>
-        /// <param name="b"> Position to move towards. </param>
+        /// <param name="moveTo"> Position to move towards. </param>
         /// <returns> True if successfully moved. False if there's an obstacle in the way. </returns>
-        public bool TryMove(Point a, Point b)
+        public bool TryMove(Point moveTo)
         {
-            // Convert point. May not be needed so commented out
-            // uncomment if movement and collision testing seems odd.
-            //a = PictureBox.PointToClient(a);
-
+            // Set true if there's a collider where attempting to move.
+            bool colliderAtMovePos = false;
             foreach (Collider col in gh.Colliders)
             {
-                // Ignore any distant colliders to save memory usage
-                if (// To-do: Write a utils function for distance here)
+                // Skip if evaluating against self
+                if (col == selfCollider)
+                    continue;
 
-                // To-do: Collision testing will go here
+                // Ignore any distant colliders to save memory usage
+                const int distant = 150;
+                if (Utils.Distance(pictureBox.Location, col.Pos) > distant)
+                    continue;
+
+                // Furthest left/right/up/down the collider extends
+                int xMinPos = col.Pos.X - col.Size.Width / 2;
+                int xMaxPos = col.Pos.X + col.Size.Width / 2;
+                int yMinPos = col.Pos.Y - col.Size.Height / 2;
+                int yMaxPos = col.Pos.Y + col.Size.Height / 2;
+                // Test for collision against bounds of the collider
+                if (moveTo.X >= xMinPos && moveTo.X < xMaxPos
+                    || moveTo.Y >= yMinPos && moveTo.Y < yMinPos)
+                {
+                    colliderAtMovePos = true;
+                    break;
+                }
             }
 
             // Set new position if no colliders are in the way
-            PictureBox.Location = b;
-            return true;
+            if (!colliderAtMovePos)
+                PictureBox.Location = moveTo;
+
+            return colliderAtMovePos;
         }
     }
 }
