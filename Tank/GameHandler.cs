@@ -41,9 +41,9 @@ namespace Tank
             get { return rocks; }
             private set { rocks = value; }
         }
-        PlayerController player;
+        Tank player;
         /// <summary> Player object being used. </summary>
-        public PlayerController Player
+        public Tank Player
         {
             get { return player; }
             set { player = value; }
