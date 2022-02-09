@@ -40,13 +40,23 @@ namespace Tank
         /// Calculates a distance to move towards between the AI's current position
         /// and the specified point.
         /// </summary>
-        /// <param name="pt"> Point to move towards. Generally will be the player's position. </param>
+        /// <param name="pt"> Final point to move towards. Generally will be the player's position. </param>
         void MoveToPoint(Point pt)
         {
             Point current = tank.PictureBox.PointToClient(pt);
-            // TODO
-            Point newPos = ;
-            tank.PictureBox.Location = newPos;
+
+            // Don't move if within the stopping distance
+            const int stopDistance = 30;
+            if (Utils.Distance(current, pt) <= stopDistance)
+                return;
+
+            Point newPos = current;
+            if (pt.Y > current.Y)
+            {
+                newPos.Y += (int)tank.speed;
+            }
+
+            tank.TryMove(newPos);
         }
     }
 }
