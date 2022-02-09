@@ -41,6 +41,13 @@ namespace Tank
             get { return rocks; }
             private set { rocks = value; }
         }
+        Tank player;
+        /// <summary> Player object being used. </summary>
+        public Tank Player
+        {
+            get { return player; }
+            set { player = value; }
+        }
         Timer timer;
         #endregion
         #region Events

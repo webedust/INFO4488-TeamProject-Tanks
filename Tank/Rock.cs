@@ -40,7 +40,8 @@ namespace Tank
 
             gh.CurrentForm.Controls.Add(button);
 
-            // TODO: Remove debug
+            // TODO: Remove debug when thoroughly tested.
+            // Currently this adds a button to the form where the rock is.
             button.Text = "Rock";
             button.Size = col.Size;
             button.BackColor = Color.BlanchedAlmond;
@@ -52,6 +53,7 @@ namespace Tank
             // Convert panel's square width to a circle radius
             float rad = panel.Width / 2;
 
+            // To-do: Change from panel to PictureBox
             col = new(gh, rad, panel);
 
             DrawElementOnForm();
