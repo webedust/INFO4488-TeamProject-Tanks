@@ -34,7 +34,15 @@ namespace Tank
         /// <summary> AI makes a decision on how they should act. </summary>
         void MakeDecision()
         {
-            // TODO
+            Point current = tank.PictureBox.Location;
+            Point playerPos = gh.Player.PictureBox.Location;
+
+            // Don't move if within the stopping distance
+            const int stopDistance = 30;
+            if (Utils.Distance(current, playerPos) > stopDistance)
+                MoveToPoint(playerPos);
+
+            // TODO: Add shooting here when it has been created
         }
         /// <summary>
         /// Calculates a distance to move towards between the AI's current position
@@ -43,20 +51,57 @@ namespace Tank
         /// <param name="pt"> Final point to move towards. Generally will be the player's position. </param>
         void MoveToPoint(Point pt)
         {
-            Point current = tank.PictureBox.PointToClient(pt);
+            Point current = tank.PictureBox.Location;
 
-            // Don't move if within the stopping distance
-            const int stopDistance = 30;
-            if (Utils.Distance(current, pt) <= stopDistance)
-                return;
+            Point newPos = Utils.MoveToward(current, pt, (int)tank.speed);
+            if (!tank.TryMove(newPos))
+                MoveAroundObstacle();
+        }
+        /// <summary>
+        /// Call when the AI cannot path without getting stuck on an obstacle.
+        /// This attempts to resolve the collision by navigating diagonally
+        /// around the obstacle.
+        /// </summary>
+        void MoveAroundObstacle()
+        {
+            Point current = tank.PictureBox.Location;
 
-            Point newPos = current;
-            if (pt.Y > current.Y)
+            // Randomly choose a direction to try to move around the obstacle
+            Point move = current;
+            Random r = new();
+            // Ensure this is always equal to the length of the # of cases in the switch
+            const int numOfDecisions = 4;
+            int decision = r.Next(numOfDecisions);
+            // Amount to move in each decision in the x and y directions
+            const int xMove = 25;
+            const int yMove = 25;
+            switch (decision)
             {
-                newPos.Y += (int)tank.speed;
+                case 0: // Try to move diagonally up and right
+                    move.X += xMove;
+                    move.Y += yMove;
+                    break;
+                case 1: // Try to move diagonally up and left
+                    move.X -= xMove;
+                    move.Y += yMove;
+                    break;
+                case 2: // Try to move diagonally down and right
+                    move.X += xMove;
+                    move.Y -= yMove;
+                    break;
+                case 3: // Try to move diagonally down and left
+                    move.X -= xMove;
+                    move.Y -= yMove;
+                    break;
             }
 
-            tank.TryMove(newPos);
+            Point newPos = Utils.MoveToward(current, move,(int)tank.speed);
+            // Re-run if failed to resolve collision
+            if (!tank.TryMove(newPos))
+                MoveAroundObstacle();
+            // Otherwise return to normal decision making.
+            else
+                MakeDecision();
         }
     }
 }
