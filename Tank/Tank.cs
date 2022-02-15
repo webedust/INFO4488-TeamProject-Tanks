@@ -10,17 +10,17 @@ namespace Tank
 {
     class Tank
     {
-        public float speed;
+        public float speed = 2;
         public float playerHealth;
         public float enemyHealth;
         public float fireRate;
         public float projectileDamage;
 
         public string direction = "up";
-        //public bool goLeft;
-        //public bool goRight;
-        //public bool goUp;
-        //public bool goDown;
+        public bool goLeft = false;
+        public bool goRight = false;
+        public bool goUp = false;
+        public bool goDown = false;
         public bool gameOver;
         #region References
         Collider selfCollider;
@@ -46,62 +46,113 @@ namespace Tank
             pictureBox = pic;
         }
         #endregion
+
+        #region Unneccesary Code to be deleted later 
         //Need to add collision detection to movement and figure out how to attach
         //KeyIsDown and KeyIsUp events to the playerTank picturebox on the form
 
-        private void KeyIsDown(object sender, KeyEventArgs e)
+        //private void KeyIsDown(object sender, KeyEventArgs e)
+        //{
+        //    if(e.KeyCode == Keys.Left)
+        //    {
+        //        //goLeft = true;
+        //        direction = "left";
+        //        pictureBox.Image = Properties.Resources.PlayerTankLeft;
+
+        //        if (pictureBox.Left > 0)
+        //            pictureBox.Left -= (int)speed;
+        //    }
+
+        //    if (e.KeyCode == Keys.Right)
+        //    {
+        //        //goRight = true;
+        //        direction = "right";
+        //        pictureBox.Image = Properties.Resources.PlayerTankRight;
+
+        //        if (pictureBox.Right > 0)
+        //        {
+        //            // Modifying from left because it's the only public property
+        //            pictureBox.Left += (int)speed;
+        //        }
+        //    }
+
+        //    if (e.KeyCode == Keys.Up)
+        //    {
+        //        //goUp = true;
+        //        direction = "up";
+        //        pictureBox.Image = Properties.Resources.PlayerTankUp;
+
+        //        if (pictureBox.Top > 0)
+        //        {
+        //            pictureBox.Top -= (int)speed;
+        //        }
+        //    }
+
+        //    if (e.KeyCode == Keys.Down)
+        //    {
+        //        //goDown = true;
+        //        direction = "down";
+        //        pictureBox.Image = Properties.Resources.PlayerTankDown;
+
+        //        if (pictureBox.Bottom > 0)
+        //        {
+        //            // Modifying from top because it's the only public property
+        //            pictureBox.Top += (int)speed;
+        //        }
+        //    }
+        //}
+        #endregion
+
+        public void MoveLeft()
         {
-            if(e.KeyCode == Keys.Left)
+            direction = "left";
+            pictureBox.Image = Properties.Resources.PlayerTankLeft;
+
+            if (pictureBox.Left > 0)
+                pictureBox.Left -= (int)speed;
+        }
+
+        public void MoveRight()
+        {
+            direction = "right";
+            pictureBox.Image = Properties.Resources.PlayerTankRight;
+
+            if (pictureBox.Right > 0)
             {
-                //goLeft = true;
-                direction = "left";
-                pictureBox.Image = Properties.Resources.PlayerTankLeft;
-
-                if (pictureBox.Left > 0)
-                    pictureBox.Left -= (int)speed;
-            }
-
-            if (e.KeyCode == Keys.Right)
-            {
-                //goRight = true;
-                direction = "right";
-                pictureBox.Image = Properties.Resources.PlayerTankRight;
-
-                if (pictureBox.Right > 0)
-                {
-                    // Modifying from left because it's the only public property
-                    pictureBox.Left += (int)speed;
-                }
-            }
-
-            if (e.KeyCode == Keys.Up)
-            {
-                //goUp = true;
-                direction = "up";
-                pictureBox.Image = Properties.Resources.PlayerTankUp;
-
-                if (pictureBox.Top > 0)
-                {
-                    pictureBox.Top -= (int)speed;
-                }
-            }
-
-            if (e.KeyCode == Keys.Down)
-            {
-                //goDown = true;
-                direction = "down";
-                pictureBox.Image = Properties.Resources.PlayerTankDown;
-
-                if (pictureBox.Bottom > 0)
-                {
-                    // Modifying from top because it's the only public property
-                    pictureBox.Top += (int)speed;
-                }
+                // Modifying from left because it's the only public property
+                pictureBox.Left += (int)speed;
             }
         }
 
+        public void MoveUp()
+        {
+            direction = "up";
+            pictureBox.Image = Properties.Resources.PlayerTankUp;
 
-        public void takeDamage(float projectileDamage)
+            if (pictureBox.Top > 0)
+            {
+                pictureBox.Top -= (int)speed;
+            }
+        }
+
+        public void MoveDown()
+        {
+            direction = "down";
+            pictureBox.Image = Properties.Resources.PlayerTankDown;
+
+            if (pictureBox.Bottom > 0)
+            {
+                // Modifying from top because it's the only public property
+                pictureBox.Top += (int)speed;
+            }
+        }
+
+        public void Shoot(String direction)
+        {
+            //Add code for firing the projectile 
+        }
+
+        public void TakeDamage(float projectileDamage)
         {
             //Add logic to determine which entity got hit
             playerHealth -= projectileDamage;
@@ -109,7 +160,7 @@ namespace Tank
             enemyHealth -= projectileDamage;
         }
 
-        private void playerDeath()
+        public void PlayerDeath()
         {
             if(playerHealth <= 0)
             {
@@ -118,7 +169,7 @@ namespace Tank
             }
         }
 
-        private void enemyDeath()
+        public void EnemyDeath()
         {
             if(enemyHealth <= 0)
             {
@@ -127,10 +178,7 @@ namespace Tank
             }
         }
 
-        private void shoot()
-        {
-            //Add code for firing the projectile 
-        }
+        
         /// <summary> Attempts to move towards the specified position. </summary>
         /// <param name="moveTo"> Position to move towards. </param>
         /// <returns> True if successfully moved. False if there's an obstacle in the way. </returns>

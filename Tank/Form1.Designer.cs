@@ -33,7 +33,8 @@ namespace Tank
             this.healthLabel = new System.Windows.Forms.Label();
             this.healthBar = new System.Windows.Forms.ProgressBar();
             this.playerTank = new System.Windows.Forms.PictureBox();
-            this.gameTimer = new System.Windows.Forms.Timer(this.components);
+            this.GameTimer = new System.Windows.Forms.Timer(this.components);
+            this.panel1 = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.playerTank)).BeginInit();
             this.SuspendLayout();
             // 
@@ -65,20 +66,32 @@ namespace Tank
             this.playerTank.TabIndex = 2;
             this.playerTank.TabStop = false;
             // 
-            // gameTimer
+            // GameTimer
             // 
-            this.gameTimer.Tick += new System.EventHandler(this.gameTimer_Tick);
+            this.GameTimer.Enabled = true;
+            this.GameTimer.Interval = 20;
+            this.GameTimer.Tick += new System.EventHandler(this.GameTimer_Tick);
+            // 
+            // panel1
+            // 
+            this.panel1.Location = new System.Drawing.Point(104, 384);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 100);
+            this.panel1.TabIndex = 3;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 661);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.playerTank);
             this.Controls.Add(this.healthBar);
             this.Controls.Add(this.healthLabel);
             this.Name = "Form1";
             this.Text = "Tank Game";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);
+            this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.KeyIsUp);
             ((System.ComponentModel.ISupportInitialize)(this.playerTank)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -90,7 +103,8 @@ namespace Tank
         private System.Windows.Forms.Label healthLabel;
         private System.Windows.Forms.ProgressBar healthBar;
         private System.Windows.Forms.PictureBox playerTank;
-        private System.Windows.Forms.Timer gameTimer;
+        private System.Windows.Forms.Timer GameTimer;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 
