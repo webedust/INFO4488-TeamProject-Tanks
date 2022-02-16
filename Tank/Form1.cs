@@ -80,7 +80,7 @@ namespace Tank
                     panel1.BackColor = Color.Blue;
 
                     player.goRight = true;
-                    player.direction = "left";
+                    player.direction = "right";
                     playerTank.Image= Properties.Resources.PlayerTankRight;
                     break;
 
@@ -88,7 +88,7 @@ namespace Tank
                     panel1.BackColor = Color.Yellow;
 
                     player.goUp = true;
-                    player.direction = "left";
+                    player.direction = "up";
                     playerTank.Image = Properties.Resources.PlayerTankUp;
                     break;
 
@@ -96,7 +96,7 @@ namespace Tank
                     panel1.BackColor = Color.Green;
 
                     player.goDown = true;
-                    player.direction = "left";
+                    player.direction = "down";
                     playerTank.Image = Properties.Resources.PlayerTankDown;
                     break;
             }
