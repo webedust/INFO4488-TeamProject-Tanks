@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -16,18 +17,11 @@ namespace Tank
         public Form1()
         {
             InitializeComponent();
-            //Created these objects for testing purposes.
-            GameHandler gh = new GameHandler(this);
-            Collider collide = new Collider(gh, Collider.Shapes.Rectangle, playerTank.Size, panel1 );
-            player = new Tank(collide, gh, playerTank);
-        
-          
+            GameHandler gh = new(this);
+            player = gh.Player;
         }
-
-
-        private void GameTimer_Tick(object sender, EventArgs e)
+        void GameTimer_Tick(object sender, EventArgs e)
         {
-            
             if (player.playerHealth > 1)
             {
                 healthBar.Value = (int)player.playerHealth;
@@ -59,11 +53,9 @@ namespace Tank
                 player.MoveDown();
             }
         }
-
-
-
-        private void KeyIsDown(object sender, KeyEventArgs e)
+        void KeyIsDown(object sender, KeyEventArgs e)
         {
+            Debug.WriteLine($"Key pressed is {e.KeyCode}");
             //The panel back color changing is for testing purposes.
             panel1.BackColor = Color.Black;
             switch (e.KeyCode)
@@ -101,8 +93,7 @@ namespace Tank
                     break;
             }
         }
-
-        private void KeyIsUp(object sender, KeyEventArgs e)
+        void KeyIsUp(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
             {

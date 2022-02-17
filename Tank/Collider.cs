@@ -22,8 +22,8 @@ namespace Tank
         /// <summary> World position of the collider from the upper-left edge. </summary>
         public Point Pos
         {
-            get { return panel.Location; }
-            set { panel.Location = value; }
+            get { return ctrl.Location; }
+            set { ctrl.Location = value; }
         }
         Shapes shape = Shapes.Rectangle;
         /// <summary> The shape of this collider. </summary>
@@ -47,10 +47,10 @@ namespace Tank
         #region References
         GameHandler gh;
         /// <summary>
-        /// Invisible panel associated with this collider.
+        /// Windows form control associated with this collider.
         /// Used to track the collider's world space position.
         /// </summary>
-        Panel panel;
+        Control ctrl;
         #endregion
         #region Events
         /// <summary>
@@ -68,13 +68,13 @@ namespace Tank
         /// <param name="gh"> GameHandler object. </param>
         /// <param name="shape"> Shape the collider should take. </param>
         /// <param name="size"> How large the collider should be in pixels. </param>
-        /// <param name="panel"> Windows Form panel to use for this collider's world space coordinates. </param>
-        void BaseConstruct(GameHandler gh, Shapes shape, Size size, Panel panel)
+        /// <param name="ctrl"> Windows Form panel to use for this collider's world space coordinates. </param>
+        void BaseConstruct(GameHandler gh, Shapes shape, Size size, Control ctrl)
         {
             this.gh = gh;
             this.shape = shape;
             this.size = size;
-            this.panel = panel;
+            this.ctrl = ctrl;
 
             ConnectGameHandler();
         }
@@ -82,19 +82,19 @@ namespace Tank
         /// <param name="gh"> GameHandler object. </param>
         /// <param name="shape"> Shape the collider should take. </param>
         /// <param name="size"> How large the collider should be in pixels. </param>
-        /// <param name="panel"> Windows Form panel to use for this collider's world space coordinates. </param>
-        internal Collider(GameHandler gh, Shapes shape, Size size, Panel panel)
-            => BaseConstruct(gh, shape, size, panel);
+        /// <param name="ctrl"> Windows Form panel to use for this collider's world space coordinates. </param>
+        internal Collider(GameHandler gh, Shapes shape, Control ctrl)
+            => BaseConstruct(gh, shape, ctrl.Size, ctrl);
         /// <summary> Creates a circlular collider object. </summary>
         /// <param name="gh"> GameHandler object. </param>
         /// <param name="radius"> Radius (size) of the circle collider. </param>
-        /// <param name="panel"> Windows Form panel to use for this collider's world space coordinates. </param>
-        internal Collider(GameHandler gh, float radius, Panel panel)
+        /// <param name="ctrl"> Windows Form panel to use for this collider's world space coordinates. </param>
+        internal Collider(GameHandler gh, float radius, Control ctrl)
         {
             // Convert float to a vector to pass as a valid parameter
             int irad = (int)radius;
             Size vSize = new(irad, irad);
-            BaseConstruct(gh, Shapes.Circle, vSize, panel);
+            BaseConstruct(gh, Shapes.Circle, vSize, ctrl);
         }
         #endregion
         #region Event connections
