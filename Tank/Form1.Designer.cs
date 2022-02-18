@@ -88,6 +88,7 @@ namespace Tank
             this.Controls.Add(this.playerTank);
             this.Controls.Add(this.healthBar);
             this.Controls.Add(this.healthLabel);
+            this.KeyPreview = true;
             this.Name = "Form1";
             this.Text = "Tank Game";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);
