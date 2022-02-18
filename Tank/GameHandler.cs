@@ -92,13 +92,13 @@ namespace Tank
         {
             foreach (Control ctrl in CurrentForm.Controls)
                 // Set all panels on the form to rocks
-                if (ctrl != null && ctrl.GetType() == typeof(Panel))
+                if (ctrl != null && ctrl.Tag == "Rock")
                 {
-                    Panel panel = (Panel)ctrl;
+                    PictureBox pic = (PictureBox)ctrl;
                     Rock rock = new
                         (
                             this,
-                            panel
+                            pic
                         );
                     Rocks.Add(rock);
                     Debug.WriteLine($"Rock added at {rock.Pos}");
