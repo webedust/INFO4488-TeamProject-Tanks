@@ -72,6 +72,7 @@ namespace Tank
             timer.Tick += TickGameInterval;
             timer.Start();
 
+            InstantiatePlayer();
             InstantiateRocks();
         }
         /// <summary> Constructs a new GameHandler for the form. </summary>
@@ -89,31 +90,89 @@ namespace Tank
         /// <remarks> Should only be called once at the start to create the map/level/scene. </remarks>
         void InstantiateRocks()
         {
-            foreach (Control control in CurrentForm.Controls)
+            foreach (Control ctrl in CurrentForm.Controls)
                 // Set all panels on the form to rocks
-                if (control != null && control.GetType() == typeof(Panel))
+                if (ctrl != null && ctrl.Tag == "Rock")
                 {
-                    Panel panel = (Panel)control;
+                    PictureBox pic = (PictureBox)ctrl;
                     Rock rock = new
                         (
                             this,
-                            panel
+                            pic
                         );
                     Rocks.Add(rock);
                     Debug.WriteLine($"Rock added at {rock.Pos}");
                 }
         }
         /// <summary>
+        /// Instantiates the player game logic on the form control named <c>playerTank</c>.
+        /// This is case-sensitive.
+        /// </summary>
+        void InstantiatePlayer()
+        {
+            foreach (Control ctrl in CurrentForm.Controls)
+                if (ctrl != null && ctrl.Name == "playerTank")
+                {
+                    Collider col = new(this, Collider.Shapes.Rectangle, ctrl);
+                    player = new(col, this, (PictureBox)ctrl);
+                    return;
+                }
+        }
+        /// <summary>
+        /// How many intervals should pass between each subsequent spawn of enemy tanks.
+        /// </summary>
+        readonly int intervalGapBetweenSpawns = 500;
+        /// <summary>
+        /// Maximum amount of tanks that can be onscreen at once
+        /// before preventing more from spawning for performance concerns
+        /// </summary>
+        /// <remarks>
+        /// This value is checked at the <b>start</b> of the <c>InstantiateTanks()</c> function.
+        /// Later in the function a random number of enemy tanks are spawned,
+        /// at which point the total number of enemy tanks may exceed this "cap".
+        /// This is not a bug, and therefore this number should be thought of as a softcap only.
+        /// </remarks>
+        readonly int maxTanksAtOnce = 30;
+        /// <summary> Number of alive enemy tanks currently on the screen. </summary>
+        int currentTanks;
+        /// <summary>
         /// Instantiates <b>enemy</b> tanks as specified in a Map object.
         /// </summary>
         /// <remarks> Should be called on an interval to continually spawn in enemies. </remarks>
         void InstantiateTanks()
         {
-            // TODO: Do this after tanks have been implemented
+            if (currentTanks > maxTanksAtOnce)
+                return;
+
+            Random rand = new();
+            int tanks = rand.Next(1, 4);
+            for (int i = 0; i < tanks; i++)
+            {
+                PictureBox ctrl = new();
+                // TODO: This size will need to be changed, using 50 for testing
+                ctrl.Size = new System.Drawing.Size(50, 50);
+                CurrentForm.Controls.Add(ctrl);
+                Collider col = new(this, Collider.Shapes.Rectangle, ctrl);
+
+                Tank tank = new(col, this, ctrl);
+
+                AI_TankController ai = new(this, tank);
+
+                currentTanks++;
+            }
         }
         /// <summary>
-        /// Destroys any rocks that are still present in the scene/level.
+        /// Call whenever an AI-controlled tank has been killed/destroyed
+        /// to remove reference to it in the GameHandler.
         /// </summary>
+        public void OnAITankDeath()
+        {
+            currentTanks--;
+
+            if (currentTanks < 0)
+                throw new ArithmeticException("Number of current tanks should never be negative.");
+        }
+        /// <summary> Destroys any rocks that are still present in the scene/level. </summary>
         void DestroyRocks()
         {
             // TODO

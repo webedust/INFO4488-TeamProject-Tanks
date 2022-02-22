@@ -25,11 +25,20 @@ namespace Tank
             this.gh = gh;
             this.tank = tank;
 
+            ConnectEvents();
+
             // Make an initial decision
             MakeDecision();
             // TODO: When/if AI gets more advanced then add a loop here
             // to call MakeDecision() on a timer so the AI can change their course of action.
         }
+        #endregion
+        #region Event connections
+        void ConnectEvents() => tank.OnDeath += Die;
+        #endregion
+        #region Events
+        /// <summary> AI's tank is destroyed. </summary>
+        void Die(object sender, EventArgs e) => gh.OnAITankDeath();
         #endregion
         /// <summary> AI makes a decision on how they should act. </summary>
         void MakeDecision()

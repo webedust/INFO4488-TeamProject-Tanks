@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
 
 namespace Tank
@@ -46,15 +41,15 @@ namespace Tank
             button.Size = col.Size;
             button.BackColor = Color.BlanchedAlmond;
         }
-        internal Rock(GameHandler gh, Panel panel)
+        internal Rock(GameHandler gh, PictureBox pic)
         {
             this.gh = gh;
 
             // Convert panel's square width to a circle radius
-            float rad = panel.Width / 2;
+            float rad = pic.Width / 2;
 
             // To-do: Change from panel to PictureBox
-            col = new(gh, rad, panel);
+            col = new(gh, rad, pic);
 
             DrawElementOnForm();
         }

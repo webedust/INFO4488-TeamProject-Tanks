@@ -32,6 +32,10 @@ namespace Tank
             get { return pictureBox; }
         }
         #endregion
+        #region Events
+        /// <summary> Called at the end of a tank dying/being destroyed. </summary>
+        public event EventHandler OnDeath;
+        #endregion
 
 
         #region Initial
@@ -173,8 +177,8 @@ namespace Tank
         {
             if(enemyHealth <= 0)
             {
-              
-                //Remove dead enemy from the map
+                // TODO: Rest of Death code
+                OnDeath?.Invoke(this, EventArgs.Empty);
             }
         }
 
