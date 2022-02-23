@@ -41,19 +41,19 @@ namespace Tank
             //the player tank then begins to move across the screen, without user input.
             if (player.goLeft == true && playerTank.Left > 0)
             {
-                player.MoveLeft();
+                player.PlayerMove(Tank.Directions.Left);
             }
             if (player.goRight == true && playerTank.Left < this.ClientSize.Width)
             {
-                player.MoveRight();
+                player.PlayerMove(Tank.Directions.Right);
             }
             if (player.goUp == true && playerTank.Top > 0)
             {
-                player.MoveUp();
+                player.PlayerMove(Tank.Directions.Up);
             }
             if (player.goDown == true && playerTank.Left < this.ClientSize.Height)
             {
-                player.MoveDown();
+                player.PlayerMove(Tank.Directions.Down);
             }
         }
         void KeyIsDown(object sender, KeyEventArgs e)
@@ -100,19 +100,19 @@ namespace Tank
         {
             switch (e.KeyCode)
             {
-                case Keys.Left:
+                case Keys.A:
                     player.goLeft = false;
                     break;
 
-                case Keys.Right:
+                case Keys.D:
                     player.goRight = false;
                     break;
 
-                case Keys.Up:
+                case Keys.W:
                     player.goUp = false;
                     break;
 
-                case Keys.Down:
+                case Keys.S:
                     player.goDown = false;
                     break;
                 case Keys.Space:

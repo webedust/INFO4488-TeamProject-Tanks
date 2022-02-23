@@ -10,6 +10,14 @@ namespace Tank
 {
     class Tank
     {
+        /// <summary> All directions that the player can move the tank. </summary>
+        public enum Directions
+        {
+            Up,
+            Down,
+            Left,
+            Right
+        }
         public float speed = 2;
         public float playerHealth;
         public float enemyHealth;
@@ -105,8 +113,6 @@ namespace Tank
         //        }
         //    }
         //}
-        #endregion
-
         public void MoveLeft()
         {
             direction = "left";
@@ -150,7 +156,41 @@ namespace Tank
                 pictureBox.Top += (int)speed;
             }
         }
+        #endregion
+        /// <summary> Player moves the tank in the specified direction. </summary>
 
+        public void PlayerMove(Directions dir)
+        {
+            Point moveTo = pictureBox.Location;
+            switch (dir)
+            {
+                case Directions.Up:
+                    direction = "up";
+                    pictureBox.Image = Properties.Resources.PlayerTankUp;
+                    if (pictureBox.Top > 0)
+                        moveTo.Y -= (int)speed;
+                    break;
+                case Directions.Down:
+                    direction = "down";
+                    pictureBox.Image = Properties.Resources.PlayerTankDown;
+                    if (pictureBox.Bottom > 0)
+                        moveTo.Y += (int)speed;
+                    break;
+                case Directions.Left:
+                    direction = "left";
+                    pictureBox.Image = Properties.Resources.PlayerTankLeft;
+                    if (pictureBox.Left > 0)
+                        moveTo.X -= (int)speed;
+                    break;
+                case Directions.Right:
+                    direction = "right";
+                    pictureBox.Image = Properties.Resources.PlayerTankRight;
+                    if (pictureBox.Right > 0)
+                        moveTo.X += (int)speed;
+                    break;
+            }
+            TryMove(moveTo);
+        }
         public void Shoot(String direction)
         {
             //Add code for firing the projectile 
