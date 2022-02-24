@@ -75,14 +75,12 @@ namespace Tank
             this.shape = shape;
             this.size = size;
             this.ctrl = ctrl;
-
-            ConnectGameHandler();
         }
         /// <summary> Creates a new collider object with the specified shape. </summary>
         /// <param name="gh"> GameHandler object. </param>
         /// <param name="shape"> Shape the collider should take. </param>
         /// <param name="size"> How large the collider should be in pixels. </param>
-        /// <param name="ctrl"> Windows Form panel to use for this collider's world space coordinates. </param>
+        /// <param name="ctrl"> Windows Form control to use for this collider's world space coordinates. </param>
         internal Collider(GameHandler gh, Shapes shape, Control ctrl)
             => BaseConstruct(gh, shape, ctrl.Size, ctrl);
         /// <summary> Creates a circlular collider object. </summary>
@@ -92,26 +90,9 @@ namespace Tank
         internal Collider(GameHandler gh, float radius, Control ctrl)
         {
             // Convert float to a vector to pass as a valid parameter
-            int irad = (int)radius;
-            Size vSize = new(irad, irad);
+            int diameter = (int)radius * 2;
+            Size vSize = new(diameter, diameter);
             BaseConstruct(gh, Shapes.Circle, vSize, ctrl);
-        }
-        #endregion
-        #region Event connections
-        void ConnectGameHandler() => gh.OnIntervalTick += CheckForCollisions;
-        #endregion
-        #region Events
-        void CheckForCollisions(object sender, EventArgs e)
-        {
-            foreach (Collider col in gh.Colliders)
-            {
-                // TODO: Optimize on distance
-                if (col == this)
-                    return;
-
-                // TODO: Put calculations for the collider's coordinates here
-                // when they're added.
-            }
         }
         #endregion
     }

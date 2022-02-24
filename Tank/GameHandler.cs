@@ -92,7 +92,7 @@ namespace Tank
         {
             foreach (Control ctrl in CurrentForm.Controls)
                 // Set all panels on the form to rocks
-                if (ctrl != null && ctrl.Tag == "Rock")
+                if (ctrl != null && (string)ctrl.Tag == "Rock")
                 {
                     PictureBox pic = (PictureBox)ctrl;
                     Rock rock = new
@@ -100,8 +100,8 @@ namespace Tank
                             this,
                             pic
                         );
+                    Colliders.Add(rock.Collider);
                     Rocks.Add(rock);
-                    Debug.WriteLine($"Rock added at {rock.Pos}");
                 }
         }
         /// <summary>
@@ -152,7 +152,9 @@ namespace Tank
                 // TODO: This size will need to be changed, using 50 for testing
                 ctrl.Size = new System.Drawing.Size(50, 50);
                 CurrentForm.Controls.Add(ctrl);
+
                 Collider col = new(this, Collider.Shapes.Rectangle, ctrl);
+                Colliders.Add(col);
 
                 Tank tank = new(col, this, ctrl);
 

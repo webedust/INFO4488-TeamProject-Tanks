@@ -21,8 +21,10 @@ namespace Tank
         }
         #endregion
         #region References
-        /// <summary> Collider being used by this rock. </summary>
         Collider col;
+        /// <summary> Collider being used by this rock. </summary>
+        public Collider Collider
+        { get { return col; } }
         GameHandler gh;
         #endregion
 
@@ -48,7 +50,6 @@ namespace Tank
             // Convert panel's square width to a circle radius
             float rad = pic.Width / 2;
 
-            // To-do: Change from panel to PictureBox
             col = new(gh, rad, pic);
 
             DrawElementOnForm();

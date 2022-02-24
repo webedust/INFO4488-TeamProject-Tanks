@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,14 @@ namespace Tank
 {
     class Tank
     {
+        /// <summary> All directions that the player can move the tank. </summary>
+        public enum Directions
+        {
+            Up,
+            Down,
+            Left,
+            Right
+        }
         public int speed = 2;
         public int playerHealth;
         public int enemyHealth;
@@ -52,6 +61,7 @@ namespace Tank
         #endregion
 
 
+        #region
         //Add label for tank coordinates to help debug why tank won't move down
         //when on the right side of the screen.
         public void MoveLeft()
@@ -100,6 +110,38 @@ namespace Tank
         #endregion
         /// <summary> Player moves the tank in the specified direction. </summary>
 
+        public void PlayerMove(Directions dir)
+        {
+            Point moveTo = pictureBox.Location;
+            switch (dir)
+            {
+                case Directions.Up:
+                    direction = "up";
+                    pictureBox.Image = Properties.Resources.PlayerTankUp;
+                    if (pictureBox.Top > 0)
+                        moveTo.Y -= speed;
+                    break;
+                case Directions.Down:
+                    direction = "down";
+                    pictureBox.Image = Properties.Resources.PlayerTankDown;
+                    if (pictureBox.Bottom > 0)
+                        moveTo.Y += speed;
+                    break;
+                case Directions.Left:
+                    direction = "left";
+                    pictureBox.Image = Properties.Resources.PlayerTankLeft;
+                    if (pictureBox.Left > 0)
+                        moveTo.X -= speed;
+                    break;
+                case Directions.Right:
+                    direction = "right";
+                    pictureBox.Image = Properties.Resources.PlayerTankRight;
+                    if (pictureBox.Right > 0)
+                        moveTo.X += speed;
+                    break;
+            }
+            TryMove(moveTo);
+        }
         public void Shoot(String direction, Form form)
         {
             Bullet bullet = new Bullet();
@@ -159,16 +201,12 @@ namespace Tank
                 if (Utils.Distance(pictureBox.Location, col.Pos) > distant)
                     continue;
 
-                // Furthest left/right/up/down the collider extends
-                int xMinPos = col.Pos.X - col.Size.Width / 2;
-                int xMaxPos = col.Pos.X + col.Size.Width / 2;
-                int yMinPos = col.Pos.Y - col.Size.Height / 2;
-                int yMaxPos = col.Pos.Y + col.Size.Height / 2;
-                // Test for collision against bounds of the collider
-                if (moveTo.X >= xMinPos && moveTo.X < xMaxPos
-                    || moveTo.Y >= yMinPos && moveTo.Y < yMinPos)
+                Control potentialCollider =
+                    gh.CurrentForm.GetChildAtPoint(moveTo);
+                if (potentialCollider != null && (string)potentialCollider.Tag == "Rock")
                 {
                     colliderAtMovePos = true;
+                    Debug.WriteLine("Collider at move position");
                     break;
                 }
             }
