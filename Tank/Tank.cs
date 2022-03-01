@@ -10,7 +10,15 @@ namespace Tank
 {
     class Tank
     {
-        public int speed = 2;
+        public enum Directions
+        {
+            Up,
+            Down,
+            Left,
+            Right
+        }
+        //Change speed back after testing
+        public int speed = 10;
         public int playerHealth;
         public int enemyHealth;
         public int fireRate;
@@ -97,19 +105,20 @@ namespace Tank
                 pictureBox.Top += speed;
             }
         }
-        #endregion
         /// <summary> Player moves the tank in the specified direction. </summary>
 
         public void Shoot(String direction, Form form)
         {
             Bullet bullet = new Bullet();
             bullet.bulletDirection = direction;
+
+            //Set bullet to fire from tank 
+            bullet.leftFrame = pictureBox.Left + (pictureBox.Width / 2);
+            bullet.topFrame = pictureBox.Top + (pictureBox.Height / 2);
             bullet.CreateBullet(form);
 
-            bullet.leftFrame = pictureBox.Left;
-            bullet.topFrame = pictureBox.Top;
-            //Set bullet to fire from tank and delete bullet if it collides
-            //with something or if it travels off the screen
+            
+            
         }
 
         public void TakeDamage(int projectileDamage)
@@ -139,7 +148,38 @@ namespace Tank
                 OnDeath?.Invoke(this, EventArgs.Empty);
             }
         }
-
+        public void PlayerMove(Directions dir)
+        {
+            Point moveTo = pictureBox.Location;
+            switch (dir)
+            {
+                case Directions.Up:
+                    direction = "up";
+                    pictureBox.Image = Properties.Resources.PlayerTankUp;
+                    if (pictureBox.Top > 0)
+                        moveTo.Y -= (int)speed;
+                    break;
+                case Directions.Down:
+                    direction = "down";
+                    pictureBox.Image = Properties.Resources.PlayerTankDown;
+                    if (pictureBox.Bottom > 0)
+                        moveTo.Y += (int)speed;
+                    break;
+                case Directions.Left:
+                    direction = "left";
+                    pictureBox.Image = Properties.Resources.PlayerTankLeft;
+                    if (pictureBox.Left > 0)
+                        moveTo.X -= (int)speed;
+                    break;
+                case Directions.Right:
+                    direction = "right";
+                    pictureBox.Image = Properties.Resources.PlayerTankRight;
+                    if (pictureBox.Right > 0)
+                        moveTo.X += (int)speed;
+                    break;
+            }
+            TryMove(moveTo);
+        }
 
         /// <summary> Attempts to move towards the specified position. </summary>
         /// <param name="moveTo"> Position to move towards. </param>

@@ -22,6 +22,7 @@ namespace Tank
 
             GameHandler gh = new(this);
             player = gh.Player;
+            
         }
         void GameTimer_Tick(object sender, EventArgs e)
         {
@@ -38,21 +39,35 @@ namespace Tank
 
 
            
-            if (player.goLeft == true && playerTank.Left > 0)
+            //if (player.goLeft == true && playerTank.Left > 0)
+            if (player.goLeft == true)
             {
-                player.PlayerMove(Tank.Directions.Left);
+                if(playerTank.Left < 0)
+                {
+                    playerTank.Left = 1200;
+                    
+                } else
+                {
+                    player.PlayerMove(Tank.Directions.Left);
+
+                }
+                //player.PlayerMove(Tank.Directions.Left);
+                //player.MoveLeft();
             }
             if (player.goRight == true && playerTank.Left < this.ClientSize.Width)
             {
                 player.PlayerMove(Tank.Directions.Right);
+                //player.MoveRight();
             }
             if (player.goUp == true && playerTank.Top > 0)
             {
                 player.PlayerMove(Tank.Directions.Up);
+                //player.MoveUp();
             }
             if (player.goDown == true && playerTank.Top < this.ClientSize.Height)
             {
                 player.PlayerMove(Tank.Directions.Down);
+                //player.MoveDown();
             }
 
         }

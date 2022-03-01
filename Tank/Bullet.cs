@@ -24,8 +24,9 @@ namespace Tank
         {
             bullet.BackColor = Color.Red;
             bullet.Size = new Size(7, 7);
-            leftFrame = bullet.Left;
-            topFrame = bullet.Top;
+            bullet.Left = leftFrame;
+            bullet.Top = topFrame;
+          
 
             form.Controls.Add(bullet);
 
@@ -57,7 +58,13 @@ namespace Tank
                     break;
             }
 
-           
+            //Delete bullet if it collides with something or if it travels off the screen
+            if (bullet.Left < 10 || bullet.Left > 1200 || bullet.Top < 10 || bullet.Top > 700)
+            {
+                timer.Stop();
+                timer.Dispose();
+                bullet.Dispose();
+            }
         }
 
         public void OnCollision(Collider collisionType)
