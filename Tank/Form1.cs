@@ -22,7 +22,7 @@ namespace Tank
 
             GameHandler gh = new(this);
             player = gh.Player;
-            
+
         }
         void GameTimer_Tick(object sender, EventArgs e)
         {
@@ -38,36 +38,45 @@ namespace Tank
             }
 
 
-           
-            //if (player.goLeft == true && playerTank.Left > 0)
+
             if (player.goLeft == true)
             {
-                if(playerTank.Left < 0)
+                //When tank goes off the screen on the left, move it to the right side of the screen.
+                if (playerTank.Left < 0)
                 {
                     playerTank.Left = 1200;
-                    
-                } else
-                {
-                    player.PlayerMove(Tank.Directions.Left);
-
                 }
-                //player.PlayerMove(Tank.Directions.Left);
-                //player.MoveLeft();
+                player.PlayerMove(Tank.Directions.Left);
             }
-            if (player.goRight == true && playerTank.Left < this.ClientSize.Width)
+
+            if (player.goRight == true)
             {
+                //When tank goes off the screen on the right, move it to the left side of the screen.
+                if (playerTank.Left > 1200)
+                {
+                    playerTank.Left = 0;
+                }
                 player.PlayerMove(Tank.Directions.Right);
-                //player.MoveRight();
             }
-            if (player.goUp == true && playerTank.Top > 0)
+
+            if (player.goUp == true)
             {
+                //When tank goes off the screen on the top, move it to the bottom side of the screen.
+                if (playerTank.Top < 0)
+                {
+                    playerTank.Top = 700;
+                }
                 player.PlayerMove(Tank.Directions.Up);
-                //player.MoveUp();
             }
-            if (player.goDown == true && playerTank.Top < this.ClientSize.Height)
+
+            if (player.goDown == true)
             {
+                //When tank goes off the screen on the bottom, move it to the top side of the screen.
+                if (playerTank.Top > 700)
+                {
+                    playerTank.Top = 0;
+                }
                 player.PlayerMove(Tank.Directions.Down);
-                //player.MoveDown();
             }
 
         }

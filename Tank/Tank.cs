@@ -59,7 +59,7 @@ namespace Tank
         }
         #endregion
 
-
+        #region Depreciated movement code
         //Add label for tank coordinates to help debug why tank won't move down
         //when on the right side of the screen.
         public void MoveLeft()
@@ -105,8 +105,13 @@ namespace Tank
                 pictureBox.Top += speed;
             }
         }
-        /// <summary> Player moves the tank in the specified direction. </summary>
+        #endregion
 
+        /// <summary>
+        /// Allows for the tank to shoot a projectile depending on the direction.
+        /// </summary>
+        /// <param name="direction"> Direction the tank is facing. </param>
+        /// <param name="form">The game screen. </param>
         public void Shoot(String direction, Form form)
         {
             Bullet bullet = new Bullet();
@@ -120,7 +125,10 @@ namespace Tank
             
             
         }
-
+        /// <summary>
+        /// When a tank is hit cause it to take damage
+        /// </summary>
+        /// <param name="projectileDamage"> How much damage a tank will take. </param>
         public void TakeDamage(int projectileDamage)
         {
             //Add logic to determine which entity got hit
@@ -128,7 +136,9 @@ namespace Tank
 
             enemyHealth -= projectileDamage;
         }
-
+        /// <summary>
+        /// Player died and game will need to be reset.
+        /// </summary>
         public void PlayerDeath()
         {
             if (playerHealth <= 0)
@@ -137,7 +147,9 @@ namespace Tank
                 //Display game over 
             }
         }
-
+        /// <summary>
+        /// Enemy died and will need to be removed from the form.
+        /// </summary>
         public void EnemyDeath()
         {
             if (enemyHealth <= 0)
@@ -148,6 +160,8 @@ namespace Tank
                 OnDeath?.Invoke(this, EventArgs.Empty);
             }
         }
+
+        /// <summary> Player moves the tank in the specified direction. </summary>
         public void PlayerMove(Directions dir)
         {
             Point moveTo = pictureBox.Location;
