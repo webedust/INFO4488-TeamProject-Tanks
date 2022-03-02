@@ -182,14 +182,13 @@ namespace Tank
             }
         }
 
-
         /// <summary> Attempts to move towards the specified position. </summary>
         /// <param name="moveTo"> Position to move towards. </param>
         /// <returns> True if successfully moved. False if there's an obstacle in the way. </returns>
         public bool TryMove(Point moveTo)
         {
             // Set true if there's a collider where attempting to move.
-            bool colliderAtMovePos = false;
+            bool colAtMovePos = false;
             foreach (Collider col in gh.Colliders)
             {
                 // Skip if evaluating against self
@@ -197,25 +196,37 @@ namespace Tank
                     continue;
 
                 // Ignore any distant colliders to save memory usage
-                const int distant = 150;
-                if (Utils.Distance(pictureBox.Location, col.Pos) > distant)
+                const int distant = 80;
+                if (Utils.Distance(pictureBox.Location, col.Location) > distant)
                     continue;
 
-                Control potentialCollider =
-                    gh.CurrentForm.GetChildAtPoint(moveTo);
-                if (potentialCollider != null && (string)potentialCollider.Tag == "Rock")
+                // Check each edge for collision
+                Rectangle movePos = new
+                    (
+                        moveTo.X,
+                        moveTo.Y,
+                        PictureBox.Size.Width,
+                        PictureBox.Size.Height
+                    );
+                Rectangle colRect = new
+                    (
+                        col.Location.X,
+                        col.Location.Y,
+                        col.Size.Width,
+                        col.Size.Height
+                    );
+                if (colRect.IntersectsWith(movePos))
                 {
-                    colliderAtMovePos = true;
-                    Debug.WriteLine("Collider at move position");
+                    colAtMovePos = true;
                     break;
                 }
             }
 
-            // Set new position if no colliders are in the way
-            if (!colliderAtMovePos)
+            // Set new position if no obstacles are in the way
+            if (!colAtMovePos)
                 PictureBox.Location = moveTo;
 
-            return colliderAtMovePos;
+            return colAtMovePos;
         }
     }
 }

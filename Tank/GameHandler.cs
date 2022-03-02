@@ -6,6 +6,7 @@ using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tank.Properties;
 
 namespace Tank
 {
@@ -17,7 +18,7 @@ namespace Tank
     {
         #region Attributes
         /// <summary> Amount of time in <b>milliseconds</b> between each interval tick. </summary>
-        const int interval = 100;
+        const int interval = 5000;
         #endregion
         #region References
         Form currentForm;
@@ -34,13 +35,6 @@ namespace Tank
             get { return cols; }
             private set { cols = value; }
         }
-        List<Rock> rocks = new();
-        /// <summary> All rocks in the map. </summary>
-        public List<Rock> Rocks
-        {
-            get { return rocks; }
-            private set { rocks = value; }
-        }
         Tank player;
         /// <summary> Player object being used. </summary>
         public Tank Player
@@ -49,10 +43,6 @@ namespace Tank
             set { player = value; }
         }
         Timer timer;
-        #endregion
-        #region Events
-        /// <summary> Called each time a GameHandler interval occurs. </summary>
-        public event EventHandler OnIntervalTick;
         #endregion
 
 
@@ -69,7 +59,7 @@ namespace Tank
         {
             timer = new();
             timer.Interval = interval;
-            timer.Tick += TickGameInterval;
+            timer.Tick += AISpawnInterval;
             timer.Start();
 
             InstantiatePlayer();
@@ -100,8 +90,6 @@ namespace Tank
                             this,
                             pic
                         );
-                    Colliders.Add(rock.Collider);
-                    Rocks.Add(rock);
                 }
         }
         /// <summary>
@@ -113,15 +101,11 @@ namespace Tank
             foreach (Control ctrl in CurrentForm.Controls)
                 if (ctrl != null && ctrl.Name == "playerTank")
                 {
-                    Collider col = new(this, Collider.Shapes.Rectangle, ctrl);
+                    Collider col = new(this, ctrl);
                     player = new(col, this, (PictureBox)ctrl);
                     return;
                 }
         }
-        /// <summary>
-        /// How many intervals should pass between each subsequent spawn of enemy tanks.
-        /// </summary>
-        readonly int intervalGapBetweenSpawns = 500;
         /// <summary>
         /// Maximum amount of tanks that can be onscreen at once
         /// before preventing more from spawning for performance concerns
@@ -148,15 +132,18 @@ namespace Tank
             int tanks = rand.Next(1, 4);
             for (int i = 0; i < tanks; i++)
             {
-                PictureBox ctrl = new();
-                // TODO: This size will need to be changed, using 50 for testing
-                ctrl.Size = new System.Drawing.Size(50, 50);
-                CurrentForm.Controls.Add(ctrl);
+                PictureBox pic = new();
+                pic.Image = Resources.EnemyTankUp;
+                pic.Size = new(50, 75);
+                // To-do: Change to spawn off-screen, just 0 for testing
+                pic.Location = new(0, 0);
+                pic.SizeMode = PictureBoxSizeMode.StretchImage;
+                CurrentForm.Controls.Add(pic);
 
-                Collider col = new(this, Collider.Shapes.Rectangle, ctrl);
+                Collider col = new(this, pic);
                 Colliders.Add(col);
 
-                Tank tank = new(col, this, ctrl);
+                Tank tank = new(col, this, pic);
 
                 AI_TankController ai = new(this, tank);
 
@@ -174,15 +161,8 @@ namespace Tank
             if (currentTanks < 0)
                 throw new ArithmeticException("Number of current tanks should never be negative.");
         }
-        /// <summary> Destroys any rocks that are still present in the scene/level. </summary>
-        void DestroyRocks()
-        {
-            // TODO
-        }
         #endregion
-        void TickGameInterval(object sender, EventArgs e)
-        {
-            OnIntervalTick?.Invoke(this, EventArgs.Empty);
-        }
+        void AISpawnInterval(object sender, EventArgs e)
+            => InstantiateTanks();
     }
 }
