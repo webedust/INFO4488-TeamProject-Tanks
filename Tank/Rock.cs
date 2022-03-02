@@ -16,42 +16,25 @@ namespace Tank
         }
         public Point Pos 
         { 
-            get { return col.Pos; }
-            set { col.Pos = value; }
+            get { return col.Location; }
+            set { col.Location = value; }
         }
         #endregion
         #region References
-        /// <summary> Collider being used by this rock. </summary>
         Collider col;
+        /// <summary> Collider being used by this rock. </summary>
+        public Collider Collider
+        { get { return col; } }
         GameHandler gh;
         #endregion
 
 
         #region Initial
-        void DrawElementOnForm()
-        {
-            Button button = new();
-            button.Location = col.Pos;
-
-            gh.CurrentForm.Controls.Add(button);
-
-            // TODO: Remove debug when thoroughly tested.
-            // Currently this adds a button to the form where the rock is.
-            button.Text = "Rock";
-            button.Size = col.Size;
-            button.BackColor = Color.BlanchedAlmond;
-        }
         internal Rock(GameHandler gh, PictureBox pic)
         {
             this.gh = gh;
 
-            // Convert panel's square width to a circle radius
-            float rad = pic.Width / 2;
-
-            // To-do: Change from panel to PictureBox
-            col = new(gh, rad, pic);
-
-            DrawElementOnForm();
+            col = new(gh, pic);
         }
         #endregion
     }
