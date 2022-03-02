@@ -11,6 +11,14 @@ namespace Tank
 {
     class Tank
     {
+        /// <summary> All directions that the player can move the tank. </summary>
+        public enum Directions
+        {
+            Up,
+            Down,
+            Left,
+            Right
+        }
         public int speed = 10;
         public int playerHealth;
         public int enemyHealth;
@@ -51,53 +59,40 @@ namespace Tank
             pictureBox = pic;
         }
         #endregion
+        /// <summary> Player moves the tank in the specified direction. </summary>
 
-        //Add label for tank coordinates to help debug why tank won't move down
-        //when on the right side of the screen.
-        public void MoveLeft()
+        public void PlayerMove(Directions dir)
         {
-            direction = "left";
-            pictureBox.Image = Properties.Resources.PlayerTankLeft;
-
-            if (pictureBox.Left > 0)
-                pictureBox.Left -= speed;
-        }
-
-        public void MoveRight()
-        {
-            direction = "right";
-            pictureBox.Image = Properties.Resources.PlayerTankRight;
-
-            if (pictureBox.Right > 0)
+            Point moveTo = pictureBox.Location;
+            switch (dir)
             {
-                // Modifying from left because it's the only public property
-                pictureBox.Left += speed;
+                case Directions.Up:
+                    direction = "up";
+                    pictureBox.Image = Properties.Resources.PlayerTankUp;
+                    if (pictureBox.Top > 0)
+                        moveTo.Y -= speed;
+                    break;
+                case Directions.Down:
+                    direction = "down";
+                    pictureBox.Image = Properties.Resources.PlayerTankDown;
+                    if (pictureBox.Bottom > 0)
+                        moveTo.Y += speed;
+                    break;
+                case Directions.Left:
+                    direction = "left";
+                    pictureBox.Image = Properties.Resources.PlayerTankLeft;
+                    if (pictureBox.Left > 0)
+                        moveTo.X -= speed;
+                    break;
+                case Directions.Right:
+                    direction = "right";
+                    pictureBox.Image = Properties.Resources.PlayerTankRight;
+                    if (pictureBox.Right > 0)
+                        moveTo.X += speed;
+                    break;
             }
+            TryMove(moveTo);
         }
-
-        public void MoveUp()
-        {
-            direction = "up";
-            pictureBox.Image = Properties.Resources.PlayerTankUp;
-
-            if (pictureBox.Top > 0)
-            {
-                pictureBox.Top -= speed;
-            }
-        }
-
-        public void MoveDown()
-        {
-            direction = "down";
-            pictureBox.Image = Properties.Resources.PlayerTankDown;
-
-            if (pictureBox.Bottom > 0)
-            {
-                // Modifying from top because it's the only public property
-                pictureBox.Top += speed;
-            }
-        }
-        #endregion
         /// <summary>
         /// Allows for the tank to shoot a projectile depending on the direction.
         /// </summary>
