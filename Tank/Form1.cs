@@ -78,7 +78,7 @@ namespace Tank
                 }
                 player.PlayerMove(Tank.Directions.Down);
             }
-
+            label1.Text = "X: " + playerTank.Left + " Y: " + playerTank.Top;
         }
         void KeyIsDown(object sender, KeyEventArgs e)
         {
@@ -137,5 +137,7 @@ namespace Tank
                     break;
             }
         }
+
+    
     }
 }
