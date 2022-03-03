@@ -125,6 +125,10 @@ namespace Tank
         /// <remarks> Should be called on an interval to continually spawn in enemies. </remarks>
         void InstantiateTanks()
         {
+            /* TODO: Remove this return when tank AI is fully working.
+             * It's here to prevent tanks from spawning for the time being. */
+            return;
+
             if (currentTanks > maxTanksAtOnce)
                 return;
 
