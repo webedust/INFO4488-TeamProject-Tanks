@@ -33,6 +33,10 @@ namespace Tank
             int distY = b.Y - a.Y;
             int distTotal = Distance(a, b);
 
+            // If 0 then return point a to prevent movement
+            if (distTotal < 1)
+                return a;
+
             // Output
             int xPos = (a.X + distX / distTotal * maxDistance);
             int yPos = (a.Y + distY / distTotal * maxDistance);

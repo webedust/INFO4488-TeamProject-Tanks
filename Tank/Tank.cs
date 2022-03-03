@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace Tank
 {
     class Tank
     {
+        /// <summary> All directions that the player can move the tank. </summary>
         public enum Directions
         {
             Up,
@@ -17,7 +19,6 @@ namespace Tank
             Left,
             Right
         }
-        //Change speed back after testing
         public int speed = 10;
         public int playerHealth;
         public int enemyHealth;
@@ -58,55 +59,40 @@ namespace Tank
             pictureBox = pic;
         }
         #endregion
+        /// <summary> Player moves the tank in the specified direction. </summary>
 
-        #region Depreciated movement code
-        //Add label for tank coordinates to help debug why tank won't move down
-        //when on the right side of the screen.
-        public void MoveLeft()
+        public void PlayerMove(Directions dir)
         {
-            direction = "left";
-            pictureBox.Image = Properties.Resources.PlayerTankLeft;
-
-            if (pictureBox.Left > 0)
-                pictureBox.Left -= speed;
-        }
-
-        public void MoveRight()
-        {
-            direction = "right";
-            pictureBox.Image = Properties.Resources.PlayerTankRight;
-
-            if (pictureBox.Right > 0)
+            Point moveTo = pictureBox.Location;
+            switch (dir)
             {
-                // Modifying from left because it's the only public property
-                pictureBox.Left += speed;
+                case Directions.Up:
+                    direction = "up";
+                    pictureBox.Image = Properties.Resources.PlayerTankUp;
+                    if (pictureBox.Top > 0)
+                        moveTo.Y -= speed;
+                    break;
+                case Directions.Down:
+                    direction = "down";
+                    pictureBox.Image = Properties.Resources.PlayerTankDown;
+                    if (pictureBox.Bottom > 0)
+                        moveTo.Y += speed;
+                    break;
+                case Directions.Left:
+                    direction = "left";
+                    pictureBox.Image = Properties.Resources.PlayerTankLeft;
+                    if (pictureBox.Left > 0)
+                        moveTo.X -= speed;
+                    break;
+                case Directions.Right:
+                    direction = "right";
+                    pictureBox.Image = Properties.Resources.PlayerTankRight;
+                    if (pictureBox.Right > 0)
+                        moveTo.X += speed;
+                    break;
             }
+            TryMove(moveTo);
         }
-
-        public void MoveUp()
-        {
-            direction = "up";
-            pictureBox.Image = Properties.Resources.PlayerTankUp;
-
-            if (pictureBox.Top > 0)
-            {
-                pictureBox.Top -= speed;
-            }
-        }
-
-        public void MoveDown()
-        {
-            direction = "down";
-            pictureBox.Image = Properties.Resources.PlayerTankDown;
-
-            if (pictureBox.Bottom > 0)
-            {
-                // Modifying from top because it's the only public property
-                pictureBox.Top += speed;
-            }
-        }
-        #endregion
-
         /// <summary>
         /// Allows for the tank to shoot a projectile depending on the direction.
         /// </summary>
@@ -161,47 +147,13 @@ namespace Tank
             }
         }
 
-        /// <summary> Player moves the tank in the specified direction. </summary>
-        public void PlayerMove(Directions dir)
-        {
-            Point moveTo = pictureBox.Location;
-            switch (dir)
-            {
-                case Directions.Up:
-                    direction = "up";
-                    pictureBox.Image = Properties.Resources.PlayerTankUp;
-                    if (pictureBox.Top > 0)
-                        moveTo.Y -= (int)speed;
-                    break;
-                case Directions.Down:
-                    direction = "down";
-                    pictureBox.Image = Properties.Resources.PlayerTankDown;
-                    if (pictureBox.Bottom > 0)
-                        moveTo.Y += (int)speed;
-                    break;
-                case Directions.Left:
-                    direction = "left";
-                    pictureBox.Image = Properties.Resources.PlayerTankLeft;
-                    if (pictureBox.Left > 0)
-                        moveTo.X -= (int)speed;
-                    break;
-                case Directions.Right:
-                    direction = "right";
-                    pictureBox.Image = Properties.Resources.PlayerTankRight;
-                    if (pictureBox.Right > 0)
-                        moveTo.X += (int)speed;
-                    break;
-            }
-            TryMove(moveTo);
-        }
-
         /// <summary> Attempts to move towards the specified position. </summary>
         /// <param name="moveTo"> Position to move towards. </param>
         /// <returns> True if successfully moved. False if there's an obstacle in the way. </returns>
         public bool TryMove(Point moveTo)
         {
             // Set true if there's a collider where attempting to move.
-            bool colliderAtMovePos = false;
+            bool colAtMovePos = false;
             foreach (Collider col in gh.Colliders)
             {
                 // Skip if evaluating against self
@@ -209,29 +161,37 @@ namespace Tank
                     continue;
 
                 // Ignore any distant colliders to save memory usage
-                const int distant = 150;
-                if (Utils.Distance(pictureBox.Location, col.Pos) > distant)
+                const int distant = 80;
+                if (Utils.Distance(pictureBox.Location, col.Location) > distant)
                     continue;
 
-                // Furthest left/right/up/down the collider extends
-                int xMinPos = col.Pos.X - col.Size.Width / 2;
-                int xMaxPos = col.Pos.X + col.Size.Width / 2;
-                int yMinPos = col.Pos.Y - col.Size.Height / 2;
-                int yMaxPos = col.Pos.Y + col.Size.Height / 2;
-                // Test for collision against bounds of the collider
-                if (moveTo.X >= xMinPos && moveTo.X < xMaxPos
-                    || moveTo.Y >= yMinPos && moveTo.Y < yMinPos)
+                // Check each edge for collision
+                Rectangle movePos = new
+                    (
+                        moveTo.X,
+                        moveTo.Y,
+                        PictureBox.Size.Width,
+                        PictureBox.Size.Height
+                    );
+                Rectangle colRect = new
+                    (
+                        col.Location.X,
+                        col.Location.Y,
+                        col.Size.Width,
+                        col.Size.Height
+                    );
+                if (colRect.IntersectsWith(movePos))
                 {
-                    colliderAtMovePos = true;
+                    colAtMovePos = true;
                     break;
                 }
             }
 
-            // Set new position if no colliders are in the way
-            if (!colliderAtMovePos)
+            // Set new position if no obstacles are in the way
+            if (!colAtMovePos)
                 PictureBox.Location = moveTo;
 
-            return colliderAtMovePos;
+            return colAtMovePos;
         }
     }
 }
