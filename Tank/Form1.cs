@@ -29,14 +29,15 @@ namespace Tank
 
             if (player.playerHealth > 1)
             {
-                healthBar.Value = (int)player.playerHealth;
+                healthBar.Value = player.playerHealth;
             }
-            //Need to add gameover logic here
+            //Closes the game form and reopens the main menu form. 
             else
             {
                 player.gameOver = true;
+                this.Close();
+                
             }
-
 
 
             if (player.goLeft == true)
@@ -78,7 +79,8 @@ namespace Tank
                 }
                 player.PlayerMove(Tank.Directions.Down);
             }
-            label1.Text = "X: " + playerTank.Left + " Y: " + playerTank.Top;
+            
+            //label1.Text = "X: " + playerTank.Left + " Y: " + playerTank.Top;
         }
         void KeyIsDown(object sender, KeyEventArgs e)
         {
