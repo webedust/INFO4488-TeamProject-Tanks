@@ -42,7 +42,7 @@ namespace Tank
             if (player.goLeft == true)
             {
                 //When tank goes off the screen on the left, move it to the right side of the screen.
-                if (playerTank.Left < 0)
+                if (playerTank.Left <= 0)
                 {
                     playerTank.Left = 1200;
                 }
@@ -52,7 +52,7 @@ namespace Tank
             if (player.goRight == true)
             {
                 //When tank goes off the screen on the right, move it to the left side of the screen.
-                if (playerTank.Left > 1200)
+                if (playerTank.Left >= 1200)
                 {
                     playerTank.Left = 0;
                 }
@@ -62,7 +62,7 @@ namespace Tank
             if (player.goUp == true)
             {
                 //When tank goes off the screen on the top, move it to the bottom side of the screen.
-                if (playerTank.Top < 0)
+                if (playerTank.Top <= 0)
                 {
                     playerTank.Top = 700;
                 }
@@ -72,7 +72,7 @@ namespace Tank
             if (player.goDown == true)
             {
                 //When tank goes off the screen on the bottom, move it to the top side of the screen.
-                if (playerTank.Top > 700)
+                if (playerTank.Top >= 700)
                 {
                     playerTank.Top = 0;
                 }
