@@ -36,9 +36,11 @@ namespace Tank
             {
                 player.gameOver = true;
                 this.Close();
-                
+                MainMenu mainMenu = new MainMenu();
+                mainMenu.Show();
             }
-
+            //Used for testing the game over logic
+            //player.playerHealth -= 1;
 
             if (player.goLeft == true)
             {

@@ -25,13 +25,12 @@ namespace Tank
         {
             Form1 frm  = new Form1();
             frm.Show();
-
+            this.Hide();
         }
 
         private void btnExitGame_Click(object sender, EventArgs e)
         {
-            this.Close();
-
+            Application.Exit();
         }
     }
 }
