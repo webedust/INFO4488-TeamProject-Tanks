@@ -10,6 +10,13 @@ namespace Tank
     /// <summary> Common functions for use in Windows Forms applications. </summary>
     public static class Utils
     {
+        public enum CardinalDirections
+        {
+            North,
+            South,
+            East,
+            West
+        }
         /// <summary> Calculates the distance in pixels between two points. </summary>
         /// <param name="a"> Point to start measurement from. </param>
         /// <param name="b"> Point to end measurement at. </param>

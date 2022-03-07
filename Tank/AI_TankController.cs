@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Tank
 {
@@ -29,14 +30,21 @@ namespace Tank
 
             // Make an initial decision
             MakeDecision();
-            // TODO: When/if AI gets more advanced then add a loop here
-            // to call MakeDecision() on a timer so the AI can change their course of action.
+
+            Timer t = new();
+            t.Interval = 100;
+            t.Tick += MakeDecisionLoop;
+            t.Start();
         }
         #endregion
         #region Event connections
         void ConnectEvents() => tank.OnDeath += Die;
         #endregion
         #region Events
+        void MakeDecisionLoop(object sender, EventArgs e)
+        {
+            MakeDecision();
+        }
         /// <summary> AI's tank is destroyed. </summary>
         void Die(object sender, EventArgs e) => gh.OnAITankDeath();
         #endregion
@@ -62,7 +70,7 @@ namespace Tank
         {
             Point current = tank.PictureBox.Location;
 
-            Point newPos = Utils.MoveToward(current, pt, (int)tank.speed);
+            Point newPos = Utils.MoveToward(current, pt, tank.speed);
             if (!tank.TryMove(newPos))
                 MoveAroundObstacle();
         }
@@ -104,7 +112,7 @@ namespace Tank
                     break;
             }
 
-            Point newPos = Utils.MoveToward(current, move,(int)tank.speed);
+            Point newPos = Utils.MoveToward(current, move, tank.speed);
             // Re-run if failed to resolve collision
             if (!tank.TryMove(newPos))
                 MoveAroundObstacle();
