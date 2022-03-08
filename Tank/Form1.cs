@@ -22,7 +22,6 @@ namespace Tank
 
             GameHandler gh = new(this);
             player = gh.Player;
-
         }
         void GameTimer_Tick(object sender, EventArgs e)
         {
@@ -30,14 +29,13 @@ namespace Tank
             if (player.playerHealth > 1)
             {
                 healthBar.Value = player.playerHealth;
-            }
-            //Closes the game form and reopens the main menu form. 
+            } 
             else
             {
                 player.gameOver = true;
                 this.Close();
-                MainMenu mainMenu = new MainMenu();
-                mainMenu.Show();
+                GameOver gameOver = new GameOver();
+                gameOver.Show();
             }
             //Used for testing the game over logic
             //player.playerHealth -= 1;
@@ -141,7 +139,5 @@ namespace Tank
                     break;
             }
         }
-
-    
     }
 }

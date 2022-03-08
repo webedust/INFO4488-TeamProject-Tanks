@@ -31,6 +31,8 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.btnStartGame = new System.Windows.Forms.Button();
             this.btnExitGame = new System.Windows.Forms.Button();
+            this.btnInstructions = new System.Windows.Forms.Button();
+            this.btnCredits = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // lblTitle
@@ -45,7 +47,7 @@
             // 
             // btnStartGame
             // 
-            this.btnStartGame.Location = new System.Drawing.Point(105, 208);
+            this.btnStartGame.Location = new System.Drawing.Point(105, 199);
             this.btnStartGame.Name = "btnStartGame";
             this.btnStartGame.Size = new System.Drawing.Size(100, 30);
             this.btnStartGame.TabIndex = 1;
@@ -55,7 +57,7 @@
             // 
             // btnExitGame
             // 
-            this.btnExitGame.Location = new System.Drawing.Point(105, 266);
+            this.btnExitGame.Location = new System.Drawing.Point(105, 307);
             this.btnExitGame.Name = "btnExitGame";
             this.btnExitGame.Size = new System.Drawing.Size(100, 30);
             this.btnExitGame.TabIndex = 2;
@@ -63,11 +65,33 @@
             this.btnExitGame.UseVisualStyleBackColor = true;
             this.btnExitGame.Click += new System.EventHandler(this.btnExitGame_Click);
             // 
+            // btnInstructions
+            // 
+            this.btnInstructions.Location = new System.Drawing.Point(105, 235);
+            this.btnInstructions.Name = "btnInstructions";
+            this.btnInstructions.Size = new System.Drawing.Size(100, 30);
+            this.btnInstructions.TabIndex = 3;
+            this.btnInstructions.Text = "Instructions";
+            this.btnInstructions.UseVisualStyleBackColor = true;
+            this.btnInstructions.Click += new System.EventHandler(this.btnInstructions_Click);
+            // 
+            // btnCredits
+            // 
+            this.btnCredits.Location = new System.Drawing.Point(105, 271);
+            this.btnCredits.Name = "btnCredits";
+            this.btnCredits.Size = new System.Drawing.Size(100, 30);
+            this.btnCredits.TabIndex = 4;
+            this.btnCredits.Text = "Credits";
+            this.btnCredits.UseVisualStyleBackColor = true;
+            this.btnCredits.Click += new System.EventHandler(this.btnCredits_Click);
+            // 
             // MainMenu
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(334, 361);
+            this.ClientSize = new System.Drawing.Size(335, 362);
+            this.Controls.Add(this.btnCredits);
+            this.Controls.Add(this.btnInstructions);
             this.Controls.Add(this.btnExitGame);
             this.Controls.Add(this.btnStartGame);
             this.Controls.Add(this.lblTitle);
@@ -83,5 +107,7 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Button btnStartGame;
         private System.Windows.Forms.Button btnExitGame;
+        private System.Windows.Forms.Button btnInstructions;
+        private System.Windows.Forms.Button btnCredits;
     }
 }

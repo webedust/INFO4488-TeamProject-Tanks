@@ -18,9 +18,6 @@ namespace Tank
         }
 
 
-
-
-
         private void btnStartGame_Click(object sender, EventArgs e)
         {
             Form1 frm  = new Form1();
@@ -31,6 +28,30 @@ namespace Tank
         private void btnExitGame_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void btnInstructions_Click(object sender, EventArgs e)
+        {
+            Instructions frm = new Instructions();
+            frm.Show();
+            this.Hide();
+        }
+
+        private void btnCredits_Click(object sender, EventArgs e)
+        {
+            Credits frm = new Credits();
+            frm.Show();
+            this.Hide();
+        }
+
+        private void FormClose(object sender, FormClosedEventArgs e)
+        {
+            if (this.DialogResult == DialogResult.Cancel)
+            {
+                MainMenu frm = new MainMenu();
+                frm.Show();
+                this.Close();
+            }
         }
     }
 }
