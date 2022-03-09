@@ -76,6 +76,7 @@ namespace Tank
             // 
             // playerTank
             // 
+            this.playerTank.BackColor = System.Drawing.Color.Transparent;
             this.playerTank.Image = global::Tank.Properties.Resources.PlayerTankUp;
             this.playerTank.Location = new System.Drawing.Point(552, 356);
             this.playerTank.Name = "playerTank";
@@ -93,6 +94,7 @@ namespace Tank
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox1.Image = global::Tank.Properties.Resources.Rock;
             this.pictureBox1.InitialImage = global::Tank.Properties.Resources.Rock;
             this.pictureBox1.Location = new System.Drawing.Point(857, 221);
@@ -105,6 +107,7 @@ namespace Tank
             // 
             // pictureBox2
             // 
+            this.pictureBox2.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox2.Image = global::Tank.Properties.Resources.Rock;
             this.pictureBox2.InitialImage = global::Tank.Properties.Resources.Rock;
             this.pictureBox2.Location = new System.Drawing.Point(346, 452);
@@ -130,6 +133,7 @@ namespace Tank
             // 
             // pictureBox4
             // 
+            this.pictureBox4.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox4.Image = global::Tank.Properties.Resources.Rock;
             this.pictureBox4.InitialImage = global::Tank.Properties.Resources.Rock;
             this.pictureBox4.Location = new System.Drawing.Point(1005, 581);
@@ -142,6 +146,7 @@ namespace Tank
             // 
             // pictureBox5
             // 
+            this.pictureBox5.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox5.Image = global::Tank.Properties.Resources.Rock;
             this.pictureBox5.InitialImage = global::Tank.Properties.Resources.Rock;
             this.pictureBox5.Location = new System.Drawing.Point(779, 176);
@@ -154,6 +159,7 @@ namespace Tank
             // 
             // pictureBox6
             // 
+            this.pictureBox6.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox6.Image = global::Tank.Properties.Resources.Rock;
             this.pictureBox6.InitialImage = global::Tank.Properties.Resources.Rock;
             this.pictureBox6.Location = new System.Drawing.Point(820, 534);
@@ -166,6 +172,7 @@ namespace Tank
             // 
             // pictureBox7
             // 
+            this.pictureBox7.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox7.Image = global::Tank.Properties.Resources.Rock;
             this.pictureBox7.InitialImage = global::Tank.Properties.Resources.Rock;
             this.pictureBox7.Location = new System.Drawing.Point(665, 433);
@@ -178,6 +185,7 @@ namespace Tank
             // 
             // pictureBox8
             // 
+            this.pictureBox8.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox8.Image = global::Tank.Properties.Resources.Rock;
             this.pictureBox8.InitialImage = global::Tank.Properties.Resources.Rock;
             this.pictureBox8.Location = new System.Drawing.Point(1044, 84);
@@ -190,6 +198,7 @@ namespace Tank
             // 
             // pictureBox9
             // 
+            this.pictureBox9.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox9.Image = global::Tank.Properties.Resources.Rock;
             this.pictureBox9.InitialImage = global::Tank.Properties.Resources.Rock;
             this.pictureBox9.Location = new System.Drawing.Point(127, 378);
