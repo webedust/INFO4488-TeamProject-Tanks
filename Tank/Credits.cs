@@ -24,20 +24,5 @@ namespace Tank
             this.Close();
         }
 
-        private void FormClose(object sender, FormClosedEventArgs e)
-        {
-            //if (btnReturn.Click)
-            //{
-                //MainMenu frm = new MainMenu();
-                //frm.Show();
-                //this.Close();
-            //}
-            //else
-            //{
-            //    Instructions frm1 = new Instructions();
-            //    frm1.Show();
-
-            //}
-        }
     }
 }
