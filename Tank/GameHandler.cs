@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -116,7 +117,7 @@ namespace Tank
         /// at which point the total number of enemy tanks may exceed this "cap".
         /// This is not a bug, and therefore this number should be thought of as a softcap only.
         /// </remarks>
-        readonly int maxTanksAtOnce = 30;
+        readonly int maxTanksAtOnce = 10;
         /// <summary> Number of alive enemy tanks currently on the screen. </summary>
         int currentTanks;
         /// <summary>
@@ -125,10 +126,6 @@ namespace Tank
         /// <remarks> Should be called on an interval to continually spawn in enemies. </remarks>
         void InstantiateTanks()
         {
-            /* TODO: Remove this return when tank AI is fully working.
-             * It's here to prevent tanks from spawning for the time being. */
-            return;
-
             if (currentTanks > maxTanksAtOnce)
                 return;
 
@@ -139,8 +136,33 @@ namespace Tank
                 PictureBox pic = new();
                 pic.Image = Resources.EnemyTankUp;
                 pic.Size = new(50, 75);
-                // To-do: Change to spawn off-screen, just 0 for testing
-                pic.Location = new(0, 0);
+
+                // Randomly select a side of the form to spawn the AI tank on
+                const int numOfSides = 4;
+                Utils.CardinalDirections side
+                    = (Utils.CardinalDirections)rand.Next(numOfSides);
+                Point instantionPos = new();
+                switch (side)
+                {
+                    case Utils.CardinalDirections.North:
+                        instantionPos.X = rand.Next(CurrentForm.Width);
+                        instantionPos.Y -= pic.Size.Height;
+                        break;
+                    case Utils.CardinalDirections.South:
+                        instantionPos.X = rand.Next(CurrentForm.Width);
+                        instantionPos.Y = CurrentForm.Height + pic.Size.Height;
+                        break;
+                    case Utils.CardinalDirections.East:
+                        instantionPos.X = CurrentForm.Width + pic.Size.Width;
+                        instantionPos.Y = rand.Next(CurrentForm.Height);
+                        break;
+                    case Utils.CardinalDirections.West:
+                        instantionPos.X -= pic.Size.Width;
+                        instantionPos.Y = rand.Next(CurrentForm.Height);
+                        break;
+                }
+                pic.Location = instantionPos;
+
                 pic.SizeMode = PictureBoxSizeMode.StretchImage;
                 CurrentForm.Controls.Add(pic);
 
