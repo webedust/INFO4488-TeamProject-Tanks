@@ -22,22 +22,23 @@ namespace Tank
 
             GameHandler gh = new(this);
             player = gh.Player;
-
         }
         void GameTimer_Tick(object sender, EventArgs e)
         {
 
             if (player.playerHealth > 1)
             {
-                healthBar.Value = (int)player.playerHealth;
-            }
-            //Need to add gameover logic here
+                healthBar.Value = player.playerHealth;
+            } 
             else
             {
                 player.gameOver = true;
+                this.Close();
+                GameOver gameOver = new GameOver();
+                gameOver.Show();
             }
-
-
+            //Used for testing the game over logic
+            //player.playerHealth -= 1;
 
             if (player.goLeft == true)
             {
@@ -78,7 +79,8 @@ namespace Tank
                 }
                 player.PlayerMove(Tank.Directions.Down);
             }
-            label1.Text = "X: " + playerTank.Left + " Y: " + playerTank.Top;
+            
+            //label1.Text = "X: " + playerTank.Left + " Y: " + playerTank.Top;
         }
         void KeyIsDown(object sender, KeyEventArgs e)
         {
@@ -137,7 +139,5 @@ namespace Tank
                     break;
             }
         }
-
-    
     }
 }

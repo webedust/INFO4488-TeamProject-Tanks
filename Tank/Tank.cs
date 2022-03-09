@@ -20,7 +20,7 @@ namespace Tank
             Right
         }
         public int speed = 10;
-        public int playerHealth;
+        public int playerHealth = 100;
         public int enemyHealth;
         public int fireRate;
         public int projectileDamage;
