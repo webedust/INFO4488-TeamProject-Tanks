@@ -147,7 +147,7 @@ namespace Tank
             }
         }
 
-        /// <summary> Attempts to move towards the specified position. </summary>
+        /// <summary> Attempts to move to the specified position. </summary>
         /// <param name="moveTo"> Position to move towards. </param>
         /// <returns> True if successfully moved. False if there's an obstacle in the way. </returns>
         public bool TryMove(Point moveTo)

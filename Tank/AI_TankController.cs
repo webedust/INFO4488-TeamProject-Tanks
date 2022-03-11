@@ -56,7 +56,7 @@ namespace Tank
             Point playerPos = gh.Player.PictureBox.Location;
 
             // Don't move if within the stopping distance
-            const int StopDistance = 60;
+            const int StopDistance = 100;
             if (Utils.Distance(current, playerPos) > StopDistance)
                 MoveToPoint(playerPos);
 

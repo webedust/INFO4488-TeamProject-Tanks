@@ -43,11 +43,25 @@ namespace Tank
             // Get distances between points and total distance
             int distX = destination.X - current.X;
             int distY = destination.Y - current.Y;
-            int distance = Distance(current, destination);
 
-            // Output
-            int xPos = current.X + distX / distance * maxDistance;
-            int yPos = current.Y + distY / distance * maxDistance;
+            // Set maximums
+            // Divide maximum by 2 as it will be split between the x and y
+            int splitMax = maxDistance / 2;
+            // If x or y is negative then use negative instead
+            int negSplitMax = -splitMax;
+            if (distX < 0 && distX < negSplitMax)
+                distX = negSplitMax;
+            if (distY < 0 && distY < negSplitMax)
+                distY = negSplitMax;
+            // Positive
+            if (distX > splitMax)
+                distX = splitMax;
+            if (distY > splitMax)
+                distY = splitMax;
+
+            // Calculate new position to move to
+            int xPos = current.X + distX;
+            int yPos = current.Y + distY;
             return new(xPos, yPos);
         }
     }
