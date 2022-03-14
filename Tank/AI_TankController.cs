@@ -18,6 +18,8 @@ namespace Tank
         #region References
         GameHandler gh;
         Tank tank;
+        /// <summary> Tank object this AI is controlling. </summary>
+        public Tank SelfTank {  get { return tank; } }
         #endregion
 
 
@@ -47,13 +49,13 @@ namespace Tank
         #region Events
         void MakeDecisionLoop(object sender, EventArgs e) => MakeDecision();
         /// <summary> AI's tank is destroyed. </summary>
-        void Die(object sender, EventArgs e) => gh.OnAITankDeath();
+        void Die(object sender, EventArgs e) => gh.OnAITankDeath(this);
         #endregion
         /// <summary> AI makes a decision on how they should act. </summary>
         void MakeDecision()
         {
-            Point current = tank.PictureBox.Location;
-            Point playerPos = gh.Player.PictureBox.Location;
+            Point current = tank.Pic.Location;
+            Point playerPos = gh.Player.Pic.Location;
 
             // Don't move if within the stopping distance
             const int StopDistance = 100;
@@ -72,10 +74,10 @@ namespace Tank
         /// </param>
         void MoveToPoint(Point destination)
         {
-            Point current = tank.PictureBox.Location;
+            Point current = tank.Pic.Location;
             Point nextPos = Utils.MoveToward(current, destination, tank.speed);
             // Movement is blocked, therefore try obstacle resolution
-            if (!tank.TryMove(nextPos))
+            if (tank.Col.TryMove(nextPos) != null)
                 MoveAroundObstacle();
         }
         /// <summary>
@@ -88,7 +90,7 @@ namespace Tank
             return;
 
             Debug.WriteLine("Attempting move around obstacle");
-            Point current = tank.PictureBox.Location;
+            Point current = tank.Pic.Location;
 
             // Randomly choose a direction to try to move around the obstacle
             Point destination = current;
@@ -121,7 +123,7 @@ namespace Tank
 
             Point nextPos = Utils.MoveToward(current, destination, tank.speed);
             // Re-run if failed to resolve collision
-            if (!tank.TryMove(nextPos))
+            if (tank.Col.TryMove(nextPos) != null)
                 MoveAroundObstacle();
             // Otherwise return to normal decision making.
             else
