@@ -36,12 +36,7 @@ namespace Tank
             get { return ctrl; }
             private set { ctrl = value; }
         }
-        #endregion
-        #region Events
-        /// <summary>
-        /// Called whenever the collider object detects a collision with another collider.
-        /// </summary>
-        public event EventHandler OnCollide;
+        GameHandler gh;
         #endregion
 
 
@@ -51,9 +46,63 @@ namespace Tank
         /// <param name="ctrl"> Windows Form control to use for this collider's world space coordinates. </param>
         internal Collider(GameHandler gh, Control ctrl)
         {
+            this.gh = gh;
             gh.Colliders.Add(this);
             Control = ctrl;
         }
         #endregion
+        /// <summary> Attempts to move to the specified position. </summary>
+        /// <param name="moveTo"> Position to move towards. </param>
+        /// <returns> Null if successfully moved.
+        /// If this collider cannot be moved then the blocking collider is returned. </returns>
+        public Collider TryMove(Point moveTo)
+        {
+            // Set if there's a collider where attempting to move.
+            Collider obstacleCol = null;
+            foreach (Collider col in gh.Colliders)
+            {
+                // Skip if evaluating against self
+                if (col == this)
+                    continue;
+
+                // Ignore any distant colliders to save memory usage
+                const int distant = 80;
+                if (Utils.Distance(Control.Location, col.Location) > distant)
+                    continue;
+
+                // Check each edge for collision
+                Rectangle movePos = new
+                    (
+                        moveTo.X,
+                        moveTo.Y,
+                        Control.Size.Width,
+                        Control.Size.Height
+                    );
+                Rectangle colRect = new
+                    (
+                        col.Location.X,
+                        col.Location.Y,
+                        col.Size.Width,
+                        col.Size.Height
+                    );
+                if (colRect.IntersectsWith(movePos))
+                {
+                    obstacleCol = col;
+                    break;
+                }
+            }
+
+            // Set new position if no obstacles are in the way
+            if (obstacleCol == null)
+                Control.Location = moveTo;
+
+            return obstacleCol;
+        }
+        /// <summary> Destroys this collider and all references associated with it. </summary>
+        public void Destroy()
+        {
+            gh.Colliders.Remove(this);
+            ctrl.Dispose();
+        }
     }
 }

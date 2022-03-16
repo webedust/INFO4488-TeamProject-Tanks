@@ -119,14 +119,14 @@ namespace Tank
         /// </remarks>
         readonly int maxTanksAtOnce = 10;
         /// <summary> Number of alive enemy tanks currently on the screen. </summary>
-        int currentTanks;
+        List<Tank> currentTanks = new();
         /// <summary>
         /// Instantiates <b>enemy</b> tanks as specified in a Map object.
         /// </summary>
         /// <remarks> Should be called on an interval to continually spawn in enemies. </remarks>
         void InstantiateTanks()
         {
-            if (currentTanks > maxTanksAtOnce)
+            if (currentTanks.Count > maxTanksAtOnce)
                 return;
 
             Random rand = new();
@@ -173,22 +173,44 @@ namespace Tank
 
                 AI_TankController ai = new(this, tank);
 
-                currentTanks++;
+                currentTanks.Add(tank);
             }
         }
         /// <summary>
         /// Call whenever an AI-controlled tank has been killed/destroyed
         /// to remove reference to it in the GameHandler.
         /// </summary>
-        public void OnAITankDeath()
+        /// <param name="casualty"> The AI tank that has been destroyed. </param>
+        public void OnAITankDeath(AI_TankController casualty)
         {
-            currentTanks--;
+            currentTanks.Remove(casualty.SelfTank);
 
-            if (currentTanks < 0)
+            if (currentTanks.Count < 0)
                 throw new ArithmeticException("Number of current tanks should never be negative.");
         }
         #endregion
         void AISpawnInterval(object sender, EventArgs e)
             => InstantiateTanks();
+        /// <summary> 
+        /// Iterates through all colliders in the current form
+        /// to find the tank that is using the collider that has been specified.
+        /// </summary>
+        /// <param name="col"> Collider to find the tank for. </param>
+        /// <returns>
+        /// Tank that is using the specified collider "other",
+        /// or null if the collider cannot be matched to a tank.
+        /// </returns>
+        public Tank GetTankFromCollider(Collider col)
+        {
+            // Ensure tanks exist on the form
+            if (currentTanks.Count < 1)
+                return null;
+
+            foreach (Tank tank in currentTanks)
+                if (tank.Col == col)
+                    return tank;
+
+            return null;
+        }
     }
 }
