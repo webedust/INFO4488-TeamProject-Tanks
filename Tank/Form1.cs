@@ -29,7 +29,7 @@ namespace Tank
             if (player.playerHealth > 1)
             {
                 healthBar.Value = player.playerHealth;
-            } 
+            }
             else
             {
                 player.gameOver = true;
@@ -79,7 +79,7 @@ namespace Tank
                 }
                 player.PlayerMove(Utils.CardinalDirections.South);
             }
-            
+
             //label1.Text = "X: " + playerTank.Left + " Y: " + playerTank.Top;
         }
         void KeyIsDown(object sender, KeyEventArgs e)
@@ -135,5 +135,31 @@ namespace Tank
                     break;
             }
         }
+
+        /// <summary>
+        /// When the X is clicked on the form, open the main menu.
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown)
+            {
+                return;
+            }
+
+            switch (MessageBox.Show(this, "Are you sure you want to close?", "Closing", MessageBoxButtons.YesNo))
+            {
+                case DialogResult.Yes:
+                    MainMenu mainMenu = new MainMenu();
+                    mainMenu.Show();
+                    break;
+                case DialogResult.No:
+                    e.Cancel = true;
+                    break;
+            }
+        }
+
     }
 }
