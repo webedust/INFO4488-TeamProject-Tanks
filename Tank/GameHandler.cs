@@ -104,6 +104,8 @@ namespace Tank
                 {
                     Collider col = new(this, ctrl);
                     player = new(col, this, (PictureBox)ctrl);
+                    player.TankSprites = Tank.PlayerTankSprites;
+                    player.OnDeath += Player_OnDeath;
                     return;
                 }
         }
@@ -117,7 +119,7 @@ namespace Tank
         /// at which point the total number of enemy tanks may exceed this "cap".
         /// This is not a bug, and therefore this number should be thought of as a softcap only.
         /// </remarks>
-        readonly int maxTanksAtOnce = 10;
+        readonly int maxTanksAtOnce = 7;
         /// <summary> Number of alive enemy tanks currently on the screen. </summary>
         List<Tank> currentTanks = new();
         /// <summary>
@@ -134,6 +136,7 @@ namespace Tank
             for (int i = 0; i < tanks; i++)
             {
                 PictureBox pic = new();
+                pic.BackColor = Color.Transparent;
                 pic.Image = Resources.EnemyTankUp;
                 pic.Size = new(50, 75);
 
@@ -184,9 +187,10 @@ namespace Tank
         public void OnAITankDeath(AI_TankController casualty)
         {
             currentTanks.Remove(casualty.SelfTank);
-
-            if (currentTanks.Count < 0)
-                throw new ArithmeticException("Number of current tanks should never be negative.");
+        }
+        void Player_OnDeath(object sender, EventArgs e)
+        {
+            // To-do
         }
         #endregion
         void AISpawnInterval(object sender, EventArgs e)

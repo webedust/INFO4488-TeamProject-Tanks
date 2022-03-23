@@ -15,8 +15,6 @@ namespace Tank
         // To-do: Probably change damage. It's set as 5 for testing purposes.
         public int damage = 5;
         public const int Speed = 3;
-        public int leftFrame;
-        public int topFrame;
         Timer timer;
         #endregion
         #region References
@@ -117,8 +115,6 @@ namespace Tank
         }
         void OnCollision(Collider other)
         {
-            Debug.WriteLine($"Collided with object {other.Control.Name}");
-
             // Check if the bullet hit a tank, and make it take damage if so.
             Tank hit = gh.GetTankFromCollider(other);
             if (hit != null)

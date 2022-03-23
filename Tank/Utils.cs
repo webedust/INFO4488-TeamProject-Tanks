@@ -64,5 +64,40 @@ namespace Tank
             int yPos = current.Y + distY;
             return new(xPos, yPos);
         }
+        /// <summary>
+        /// Determines the direction to make the starting point face the end point.
+        /// </summary>
+        /// <param name="start"> Starting point of the calculation. </param>
+        /// <param name="end"> End point to calculate the direction to. </param>
+        /// <returns> Cardinal direction the point should face. </returns>
+        /// <remarks>
+        /// In the event that the start and end points are diagonal from each other,
+        /// then the x or y coordinate that is a greater distance will take precedence for
+        /// the direction that is returned.
+        /// </remarks>
+        public static CardinalDirections DirectionFromPoint(Point start, Point end)
+        {
+            int xDiff = end.X - start.X;
+            int yDiff = end.Y - start.Y;
+            // > 0 means the direction must be North as it's positive
+            if (yDiff > 0)
+            {
+                /* Determine whether to return North or East/West.
+                 * If East/West needs to be returned then it's calculated later. */
+                if (yDiff > xDiff)
+                    return CardinalDirections.North;
+            }
+            else
+            {
+                if (yDiff > xDiff)
+                    return CardinalDirections.South;
+            }
+            // Determine whether East/West should be returned.
+            // > 0 means direction must be East as it's positive
+            if (xDiff > 0)
+                return CardinalDirections.East;
+            else
+                return CardinalDirections.West;
+        }
     }
 }
