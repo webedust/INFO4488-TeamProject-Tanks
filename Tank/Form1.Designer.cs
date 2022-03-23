@@ -209,10 +209,20 @@ namespace Tank
             this.pictureBox9.TabStop = false;
             this.pictureBox9.Tag = "Rock";
             // 
+            // label1
+            // 
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(100, 23);
+            this.label1.TabIndex = 0;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(94)))), ((int)(((byte)(64)))));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(1184, 661);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox9);
@@ -228,6 +238,8 @@ namespace Tank
             this.Controls.Add(this.healthBar);
             this.Controls.Add(this.healthLabel);
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Tank Game";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);
