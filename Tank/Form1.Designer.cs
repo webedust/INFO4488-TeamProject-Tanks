@@ -234,6 +234,9 @@ namespace Tank
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(94)))), ((int)(((byte)(64)))));
+            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(1184, 661);
             this.Controls.Add(this.lblKills);
             this.Controls.Add(this.lblLevel);
@@ -250,6 +253,8 @@ namespace Tank
             this.Controls.Add(this.healthBar);
             this.Controls.Add(this.healthLabel);
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "Form1";
             this.Text = "Tank Game";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.KeyIsDown);

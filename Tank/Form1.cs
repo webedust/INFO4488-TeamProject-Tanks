@@ -17,8 +17,6 @@ namespace Tank
         public Form1()
         {
             InitializeComponent();
-            // Must be true for user input to work.
-            KeyPreview = true;
 
             GameHandler gh = new(this);
             player = gh.Player;
@@ -131,7 +129,7 @@ namespace Tank
                     player.goDown = false;
                     break;
                 case Keys.Space:
-                    player.Shoot(this);
+                    player.Shoot();
                     break;
             }
         }

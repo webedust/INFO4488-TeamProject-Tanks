@@ -12,11 +12,10 @@ namespace Tank
     class Tank
     {
         #region Attributes
-        public int speed = 10;
+        int health;
+        public int speed = 5;
         public int playerHealth = 100;
         public int enemyHealth;
-        public int fireRate;
-        public int projectileDamage;
 
         public Utils.CardinalDirections direction = Utils.CardinalDirections.North;
         public bool goLeft = false;
@@ -24,14 +23,44 @@ namespace Tank
         public bool goUp = false;
         public bool goDown = false;
         public bool gameOver;
+
+        /// <summary>
+        /// Minimum amount of milliseconds that must elapse between successive shots
+        /// before the tank can fire again.
+        /// </summary>
+        const int FireRate = 450;
+        bool canShoot = true;
+        Size originalSize;
+        Timer rofTimer = new();
         #endregion
         #region References
         Collider col;
         public Collider Col { get { return col; } }
         GameHandler gh;
+        Image[] tankSprites = EnemyTankSprites;
+        /// <summary> Sprites that this tank should use. </summary>
+        public Image[] TankSprites 
+        {
+            set { tankSprites = value; }
+            get { return tankSprites; } 
+        }
         PictureBox pictureBox;
         /// <summary> PictureBox being used to render this Tank. </summary>
         public PictureBox Pic { get { return pictureBox; } }
+        public static readonly Image[] PlayerTankSprites =
+        {
+            Properties.Resources.PlayerTankUp,
+            Properties.Resources.PlayerTankDown,
+            Properties.Resources.PlayerTankRight,
+            Properties.Resources.PlayerTankLeft
+        };
+        public static readonly Image[] EnemyTankSprites =
+        {
+            Properties.Resources.EnemyTankUp,
+            Properties.Resources.EnemyTankDown,
+            Properties.Resources.EnemyTankRight,
+            Properties.Resources.EnemyTankLeft
+        };
         #endregion
         #region Events
         /// <summary> Called at the end of a tank dying/being destroyed. </summary>
@@ -46,13 +75,16 @@ namespace Tank
         /// <param name="pic"> PictureBox to use for rendering this tank to the form. </param>
         public Tank(Collider selfCollider, GameHandler gh, PictureBox pic)
         {
-            this.col = selfCollider;
+            col = selfCollider;
             this.gh = gh;
             pictureBox = pic;
+            originalSize = pic.Size;
+
+            rofTimer.Interval = FireRate;
+            rofTimer.Tick += GunCooldown;
         }
         #endregion
         /// <summary> Player moves the tank in the specified direction. </summary>
-
         public void PlayerMove(Utils.CardinalDirections dir)
         {
             direction = dir;
@@ -60,70 +92,93 @@ namespace Tank
             switch (direction)
             {
                 case Utils.CardinalDirections.North:
-                    pictureBox.Image = Properties.Resources.PlayerTankUp;
                     if (pictureBox.Top > 0)
                         moveTo.Y -= speed;
                     break;
                 case Utils.CardinalDirections.South:
-                    pictureBox.Image = Properties.Resources.PlayerTankDown;
                     if (pictureBox.Bottom > 0)
                         moveTo.Y += speed;
                     break;
                 case Utils.CardinalDirections.West:
-                    pictureBox.Image = Properties.Resources.PlayerTankLeft;
                     if (pictureBox.Left > 0)
                         moveTo.X -= speed;
                     break;
                 case Utils.CardinalDirections.East:
-                    pictureBox.Image = Properties.Resources.PlayerTankRight;
                     if (pictureBox.Right > 0)
                         moveTo.X += speed;
                     break;
             }
-            col.TryMove(moveTo);
+            // Only turn the tank if moving succeeded to prevent getting stuck in rocks
+            if (col.TryMove(moveTo) == null)
+                TurnToDirection();
+        }
+        /// <summary>
+        /// Turns the tank the current direction it should be facing
+        /// by switching width and height.
+        /// </summary>
+        public void TurnToDirection()
+        {
+            if (direction == Utils.CardinalDirections.North
+                || direction == Utils.CardinalDirections.South)
+                Pic.Size = originalSize;
+            else
+            {
+                Size flippedSize = new(originalSize.Height, originalSize.Width);
+                Pic.Size = flippedSize;
+            }
+            // Change image
+            int iDir = (int)direction;
+            switch (direction)
+            {
+                case Utils.CardinalDirections.North:
+                    pictureBox.Image = TankSprites[iDir];
+                    break;
+                case Utils.CardinalDirections.South:
+                    pictureBox.Image = TankSprites[iDir];
+                    break;
+                case Utils.CardinalDirections.West:
+                    pictureBox.Image = TankSprites[iDir];
+                    break;
+                case Utils.CardinalDirections.East:
+                    pictureBox.Image = TankSprites[iDir];
+                    break;
+            }
         }
         /// <summary>
         /// Allows for the tank to shoot a projectile depending on the direction.
         /// </summary>
-        /// <param name="form">The game screen. </param>
-        public void Shoot(Form form)
+        public void Shoot()
         {
+            if (!canShoot)
+                return;
+
+            canShoot = false;
+            rofTimer.Start();
+
             Bullet bullet = new(gh, this);
+        }
+        /// <summary> Cooldown timer event before the tank can be fired again. </summary>
+        void GunCooldown(object sender, EventArgs e)
+        {
+            canShoot = true;
+            rofTimer.Stop();
         }
         /// <summary>
         /// When a tank is hit cause it to take damage
         /// </summary>
-        /// <param name="projectileDamage"> How much damage a tank will take. </param>
-        public void TakeDamage(int projectileDamage)
+        /// <param name="damage"> How much damage a tank will take. </param>
+        public void TakeDamage(int damage)
         {
-            //Add logic to determine which entity got hit
-            playerHealth -= projectileDamage;
-
-            enemyHealth -= projectileDamage;
+            health -= damage;
+            if (health <= 0)
+                Death();
         }
-        /// <summary>
-        /// Player died and game will need to be reset.
-        /// </summary>
-        public void PlayerDeath()
+        void Death()
         {
-            if (playerHealth <= 0)
-            {
-
-                //Display game over 
-            }
-        }
-        /// <summary>
-        /// Enemy died and will need to be removed from the form.
-        /// </summary>
-        public void EnemyDeath()
-        {
-            if (enemyHealth <= 0)
-            {
-
-                //Remove dead enemy from the map
-                // TODO: Rest of Death code
-                OnDeath?.Invoke(this, EventArgs.Empty);
-            }
+            rofTimer.Stop();
+            rofTimer.Dispose();
+            Col.Destroy();
+            OnDeath?.Invoke(this, EventArgs.Empty);
         }
     }
 }

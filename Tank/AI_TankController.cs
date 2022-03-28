@@ -13,6 +13,7 @@ namespace Tank
     internal class AI_TankController
     {
         #region Attributes
+        bool navigatingAroundObstacle;
         const int MovementInterval = 25;
         #endregion
         #region References
@@ -20,6 +21,13 @@ namespace Tank
         Tank tank;
         /// <summary> Tank object this AI is controlling. </summary>
         public Tank SelfTank {  get { return tank; } }
+        #endregion
+        #region References
+        Point destination;
+        /// <summary>
+        /// Timer before tank returns to normal navigation from obstacle resolution.
+        /// </summary>
+        Timer obstacleNavigationTimer = new();
         #endregion
 
 
@@ -32,24 +40,47 @@ namespace Tank
             this.gh = gh;
             this.tank = tank;
 
-            ConnectEvents();
-
-            // Make an initial decision
+            // Make an initial decision and set initial target to the player
+            destination = gh.Player.Col.Location;
             MakeDecision();
+
+            obstacleNavigationTimer.Interval = 1000;
 
             Timer t = new();
             t.Interval = MovementInterval;
             t.Tick += MakeDecisionLoop;
             t.Start();
+
+            ConnectEvents();
         }
         #endregion
         #region Event connections
-        void ConnectEvents() => tank.OnDeath += Die;
+        void ConnectEvents()
+        {
+            obstacleNavigationTimer.Tick += ObstacleNavigationTimer_Tick;
+            tank.OnDeath += Die;
+        }
         #endregion
         #region Events
-        void MakeDecisionLoop(object sender, EventArgs e) => MakeDecision();
         /// <summary> AI's tank is destroyed. </summary>
-        void Die(object sender, EventArgs e) => gh.OnAITankDeath(this);
+        void Die(object sender, EventArgs e)
+        {
+            obstacleNavigationTimer.Stop();
+            obstacleNavigationTimer.Dispose();
+
+            gh.OnAITankDeath(this);
+        }
+        void MakeDecisionLoop(object sender, EventArgs e) => MakeDecision();
+        /// <summary>
+        /// Called when the obstacle navigation timer has a tick, which,
+        /// in this use case, indicates that the timer has finished.
+        /// Therefore, normal navigation should resume.
+        /// </summary>
+        void ObstacleNavigationTimer_Tick(object sender, EventArgs e)
+        {
+            navigatingAroundObstacle = false;
+            obstacleNavigationTimer.Stop();
+        }
         #endregion
         /// <summary> AI makes a decision on how they should act. </summary>
         void MakeDecision()
@@ -57,77 +88,77 @@ namespace Tank
             Point current = tank.Pic.Location;
             Point playerPos = gh.Player.Pic.Location;
 
+            // Override standard behavior when navigating around obstacles
+            if (navigatingAroundObstacle)
+            {
+                MoveToPoint();
+                return;
+            }
+
             // Don't move if within the stopping distance
             const int StopDistance = 100;
-            if (Utils.Distance(current, playerPos) > StopDistance)
-                MoveToPoint(playerPos);
-
-            // TODO: Add shooting here when it has been created
+            int distance = Utils.Distance(current, playerPos);
+            if (distance > StopDistance)
+            {
+                destination = playerPos;
+                MoveToPoint();
+            }
+            // Distance before the tank will shoot
+            const int ShootDistance = 300;
+            if (Utils.Distance(current, playerPos) < ShootDistance)
+            {
+                SelfTank.direction = Utils.DirectionFromPoint
+                    (
+                        current,
+                        playerPos
+                    );
+                SelfTank.TurnToDirection();
+                SelfTank.Shoot();
+            }
         }
         /// <summary>
         /// Calculates a distance to move towards between the AI's current position
         /// and the specified point.
         /// </summary>
-        /// <param name="destination"> 
-        /// Desired end point to move towards.
-        /// Generally will be the player's position. 
-        /// </param>
-        void MoveToPoint(Point destination)
+        void MoveToPoint()
         {
             Point current = tank.Pic.Location;
             Point nextPos = Utils.MoveToward(current, destination, tank.speed);
             // Movement is blocked, therefore try obstacle resolution
             if (tank.Col.TryMove(nextPos) != null)
-                MoveAroundObstacle();
+                StartObstacleResolution();
         }
-        /// <summary>
-        /// Attempts to prevent AI-obstacle collisions by navigating diagonally
-        /// around the obstacle.
-        /// </summary>
-        void MoveAroundObstacle()
+        void StartObstacleResolution()
         {
-            // To-do: Remove the return later. Using to debug other parts
-            return;
+            if (navigatingAroundObstacle)
+                return;
 
-            Debug.WriteLine("Attempting move around obstacle");
-            Point current = tank.Pic.Location;
+            navigatingAroundObstacle = true;
+            obstacleNavigationTimer.Start();
 
             // Randomly choose a direction to try to move around the obstacle
-            Point destination = current;
+            Point moveTo = tank.Pic.Location;
             Random r = new();
-            // Ensure this is always equal to the length of the # of cases in the switch
-            const int NumOfDecisions = 4;
-            int decision = r.Next(NumOfDecisions);
-            // Amount to move in each decision in the x and y directions
-            const int xMove = 25;
-            const int yMove = 25;
-            switch (decision)
+            int decision = r.Next((int)Enum.GetValues(typeof(Utils.CardinalDirections)).Cast<Utils.CardinalDirections>().Max());
+            // Convert randomized integer back to the enum
+            Utils.CardinalDirections dir = (Utils.CardinalDirections)decision;
+            const int moveAmt = 200;
+            switch (dir)
             {
-                case 0: // Try to move diagonally up and right
-                    destination.X += xMove;
-                    destination.Y += yMove;
+                case Utils.CardinalDirections.North:
+                    moveTo.Y += moveAmt;
                     break;
-                case 1: // Try to move diagonally up and left
-                    destination.X -= xMove;
-                    destination.Y += yMove;
+                case Utils.CardinalDirections.South:
+                    moveTo.Y -= moveAmt;
                     break;
-                case 2: // Try to move diagonally down and right
-                    destination.X += xMove;
-                    destination.Y -= yMove;
+                case Utils.CardinalDirections.East:
+                    moveTo.X += moveAmt;
                     break;
-                case 3: // Try to move diagonally down and left
-                    destination.X -= xMove;
-                    destination.Y -= yMove;
+                case Utils.CardinalDirections.West:
+                    moveTo.X -= moveAmt;
                     break;
             }
-
-            Point nextPos = Utils.MoveToward(current, destination, tank.speed);
-            // Re-run if failed to resolve collision
-            if (tank.Col.TryMove(nextPos) != null)
-                MoveAroundObstacle();
-            // Otherwise return to normal decision making.
-            else
-                MakeDecision();
+            destination = moveTo;
         }
     }
 }
