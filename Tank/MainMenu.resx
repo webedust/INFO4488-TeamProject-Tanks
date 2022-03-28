@@ -57,4 +57,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="txtControlDesc.Text" xml:space="preserve">
+    <value>Objective:
+The objective is to clear levels of invading tanks.
+
+Player Controls:
+W - Move the player tank upwards.
+A - Move the player tank to the left.
+S - Move the player tank downwards.
+D - Move the player tank to the right.
+Spacebar - Shoot projectile in the direction the tank is facing.</value>
+  </data>
 </root>

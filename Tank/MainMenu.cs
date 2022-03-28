@@ -15,6 +15,8 @@ namespace Tank
         public MainMenu()
         {
             InitializeComponent();
+            btnCreditsReturn.Click += ReturnEvent;
+            btnInstructionReturn.Click += ReturnEvent;
         }
 
 
@@ -32,26 +34,38 @@ namespace Tank
 
         private void btnInstructions_Click(object sender, EventArgs e)
         {
-            Instructions frm = new Instructions();
-            frm.Show();
-            this.Hide();
+            instructionsPanel.Visible = true;
+            menuPanel.Visible = false;
         }
 
         private void btnCredits_Click(object sender, EventArgs e)
         {
-            Credits frm = new Credits();
-            frm.Show();
-            this.Hide();
+            creditsPanel.Visible = true;
+            menuPanel.Visible=false;
         }
 
-        private void FormClose(object sender, FormClosedEventArgs e)
+        /// <summary>
+        /// When the X is clicked on the form, open the main menu. 
+        /// Used code from https://stackoverflow.com/questions/1669318/override-standard-close-x-button-in-a-windows-form
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnFormClosing(FormClosingEventArgs e)
         {
-            if (this.DialogResult == DialogResult.Cancel)
+            base.OnFormClosing(e);
+
+            if (e.CloseReason == CloseReason.WindowsShutDown)
             {
-                MainMenu frm = new MainMenu();
-                frm.Show();
-                this.Close();
+                return;
             }
+            Application.Exit();
+        }
+
+ 
+        private void ReturnEvent(object sender, EventArgs e)
+        {
+            instructionsPanel.Visible = false;
+            creditsPanel.Visible = false;
+            menuPanel.Visible = true;
         }
     }
 }

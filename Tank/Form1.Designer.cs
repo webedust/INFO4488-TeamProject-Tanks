@@ -43,7 +43,8 @@ namespace Tank
             this.pictureBox7 = new System.Windows.Forms.PictureBox();
             this.pictureBox8 = new System.Windows.Forms.PictureBox();
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblLevel = new System.Windows.Forms.Label();
+            this.lblKills = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.playerTank)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -209,19 +210,33 @@ namespace Tank
             this.pictureBox9.TabStop = false;
             this.pictureBox9.Tag = "Rock";
             // 
-            // label1
+            // lblLevel
             // 
-            this.label1.Location = new System.Drawing.Point(0, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(100, 23);
-            this.label1.TabIndex = 0;
+            this.lblLevel.AutoSize = true;
+            this.lblLevel.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblLevel.Location = new System.Drawing.Point(244, 11);
+            this.lblLevel.Name = "lblLevel";
+            this.lblLevel.Size = new System.Drawing.Size(58, 21);
+            this.lblLevel.TabIndex = 12;
+            this.lblLevel.Text = "Level: ";
+            // 
+            // lblKills
+            // 
+            this.lblKills.AutoSize = true;
+            this.lblKills.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblKills.Location = new System.Drawing.Point(327, 11);
+            this.lblKills.Name = "lblKills";
+            this.lblKills.Size = new System.Drawing.Size(50, 21);
+            this.lblKills.TabIndex = 13;
+            this.lblKills.Text = "Kills: ";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1184, 661);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblKills);
+            this.Controls.Add(this.lblLevel);
             this.Controls.Add(this.pictureBox9);
             this.Controls.Add(this.pictureBox8);
             this.Controls.Add(this.pictureBox7);
@@ -269,7 +284,8 @@ namespace Tank
         private System.Windows.Forms.PictureBox pictureBox7;
         private System.Windows.Forms.PictureBox pictureBox8;
         private System.Windows.Forms.PictureBox pictureBox9;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblLevel;
+        private System.Windows.Forms.Label lblKills;
     }
 }
 

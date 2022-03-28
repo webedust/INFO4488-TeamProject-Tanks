@@ -137,7 +137,8 @@ namespace Tank
         }
 
         /// <summary>
-        /// When the X is clicked on the form, open the main menu.
+        /// When the X is clicked on the form, open the main menu. 
+        /// Used code from https://stackoverflow.com/questions/1669318/override-standard-close-x-button-in-a-windows-form
         /// </summary>
         /// <param name="e"></param>
         protected override void OnFormClosing(FormClosingEventArgs e)
