@@ -79,17 +79,19 @@ namespace Tank
         {
             int xDiff = end.X - start.X;
             int yDiff = end.Y - start.Y;
-            // > 0 means the direction must be North as it's positive
-            if (yDiff > 0)
+            int xDiffAbs = Math.Abs(xDiff);
+            int yDiffAbs = Math.Abs(yDiff);
+            // < 0 means the direction must be North
+            if (yDiff < 0)
             {
                 /* Determine whether to return North or East/West.
                  * If East/West needs to be returned then it's calculated later. */
-                if (yDiff > xDiff)
+                if (yDiffAbs > xDiffAbs)
                     return CardinalDirections.North;
             }
             else
             {
-                if (yDiff > xDiff)
+                if (yDiffAbs > xDiffAbs)
                     return CardinalDirections.South;
             }
             // Determine whether East/West should be returned.

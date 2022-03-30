@@ -11,11 +11,21 @@ namespace Tank
 {
     class Tank
     {
+        public enum Faction
+        {
+            Player = 0,
+            Enemy = 1
+        }
         #region Attributes
         int health;
+        public int Health 
+        {
+            get { return health; }
+            private set { health = value; }
+        }
         public int speed = 5;
-        public int playerHealth = 100;
-        public int enemyHealth;
+        const int PlayerHealth = 100;
+        const int EnemyHealth = 50;
 
         public Utils.CardinalDirections direction = Utils.CardinalDirections.North;
         public bool goLeft = false;
@@ -36,7 +46,9 @@ namespace Tank
         #region References
         Collider col;
         public Collider Col { get { return col; } }
-        GameHandler gh;
+        Faction faction;
+        /// <summary> Faction this tank belongs to. </summary>
+        public Faction SelfFaction { get { return faction; } }
         Image[] tankSprites = EnemyTankSprites;
         /// <summary> Sprites that this tank should use. </summary>
         public Image[] TankSprites 
@@ -44,6 +56,7 @@ namespace Tank
             set { tankSprites = value; }
             get { return tankSprites; } 
         }
+        GameHandler gh;
         PictureBox pictureBox;
         /// <summary> PictureBox being used to render this Tank. </summary>
         public PictureBox Pic { get { return pictureBox; } }
@@ -73,12 +86,25 @@ namespace Tank
         /// <param name="selfCollider"> Collider to use for this tank. </param>
         /// <param name="gh"> Reference to the GameHandler running the current form. </param>
         /// <param name="pic"> PictureBox to use for rendering this tank to the form. </param>
-        public Tank(Collider selfCollider, GameHandler gh, PictureBox pic)
+        /// <param name="faction"> Faction this tank should belong to. </param>
+        public Tank(Collider selfCollider, GameHandler gh, PictureBox pic, Faction faction)
         {
             col = selfCollider;
             this.gh = gh;
             pictureBox = pic;
             originalSize = pic.Size;
+            this.faction = faction;
+
+            // Determine starting health based on faction
+            switch (SelfFaction)
+            {
+                case Faction.Player:
+                    health = PlayerHealth;
+                    break;
+                case Faction.Enemy:
+                    health = EnemyHealth;
+                    break;
+            }
 
             rofTimer.Interval = FireRate;
             rofTimer.Tick += GunCooldown;
@@ -155,7 +181,7 @@ namespace Tank
             canShoot = false;
             rofTimer.Start();
 
-            Bullet bullet = new(gh, this);
+            Bullet bullet = new(gh, this, SelfFaction);
         }
         /// <summary> Cooldown timer event before the tank can be fired again. </summary>
         void GunCooldown(object sender, EventArgs e)

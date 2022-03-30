@@ -12,8 +12,7 @@ namespace Tank
     class Bullet
     {
         #region Attributes
-        // To-do: Probably change damage. It's set as 5 for testing purposes.
-        public int damage = 5;
+        const int Damage = 25;
         public const int Speed = 3;
         Timer timer;
         #endregion
@@ -27,19 +26,21 @@ namespace Tank
         #region References
         GameHandler gh;
         PictureBox pic;
-        Tank shooter;
+        Tank.Faction faction;
         #endregion
 
 
         #region Initial
         /// <summary> Creates and fires a bullet from the specified tank. </summary>
         /// <param name="gh"> Overhead game handler for the current form. </param>
-        /// <param name="shooter"> Tank this bullet has been fired from. </param>
-        public Bullet(GameHandler gh, Tank shooter)
+        /// <param name="origin"> Tank this bullet has been fired from. </param>
+        /// <param name="faction"> Faction of the tank firing this bullet. </param>
+        public Bullet(GameHandler gh, Tank origin, Tank.Faction faction)
         {
             this.gh = gh;
-            this.shooter = shooter;
-            dir = shooter.direction;
+            gh.Bullets.Add(this);
+            this.faction = faction;
+            dir = origin.direction;
 
             pic = new();
             pic.BackColor = Color.Red;
@@ -47,27 +48,27 @@ namespace Tank
 
             /* Set location to the shooter's location + an offset
              * to prevent immediate self-collision. */
-            Point spawnPos = shooter.Pic.Location;
+            Point spawnPos = origin.Pic.Location;
             // Pixel offset to apply to the bullet on instantiation
             const int offset = 5;
-            switch (shooter.direction)
+            switch (origin.direction)
             {
                 case Utils.CardinalDirections.North:
                     // X is modified to adjust the bullet to fire from the center
-                    spawnPos.X += shooter.Pic.Size.Width / 2;
+                    spawnPos.X += origin.Pic.Size.Width / 2;
                     spawnPos.Y -= offset;
                     break;
                 case Utils.CardinalDirections.South:
-                    spawnPos.X += shooter.Pic.Size.Width / 2;
-                    spawnPos.Y += shooter.Pic.Size.Height + offset;
+                    spawnPos.X += origin.Pic.Size.Width / 2;
+                    spawnPos.Y += origin.Pic.Size.Height + offset;
                     break;
                 case Utils.CardinalDirections.East:
-                    spawnPos.X += shooter.Pic.Size.Width + offset;
-                    spawnPos.Y += shooter.Pic.Size.Height / 2;
+                    spawnPos.X += origin.Pic.Size.Width + offset;
+                    spawnPos.Y += origin.Pic.Size.Height / 2;
                     break;
                 case Utils.CardinalDirections.West:
                     spawnPos.X -= offset;
-                    spawnPos.Y += shooter.Pic.Size.Height / 2;
+                    spawnPos.Y += origin.Pic.Size.Height / 2;
                     break;
             }
             pic.Location = spawnPos;
@@ -105,20 +106,30 @@ namespace Tank
             // Test for collision
             Collider obstacle = Col.TryMove(moveTo);
             if (obstacle != null)
-                OnCollision(obstacle);
+            {
+                // If colliding with another bullet then fly through it
+                if (gh.GetBulletFromCollider(obstacle) != null)
+                    Col.ForceMove(moveTo);
+                else
+                    OnCollision(obstacle);
+                return;
+            }
 
             // Delete bullet if travels off-screen
             if (pic.Left < 10 || pic.Left > 1200 || pic.Top < 10 || pic.Top > 700)
-            {
                 Destroy();
-            }
         }
         void OnCollision(Collider other)
         {
             // Check if the bullet hit a tank, and make it take damage if so.
             Tank hit = gh.GetTankFromCollider(other);
-            if (hit != null)
-                hit.TakeDamage(damage);
+            // Check if player
+            if (hit == null && other == gh.Player.Col)
+                hit = gh.Player;
+
+            // Ignore friendly fire
+            if (hit != null && hit.SelfFaction != faction)
+                hit.TakeDamage(Damage);
 
             Destroy();
         }
@@ -126,6 +137,9 @@ namespace Tank
         {
             timer.Stop();
             timer.Dispose();
+
+            gh.Bullets.Remove(this);
+
             Col.Destroy();
         }
     }

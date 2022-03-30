@@ -29,6 +29,13 @@ namespace Tank
             get { return currentForm; }
             set { currentForm = value; }
         }
+        List<Bullet> bullets = new List<Bullet>();
+        /// <summary> All bullets currently present in the map. </summary>
+        public List<Bullet> Bullets 
+        { 
+            get { return bullets; }
+            private set { bullets = value; }
+        }
         List<Collider> cols = new();
         /// <summary> All colliders currently present in the map. </summary>
         public List<Collider> Colliders
@@ -103,7 +110,7 @@ namespace Tank
                 if (ctrl != null && ctrl.Name == "playerTank")
                 {
                     Collider col = new(this, ctrl);
-                    player = new(col, this, (PictureBox)ctrl);
+                    player = new(col, this, (PictureBox)ctrl, Tank.Faction.Player);
                     player.TankSprites = Tank.PlayerTankSprites;
                     player.OnDeath += Player_OnDeath;
                     return;
@@ -172,7 +179,7 @@ namespace Tank
                 Collider col = new(this, pic);
                 Colliders.Add(col);
 
-                Tank tank = new(col, this, pic);
+                Tank tank = new(col, this, pic, Tank.Faction.Enemy);
 
                 AI_TankController ai = new(this, tank);
 
@@ -195,6 +202,23 @@ namespace Tank
         #endregion
         void AISpawnInterval(object sender, EventArgs e)
             => InstantiateTanks();
+        /// <summary> 
+        /// Iterates through all colliders in the current form
+        /// to find the bullet that is using the collider that has been specified.
+        /// </summary>
+        /// <param name="col"> Collider to find the bullet for. </param>
+        /// <returns>
+        /// Bullet that is using the specified collider "other",
+        /// or null if the collider cannot be matched to a bullet.
+        /// </returns>
+        public Bullet GetBulletFromCollider(Collider col)
+        {
+            foreach (Bullet bullet in Bullets)
+                if (bullet.Col == col)
+                    return bullet;
+
+            return null;
+        }
         /// <summary> 
         /// Iterates through all colliders in the current form
         /// to find the tank that is using the collider that has been specified.

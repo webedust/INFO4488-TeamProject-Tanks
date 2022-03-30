@@ -57,6 +57,32 @@ namespace Tank
         /// If this collider cannot be moved then the blocking collider is returned. </returns>
         public Collider TryMove(Point moveTo)
         {
+            Collider obstacleCol = IsColliderAtPoint(moveTo);
+
+            // Set new position if no obstacles are in the way
+            if (obstacleCol == null)
+                Control.Location = moveTo;
+
+            return obstacleCol;
+        }
+        /// <summary> Moves to the specified position even if another collider is there. </summary>
+        /// <param name="moveTo"> Position to move towards. </param>
+        public void ForceMove(Point moveTo)
+        {
+            Control.Location = moveTo;
+        }
+        /// <summary>
+        /// Iterates through all colliders currently present on the form
+        /// and checks if any are intersecting with this collider
+        /// if it were to be moved to the specified point.
+        /// </summary>
+        /// <param name="pt"> Point to check for colliders existing. </param>
+        /// <returns>
+        /// Null if no collider is at the point,
+        /// otherwise the collider occupying that space is returned. 
+        /// </returns>
+        public Collider IsColliderAtPoint(Point pt)
+        {
             // Set if there's a collider where attempting to move.
             Collider obstacleCol = null;
             foreach (Collider col in gh.Colliders)
@@ -66,15 +92,15 @@ namespace Tank
                     continue;
 
                 // Ignore any distant colliders to save memory usage
-                const int distant = 80;
-                if (Utils.Distance(Control.Location, col.Location) > distant)
+                const int distant = 125;
+                if (Utils.Distance(pt, col.Location) > distant)
                     continue;
 
                 // Check each edge for collision
                 Rectangle movePos = new
                     (
-                        moveTo.X,
-                        moveTo.Y,
+                        pt.X,
+                        pt.Y,
                         Control.Size.Width,
                         Control.Size.Height
                     );
@@ -92,17 +118,13 @@ namespace Tank
                 }
             }
 
-            // Set new position if no obstacles are in the way
-            if (obstacleCol == null)
-                Control.Location = moveTo;
-
             return obstacleCol;
         }
         /// <summary> Destroys this collider and all references associated with it. </summary>
         public void Destroy()
         {
             gh.Colliders.Remove(this);
-            ctrl.Dispose();
+            Control.Dispose();
         }
     }
 }

@@ -24,9 +24,9 @@ namespace Tank
         void GameTimer_Tick(object sender, EventArgs e)
         {
 
-            if (player.playerHealth > 1)
+            if (player.Health > 1)
             {
-                healthBar.Value = player.playerHealth;
+                healthBar.Value = player.Health;
             }
             else
             {
