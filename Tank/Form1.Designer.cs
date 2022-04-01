@@ -204,7 +204,7 @@ namespace Tank
             this.pictureBox9.InitialImage = global::Tank.Properties.Resources.Rock;
             this.pictureBox9.Location = new System.Drawing.Point(127, 378);
             this.pictureBox9.Name = "pictureBox9";
-            this.pictureBox9.Size = new System.Drawing.Size(192, 53);
+            this.pictureBox9.Size = new System.Drawing.Size(111, 53);
             this.pictureBox9.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox9.TabIndex = 11;
             this.pictureBox9.TabStop = false;

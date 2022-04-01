@@ -36,7 +36,7 @@ namespace Tank
             get { return ctrl; }
             private set { ctrl = value; }
         }
-        GameHandler gh;
+        readonly GameHandler gh;
         #endregion
 
 
@@ -67,10 +67,7 @@ namespace Tank
         }
         /// <summary> Moves to the specified position even if another collider is there. </summary>
         /// <param name="moveTo"> Position to move towards. </param>
-        public void ForceMove(Point moveTo)
-        {
-            Control.Location = moveTo;
-        }
+        public void ForceMove(Point moveTo) => Control.Location = moveTo;
         /// <summary>
         /// Iterates through all colliders currently present on the form
         /// and checks if any are intersecting with this collider
@@ -111,7 +108,9 @@ namespace Tank
                         col.Size.Width,
                         col.Size.Height
                     );
-                if (colRect.IntersectsWith(movePos))
+                if (colRect.IntersectsWith(movePos) 
+                    || colRect.Contains(movePos)
+                    || movePos.Contains(colRect))
                 {
                     obstacleCol = col;
                     break;
