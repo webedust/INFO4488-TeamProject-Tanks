@@ -29,7 +29,7 @@ namespace Tank
             get { return currentForm; }
             set { currentForm = value; }
         }
-        List<Bullet> bullets = new List<Bullet>();
+        List<Bullet> bullets = new();
         /// <summary> All bullets currently present in the map. </summary>
         public List<Bullet> Bullets 
         { 
@@ -43,6 +43,7 @@ namespace Tank
             get { return cols; }
             private set { cols = value; }
         }
+        List<Rock> rocks = new();
         Tank player;
         /// <summary> Player object being used. </summary>
         public Tank Player
@@ -98,7 +99,16 @@ namespace Tank
                             this,
                             pic
                         );
+                    rocks.Add(rock);
                 }
+        }
+        /// <summary> Destroys all rocks currently present in the level. </summary>
+        public void DestroyRocks()
+        {
+            foreach (Rock rock in rocks)
+                rock.Collider.Destroy();
+
+            rocks.Clear();
         }
         /// <summary>
         /// Instantiates the player game logic on the form control named <c>playerTank</c>.
