@@ -20,7 +20,7 @@ namespace Tank
         GameHandler gh;
         Tank tank;
         /// <summary> Tank object this AI is controlling. </summary>
-        public Tank SelfTank {  get { return tank; } }
+        public Tank SelfTank { get { return tank; } }
         #endregion
         #region References
         Point destination;

@@ -36,7 +36,7 @@ namespace Tank
             get { return ctrl; }
             private set { ctrl = value; }
         }
-        GameHandler gh;
+        readonly GameHandler gh;
         #endregion
 
 
@@ -51,6 +51,27 @@ namespace Tank
             Control = ctrl;
         }
         #endregion
+        /// <param name="moveBy">
+        /// Maximum pixel distance to test each possible movement direction.
+        /// In most cases this will be the speed the collider can be moved at.
+        /// </param>
+        /// <returns> True if the collider can't move in any cardinal direction. </returns>
+        public bool IsStuck(int moveBy)
+        {
+            Point[] movePts =
+            {
+                new(Location.X, Location.Y + moveBy), // North
+                new(Location.X, Location.Y - moveBy), // South
+                new(Location.X + moveBy, Location.Y), // East
+                new(Location.X - moveBy, Location.Y) // West
+            };
+            Collider north = TryMove(movePts[0]);
+            Collider south = TryMove(movePts[1]);
+            Collider east = TryMove(movePts[2]);
+            Collider west = TryMove(movePts[3]);
+
+            return north != null && south != null && east != null && west != null;
+        }
         /// <summary> Attempts to move to the specified position. </summary>
         /// <param name="moveTo"> Position to move towards. </param>
         /// <returns> Null if successfully moved.
@@ -67,10 +88,7 @@ namespace Tank
         }
         /// <summary> Moves to the specified position even if another collider is there. </summary>
         /// <param name="moveTo"> Position to move towards. </param>
-        public void ForceMove(Point moveTo)
-        {
-            Control.Location = moveTo;
-        }
+        public void ForceMove(Point moveTo) => Control.Location = moveTo;
         /// <summary>
         /// Iterates through all colliders currently present on the form
         /// and checks if any are intersecting with this collider
@@ -111,7 +129,9 @@ namespace Tank
                         col.Size.Width,
                         col.Size.Height
                     );
-                if (colRect.IntersectsWith(movePos))
+                if (colRect.IntersectsWith(movePos) 
+                    || colRect.Contains(movePos)
+                    || movePos.Contains(colRect))
                 {
                     obstacleCol = col;
                     break;
