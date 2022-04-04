@@ -17,6 +17,17 @@ namespace Tank
             Enemy = 1
         }
         #region Attributes
+        bool noCollide;
+        public bool NoCollide 
+        { 
+            get { return noCollide; } 
+            private set 
+            { 
+                noCollide = value;
+                if (!noCollide)
+                    ForceMovesPerformed = 0;
+            } 
+        }
         int health;
         public int Health 
         {
@@ -24,6 +35,26 @@ namespace Tank
             private set { health = value; }
         }
         public int speed = 5;
+        int successiveFailedMoves;
+        /// <summary>
+        /// Number of TryMoves attempted in a row that have failed.
+        /// Resets every time TryMove succeeds.
+        /// </summary>
+        public int SuccessiveFailedMoves
+        {
+            get { return successiveFailedMoves; }
+            private set { successiveFailedMoves = value; }
+        }
+        int forceMovesPerformed;
+        /// <summary>
+        /// Number of ForceMoves performed by the tank when NoCollide is enabled.
+        /// Resets when NoCollide is disabled.
+        /// </summary>
+        public int ForceMovesPerformed
+        {
+            get { return forceMovesPerformed; }
+            private set { forceMovesPerformed = value; }
+        }
         const int PlayerHealth = 100;
         const int EnemyHealth = 50;
 
@@ -134,9 +165,7 @@ namespace Tank
                         moveTo.X += speed;
                     break;
             }
-            // Only turn the tank if moving succeeded to prevent getting stuck in rocks
-            if (col.TryMove(moveTo) == null)
-                TurnToDirection();
+            Move(moveTo);
         }
         /// <summary>
         /// Turns the tank the current direction it should be facing
@@ -168,6 +197,39 @@ namespace Tank
                 case Utils.CardinalDirections.East:
                     pictureBox.Image = TankSprites[iDir];
                     break;
+            }
+        }
+        void Move(Point loc)
+        {
+            Collider colAtPos = null;
+            if (NoCollide)
+            { 
+                col.ForceMove(loc);
+                ForceMovesPerformed++;
+                /* Disable NoCollide when set amount of ForceMoves are conducted.
+                 * Assumes the tank will have gotten unstuck by then. */
+                if (ForceMovesPerformed >= 7)
+                    NoCollide = false;
+            }
+            else
+                col.TryMove(loc);
+
+            // Only turn the tank if moving succeeded to prevent getting stuck in rocks
+            if (colAtPos == null)
+            {
+                SuccessiveFailedMoves = 0;
+                TurnToDirection();
+            }
+            else
+            {
+                SuccessiveFailedMoves++;
+
+                // Test if stuck when failing to move numerous times
+                if (successiveFailedMoves > 10)
+                {
+                    // If the tank is stuck then allow ForceMove to escape
+                    NoCollide = Col.IsStuck(speed);
+                }
             }
         }
         /// <summary>
