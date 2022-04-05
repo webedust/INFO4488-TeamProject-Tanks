@@ -30,6 +30,8 @@ namespace Tank
             }
             else
             {
+                GameTimer.Stop();
+                GameTimer.Dispose();
                 player.gameOver = true;
                 this.Close();
                 GameOver gameOver = new GameOver();
