@@ -218,6 +218,7 @@ namespace Tank
             this.lblLevel.Name = "lblLevel";
             this.lblLevel.Size = new System.Drawing.Size(58, 21);
             this.lblLevel.TabIndex = 12;
+            this.lblLevel.Tag = "level";
             this.lblLevel.Text = "Level: ";
             // 
             // lblKills
@@ -228,6 +229,7 @@ namespace Tank
             this.lblKills.Name = "lblKills";
             this.lblKills.Size = new System.Drawing.Size(50, 21);
             this.lblKills.TabIndex = 13;
+            this.lblKills.Tag = "kills";
             this.lblKills.Text = "Kills: ";
             // 
             // Form1

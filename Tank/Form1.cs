@@ -14,16 +14,18 @@ namespace Tank
     public partial class Form1 : Form
     {
         Tank player;
+        int kills;
+        int level;
         public Form1()
         {
             InitializeComponent();
 
             GameHandler gh = new(this);
             player = gh.Player;
+            
         }
         void GameTimer_Tick(object sender, EventArgs e)
-        {
-
+        {  
             if (player.Health > 1)
             {
                 healthBar.Value = player.Health;
@@ -78,7 +80,6 @@ namespace Tank
                 player.PlayerMove(Utils.CardinalDirections.South);
             }
 
-            //label1.Text = "X: " + playerTank.Left + " Y: " + playerTank.Top;
         }
         void KeyIsDown(object sender, KeyEventArgs e)
         {
@@ -133,6 +134,8 @@ namespace Tank
                     break;
             }
         }
+
+       
 
         /// <summary>
         /// When the X is clicked on the form, open the main menu. 

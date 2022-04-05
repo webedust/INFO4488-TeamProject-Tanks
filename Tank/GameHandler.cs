@@ -20,6 +20,8 @@ namespace Tank
         #region Attributes
         /// <summary> Amount of time in <b>milliseconds</b> between each interval tick. </summary>
         const int interval = 5000;
+        public int level = 1;
+        public int killCount = 0;
         #endregion
         #region References
         Form currentForm;
@@ -204,6 +206,7 @@ namespace Tank
         public void OnAITankDeath(AI_TankController casualty)
         {
             currentTanks.Remove(casualty.SelfTank);
+            killCount++;
         }
         void Player_OnDeath(object sender, EventArgs e)
         {
@@ -249,6 +252,15 @@ namespace Tank
                     return tank;
 
             return null;
+        }
+
+        public void NextLevel()
+        {
+            if(killCount % 2 == 0)
+            {
+                level++;
+                DestroyRocks();
+            }
         }
     }
 }
