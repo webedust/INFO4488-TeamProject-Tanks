@@ -102,6 +102,22 @@ namespace Tank
                             pic
                         );
                     rocks.Add(rock);
+                } else if(ctrl != null && (string)ctrl.Tag == "Rock2")
+                {
+                    //Add level 2 layout
+                } else if(ctrl != null && (string)ctrl.Tag == "Rock3")
+                {
+                    //Add level 3 layout
+                }
+                else if (ctrl != null && (string)ctrl.Tag == "Rock4")
+                {
+                    //Add level 4 layout
+
+                }
+                else if (ctrl != null && (string)ctrl.Tag == "Rock5")
+                {
+                    //Add level 5 layout
+
                 }
         }
         /// <summary> Destroys all rocks currently present in the level. </summary>
