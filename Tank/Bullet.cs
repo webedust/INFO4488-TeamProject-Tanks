@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Tank
 {
-    class Bullet
+    public class Bullet
     {
         #region Attributes
         const int Damage = 25;
@@ -19,7 +19,6 @@ namespace Tank
         #region References
         Collider col;
         public Collider Col { get { return col; } }
-        /// <summary> PictureBox in use by this bullet. </summary>
         /// <summary> Direction this bullet is being fired. </summary>
         Utils.CardinalDirections dir;
         #endregion
@@ -130,6 +129,8 @@ namespace Tank
             // Ignore friendly fire
             if (hit != null && hit.SelfFaction != faction)
                 hit.TakeDamage(Damage);
+
+            BulletHitEffect effect = new(this);
 
             Destroy();
         }

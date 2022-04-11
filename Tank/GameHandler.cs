@@ -15,7 +15,7 @@ namespace Tank
     /// Controls the game's flow
     /// and instantiates objects into the game world as needed.
     /// </summary>
-    internal class GameHandler
+    public class GameHandler
     {
         #region Attributes
         /// <summary> Amount of time in <b>milliseconds</b> between each interval tick. </summary>
@@ -120,7 +120,7 @@ namespace Tank
                 if (ctrl != null && ctrl.Name == "playerTank")
                 {
                     Collider col = new(this, ctrl);
-                    player = new(col, this, (PictureBox)ctrl, Tank.Faction.Player);
+                    player = new(col, this, (PictureBox)ctrl, Tank.Faction.Player, Tank.PlayerFireRate);
                     player.TankSprites = Tank.PlayerTankSprites;
                     player.OnDeath += Player_OnDeath;
                     return;
@@ -139,9 +139,7 @@ namespace Tank
         readonly int maxTanksAtOnce = 7;
         /// <summary> Number of alive enemy tanks currently on the screen. </summary>
         List<Tank> currentTanks = new();
-        /// <summary>
-        /// Instantiates <b>enemy</b> tanks as specified in a Map object.
-        /// </summary>
+        /// <summary> Instantiates <b>enemy</b> tanks. </summary>
         /// <remarks> Should be called on an interval to continually spawn in enemies. </remarks>
         void InstantiateTanks()
         {
@@ -189,7 +187,7 @@ namespace Tank
                 Collider col = new(this, pic);
                 Colliders.Add(col);
 
-                Tank tank = new(col, this, pic, Tank.Faction.Enemy);
+                Tank tank = new(col, this, pic, Tank.Faction.Enemy, Tank.AIFireRate);
 
                 AI_TankController ai = new(this, tank);
 

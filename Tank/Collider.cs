@@ -10,9 +10,16 @@ using System.Windows.Forms;
 namespace Tank
 {
     /// <summary> Allows world objects to have collisions between them. </summary>
-    internal class Collider
+    public class Collider
     {
         #region Attributes
+        bool enabled = true;
+        /// <summary> Toggles collisions with this collider. </summary>
+        public bool Enabled
+        {
+            get { return enabled; }
+            set { enabled = value; }
+        }
         /// <summary> World position of the collider from the upper-left edge. </summary>
         public Point Location
         {
@@ -105,6 +112,10 @@ namespace Tank
             Collider obstacleCol = null;
             foreach (Collider col in gh.Colliders)
             {
+                // Skip disabled colliders
+                if (!col.Enabled)
+                    continue;
+
                 // Skip if evaluating against self
                 if (col == this)
                     continue;
@@ -144,6 +155,7 @@ namespace Tank
         public void Destroy()
         {
             gh.Colliders.Remove(this);
+            gh.CurrentForm.Controls.Remove(Control);
             Control.Dispose();
         }
     }

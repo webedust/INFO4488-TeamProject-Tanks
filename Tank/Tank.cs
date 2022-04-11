@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Tank
 {
-    class Tank
+    public class Tank
     {
         public enum Faction
         {
@@ -65,11 +65,8 @@ namespace Tank
         public bool goDown = false;
         public bool gameOver;
 
-        /// <summary>
-        /// Minimum amount of milliseconds that must elapse between successive shots
-        /// before the tank can fire again.
-        /// </summary>
-        const int FireRate = 450;
+        public const int PlayerFireRate = 450;
+        public const int AIFireRate = 900;
         bool canShoot = true;
         Size originalSize;
         Timer rofTimer = new();
@@ -118,7 +115,8 @@ namespace Tank
         /// <param name="gh"> Reference to the GameHandler running the current form. </param>
         /// <param name="pic"> PictureBox to use for rendering this tank to the form. </param>
         /// <param name="faction"> Faction this tank should belong to. </param>
-        public Tank(Collider selfCollider, GameHandler gh, PictureBox pic, Faction faction)
+        /// <param name="firerate">Minimum amount of milliseconds that must elapse between successive shots before the tank can fire again.</param>
+        public Tank(Collider selfCollider, GameHandler gh, PictureBox pic, Faction faction, int fireRate)
         {
             col = selfCollider;
             this.gh = gh;
@@ -137,7 +135,7 @@ namespace Tank
                     break;
             }
 
-            rofTimer.Interval = FireRate;
+            rofTimer.Interval = fireRate;
             rofTimer.Tick += GunCooldown;
         }
         #endregion
@@ -265,6 +263,8 @@ namespace Tank
         {
             rofTimer.Stop();
             rofTimer.Dispose();
+
+            Col.Enabled = false;
             Col.Destroy();
             OnDeath?.Invoke(this, EventArgs.Empty);
         }

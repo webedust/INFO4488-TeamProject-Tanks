@@ -10,11 +10,11 @@ using System.Windows.Forms;
 namespace Tank
 {
     /// <summary> Handles thinking for the enemy AI tanks. </summary>
-    internal class AI_TankController
+    public class AI_TankController
     {
         #region Attributes
         bool navigatingAroundObstacle;
-        const int MovementInterval = 25;
+        const int MakeDecisionInterval = 25;
         #endregion
         #region References
         GameHandler gh;
@@ -24,6 +24,7 @@ namespace Tank
         #endregion
         #region References
         Point destination;
+        Timer makeDecisionTimer = new();
         /// <summary>
         /// Timer before tank returns to normal navigation from obstacle resolution.
         /// </summary>
@@ -46,10 +47,9 @@ namespace Tank
 
             obstacleNavigationTimer.Interval = 1000;
 
-            Timer t = new();
-            t.Interval = MovementInterval;
-            t.Tick += MakeDecisionLoop;
-            t.Start();
+            makeDecisionTimer.Interval = MakeDecisionInterval;
+            makeDecisionTimer.Tick += MakeDecisionLoop;
+            makeDecisionTimer.Start();
 
             ConnectEvents();
         }
@@ -65,6 +65,9 @@ namespace Tank
         /// <summary> AI's tank is destroyed. </summary>
         void Die(object sender, EventArgs e)
         {
+            makeDecisionTimer.Stop();
+            makeDecisionTimer.Dispose();
+
             obstacleNavigationTimer.Stop();
             obstacleNavigationTimer.Dispose();
 
