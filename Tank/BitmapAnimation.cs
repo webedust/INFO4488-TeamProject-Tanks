@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -29,18 +30,32 @@ namespace Tank
         PictureBox pic;
         Timer timer = new();
         #endregion
+        #region Events
+        public event EventHandler OnFinish;
+        #endregion
 
 
         /// <summary>
         /// Constructs a new bitmap animation that plays the specified sequence
         /// at the given interval.
         /// </summary>
+        /// <param name="sequence"> Bitmap sequence to play as an animation. </param>
+        /// <param name="interval"> Milliseconds to show each bitmap before moving to the next one. </param>
         /// <param name="currentForm"> Form to display this animation to. </param>
-        internal BitmapAnimation(Bitmap[] sequence, int interval, Form currentForm)
+        /// <param name="pos"> Location to set this Bitmap Animation at on the current form.</param>
+        internal BitmapAnimation(Bitmap[] sequence, int interval, Form currentForm, Point pos)
         {
             Sequence = sequence;
             this.interval = interval;
             this.currentForm = currentForm;
+
+            pic = new();
+            pic.BackColor = Color.Transparent;
+            pic.Location = pos;
+            pic.Size = new(sequence[0].Width, sequence[0].Height);
+
+            // To-do: Remove debug
+            Debug.WriteLine(pic.Location);
 
             // Set initial image
             SetImageToCurrentIndex();
@@ -57,6 +72,8 @@ namespace Tank
             if (currentIndex >= sequence.Length - 1)
             {
                 timer.Stop();
+                OnFinish?.Invoke(this, EventArgs.Empty);
+                Dispose();
                 return;
             }
 

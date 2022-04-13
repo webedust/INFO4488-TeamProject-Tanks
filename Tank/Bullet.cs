@@ -130,7 +130,7 @@ namespace Tank
             if (hit != null && hit.SelfFaction != faction)
                 hit.TakeDamage(Damage);
 
-            BulletHitEffect effect = new(this);
+            _ = new BulletHitEffect(Col.Location, gh);
 
             Destroy();
         }
