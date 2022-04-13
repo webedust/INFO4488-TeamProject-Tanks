@@ -45,6 +45,7 @@ namespace Tank
             this.pictureBox9 = new System.Windows.Forms.PictureBox();
             this.lblLevel = new System.Windows.Forms.Label();
             this.lblKills = new System.Windows.Forms.Label();
+            this.pictureBox10 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.playerTank)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -55,6 +56,7 @@ namespace Tank
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).BeginInit();
             this.SuspendLayout();
             // 
             // healthLabel
@@ -232,6 +234,17 @@ namespace Tank
             this.lblKills.Tag = "kills";
             this.lblKills.Text = "Kills: ";
             // 
+            // pictureBox10
+            // 
+            this.pictureBox10.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox10.Location = new System.Drawing.Point(536, 203);
+            this.pictureBox10.Name = "pictureBox10";
+            this.pictureBox10.Size = new System.Drawing.Size(100, 50);
+            this.pictureBox10.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox10.TabIndex = 14;
+            this.pictureBox10.TabStop = false;
+            this.pictureBox10.Tag = "Rock2";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -240,6 +253,7 @@ namespace Tank
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(1184, 661);
+            this.Controls.Add(this.pictureBox10);
             this.Controls.Add(this.lblKills);
             this.Controls.Add(this.lblLevel);
             this.Controls.Add(this.pictureBox9);
@@ -271,6 +285,7 @@ namespace Tank
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox9)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox10)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -293,6 +308,7 @@ namespace Tank
         private System.Windows.Forms.PictureBox pictureBox9;
         private System.Windows.Forms.Label lblLevel;
         private System.Windows.Forms.Label lblKills;
+        private System.Windows.Forms.PictureBox pictureBox10;
     }
 }
 

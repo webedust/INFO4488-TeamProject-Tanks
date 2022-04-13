@@ -71,6 +71,7 @@ namespace Tank
             timer = new();
             timer.Interval = interval;
             timer.Tick += AISpawnInterval;
+            timer.Tick += NextLevel;
             timer.Start();
 
             InstantiatePlayer();
@@ -93,7 +94,7 @@ namespace Tank
         {
             foreach (Control ctrl in CurrentForm.Controls)
                 // Set all panels on the form to rocks
-                if (ctrl != null && (string)ctrl.Tag == "Rock")
+                if (ctrl != null && (string)ctrl.Tag == "Rock" && level == 1)
                 {
                     PictureBox pic = (PictureBox)ctrl;
                     Rock rock = new
@@ -102,22 +103,52 @@ namespace Tank
                             pic
                         );
                     rocks.Add(rock);
-                } else if(ctrl != null && (string)ctrl.Tag == "Rock2")
+                } else if(ctrl != null && (string)ctrl.Tag == "Rock2" && level == 2)
                 {
                     //Add level 2 layout
-                } else if(ctrl != null && (string)ctrl.Tag == "Rock3")
+                    PictureBox pic = (PictureBox)ctrl;
+                    pic.Image = Properties.Resources.Rock;
+                    Rock rock = new
+                        (
+                            this,
+                            pic
+                        );
+                    rocks.Add(rock);
+                } else if(ctrl != null && (string)ctrl.Tag == "Rock3" && level == 3)
                 {
                     //Add level 3 layout
+                    PictureBox pic = (PictureBox)ctrl;
+                    pic.Image = Properties.Resources.Rock;
+                    Rock rock = new
+                        (
+                            this,
+                            pic
+                        );
+                    rocks.Add(rock);
                 }
-                else if (ctrl != null && (string)ctrl.Tag == "Rock4")
+                else if (ctrl != null && (string)ctrl.Tag == "Rock4" && level == 4)
                 {
                     //Add level 4 layout
-
+                    PictureBox pic = (PictureBox)ctrl;
+                    pic.Image = Properties.Resources.Rock;
+                    Rock rock = new
+                        (
+                            this,
+                            pic
+                        );
+                    rocks.Add(rock);
                 }
-                else if (ctrl != null && (string)ctrl.Tag == "Rock5")
+                else if (ctrl != null && (string)ctrl.Tag == "Rock5" && level == 5)
                 {
                     //Add level 5 layout
-
+                    PictureBox pic = (PictureBox)ctrl;
+                    pic.Image = Properties.Resources.Rock;
+                    Rock rock = new
+                        (
+                            this,
+                            pic
+                        );
+                    rocks.Add(rock);
                 }
         }
         /// <summary> Destroys all rocks currently present in the level. </summary>
@@ -270,13 +301,15 @@ namespace Tank
             return null;
         }
 
-        public void NextLevel()
+        public int NextLevel(object sender, EventArgs e)
         {
-            if(killCount % 2 == 0)
+            if(killCount % 5 == 0)
             {
                 level++;
                 DestroyRocks();
+                InstantiateRocks();
             }
+            return level;
         }
     }
 }
