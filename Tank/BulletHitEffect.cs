@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 
 namespace Tank
 {
@@ -11,7 +6,7 @@ namespace Tank
     public class BulletHitEffect
     {
         #region References
-        readonly Bitmap[] AnimSequence =
+        public static readonly Bitmap[] AnimSequence =
         {
             Properties.Resources.BulletHitEffect1,
             Properties.Resources.BulletHitEffect2,
@@ -27,7 +22,7 @@ namespace Tank
         /// <param name="pos"> Position to instantiate this bullet hit effect. </param>
         public BulletHitEffect(Point pos, GameHandler gh)
         {
-            _ = new BitmapAnimation(AnimSequence, 100, gh.CurrentForm, pos);
+            _ = new BitmapAnimation(AnimSequence, 80, gh.CurrentForm, pos);
         }
     }
 }

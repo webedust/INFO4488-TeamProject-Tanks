@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Tank
@@ -19,7 +14,7 @@ namespace Tank
         int interval = 1000;
         #endregion
         #region References
-        /// <summary> Animation sequence of how bitmaps should be displayed. </summary>
+        /// <summary> Animation sequence of how images should be displayed. </summary>
         Bitmap[] sequence;
         public Bitmap[] Sequence
         {
@@ -53,9 +48,8 @@ namespace Tank
             pic.BackColor = Color.Transparent;
             pic.Location = pos;
             pic.Size = new(sequence[0].Width, sequence[0].Height);
-
-            // To-do: Remove debug
-            Debug.WriteLine(pic.Location);
+            pic.SizeMode = PictureBoxSizeMode.StretchImage;
+            currentForm.Controls.Add(pic);
 
             // Set initial image
             SetImageToCurrentIndex();

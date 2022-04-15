@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Tank
@@ -130,7 +125,12 @@ namespace Tank
             if (hit != null && hit.SelfFaction != faction)
                 hit.TakeDamage(Damage);
 
-            _ = new BulletHitEffect(Col.Location, gh);
+            // Create the hit effect at the center of this bullet's hit location
+            Bitmap hitEffectBmp = BulletHitEffect.AnimSequence[0];
+            int xOffset = hitEffectBmp.Width / 2;
+            int yOffset = hitEffectBmp.Height / 2;
+            Point effectPos = new(pic.Location.X - xOffset, pic.Location.Y - yOffset);
+            _ = new BulletHitEffect(effectPos, gh);
 
             Destroy();
         }
