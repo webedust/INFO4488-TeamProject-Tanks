@@ -301,9 +301,14 @@ namespace Tank
             return null;
         }
 
-        public int NextLevel(object sender, EventArgs e)
+        public void NextLevel(object sender, EventArgs e)
         {
-            if(killCount % 5 == 0)
+            GoNextLevel();
+        }
+        public int GoNextLevel()
+        {
+            // Moved all from NextLevel to this function
+            if (killCount % 5 == 0)
             {
                 level++;
                 DestroyRocks();
