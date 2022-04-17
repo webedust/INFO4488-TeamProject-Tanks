@@ -308,7 +308,7 @@ namespace Tank
         public int GoNextLevel()
         {
             // Moved all from NextLevel to this function
-            if (killCount % 5 == 0)
+             if (killCount % 1 == 1)
             {
                 level++;
                 DestroyRocks();

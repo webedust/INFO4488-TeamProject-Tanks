@@ -78,7 +78,10 @@ namespace Tank
             {
                 return;
             }
-            Application.Exit();
+            else if (e.CloseReason == CloseReason.UserClosing)
+            {
+                Application.Exit();
+            }
         }
     }
 }

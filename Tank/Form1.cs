@@ -151,15 +151,19 @@ namespace Tank
                 return;
             }
 
-            switch (MessageBox.Show(this, "Are you sure you want to close?", "Closing", MessageBoxButtons.YesNo))
+            //Test this to see if it works
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                case DialogResult.Yes:
-                    MainMenu mainMenu = new MainMenu();
-                    mainMenu.Show();
-                    break;
-                case DialogResult.No:
-                    e.Cancel = true;
-                    break;
+                switch (MessageBox.Show(this, "Are you sure you want to close?", "Closing", MessageBoxButtons.YesNo))
+                {
+                    case DialogResult.Yes:
+                        MainMenu mainMenu = new MainMenu();
+                        mainMenu.Show();
+                        break;
+                    case DialogResult.No:
+                        e.Cancel = true;
+                        break;
+                }
             }
         }
 
