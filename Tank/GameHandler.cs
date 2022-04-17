@@ -20,6 +20,8 @@ namespace Tank
         #region Attributes
         /// <summary> Amount of time in <b>milliseconds</b> between each interval tick. </summary>
         const int interval = 5000;
+        public int level = 1;
+        public int killCount = 0;
         #endregion
         #region References
         Form currentForm;
@@ -69,6 +71,7 @@ namespace Tank
             timer = new();
             timer.Interval = interval;
             timer.Tick += AISpawnInterval;
+            timer.Tick += NextLevel;
             timer.Start();
 
             InstantiatePlayer();
@@ -91,9 +94,55 @@ namespace Tank
         {
             foreach (Control ctrl in CurrentForm.Controls)
                 // Set all panels on the form to rocks
-                if (ctrl != null && (string)ctrl.Tag == "Rock")
+                if (ctrl != null && (string)ctrl.Tag == "Rock" && level == 1)
                 {
                     PictureBox pic = (PictureBox)ctrl;
+                    Rock rock = new
+                        (
+                            this,
+                            pic
+                        );
+                    rocks.Add(rock);
+                } else if(ctrl != null && (string)ctrl.Tag == "Rock2" && level == 2)
+                {
+                    //Add level 2 layout
+                    PictureBox pic = (PictureBox)ctrl;
+                    pic.Image = Properties.Resources.Rock;
+                    Rock rock = new
+                        (
+                            this,
+                            pic
+                        );
+                    rocks.Add(rock);
+                } else if(ctrl != null && (string)ctrl.Tag == "Rock3" && level == 3)
+                {
+                    //Add level 3 layout
+                    PictureBox pic = (PictureBox)ctrl;
+                    pic.Image = Properties.Resources.Rock;
+                    Rock rock = new
+                        (
+                            this,
+                            pic
+                        );
+                    rocks.Add(rock);
+                }
+                else if (ctrl != null && (string)ctrl.Tag == "Rock4" && level == 4)
+                {
+                    //Add level 4 layout
+                    PictureBox pic = (PictureBox)ctrl;
+                    pic.Image = Properties.Resources.Rock;
+                    Rock rock = new
+                        (
+                            this,
+                            pic
+                        );
+                    rocks.Add(rock);
+                }
+                else if (ctrl != null && (string)ctrl.Tag == "Rock5" && level == 5)
+                {
+                    //Add level 5 layout
+                    PictureBox pic = (PictureBox)ctrl;
+                    pic.Image = Properties.Resources.Rock;
                     Rock rock = new
                         (
                             this,
@@ -204,6 +253,7 @@ namespace Tank
         public void OnAITankDeath(AI_TankController casualty)
         {
             currentTanks.Remove(casualty.SelfTank);
+            killCount++;
         }
         void Player_OnDeath(object sender, EventArgs e)
         {
@@ -249,6 +299,22 @@ namespace Tank
                     return tank;
 
             return null;
+        }
+
+        public void NextLevel(object sender, EventArgs e)
+        {
+            GoNextLevel();
+        }
+        public int GoNextLevel()
+        {
+            // Moved all from NextLevel to this function
+             if (killCount % 1 == 1)
+            {
+                level++;
+                DestroyRocks();
+                InstantiateRocks();
+            }
+            return level;
         }
     }
 }

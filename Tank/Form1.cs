@@ -14,16 +14,18 @@ namespace Tank
     public partial class Form1 : Form
     {
         Tank player;
+        int kills;
+        int level;
         public Form1()
         {
             InitializeComponent();
 
             GameHandler gh = new(this);
             player = gh.Player;
+            
         }
         void GameTimer_Tick(object sender, EventArgs e)
-        {
-
+        {  
             if (player.Health > 1)
             {
                 healthBar.Value = player.Health;
@@ -80,7 +82,6 @@ namespace Tank
                 player.PlayerMove(Utils.CardinalDirections.South);
             }
 
-            //label1.Text = "X: " + playerTank.Left + " Y: " + playerTank.Top;
         }
         void KeyIsDown(object sender, KeyEventArgs e)
         {
@@ -136,6 +137,8 @@ namespace Tank
             }
         }
 
+       
+
         /// <summary>
         /// When the X is clicked on the form, open the main menu. 
         /// Used code from https://stackoverflow.com/questions/1669318/override-standard-close-x-button-in-a-windows-form
@@ -150,15 +153,19 @@ namespace Tank
                 return;
             }
 
-            switch (MessageBox.Show(this, "Are you sure you want to close?", "Closing", MessageBoxButtons.YesNo))
+            //Test this to see if it works
+            if (e.CloseReason == CloseReason.UserClosing)
             {
-                case DialogResult.Yes:
-                    MainMenu mainMenu = new MainMenu();
-                    mainMenu.Show();
-                    break;
-                case DialogResult.No:
-                    e.Cancel = true;
-                    break;
+                switch (MessageBox.Show(this, "Are you sure you want to close?", "Closing", MessageBoxButtons.YesNo))
+                {
+                    case DialogResult.Yes:
+                        MainMenu mainMenu = new MainMenu();
+                        mainMenu.Show();
+                        break;
+                    case DialogResult.No:
+                        e.Cancel = true;
+                        break;
+                }
             }
         }
 
