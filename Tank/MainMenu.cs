@@ -22,7 +22,7 @@ namespace Tank
 
         private void btnStartGame_Click(object sender, EventArgs e)
         {
-            Form1 frm  = new Form1();
+            Map frm  = new Map();
             frm.Show();
             this.Hide();
         }

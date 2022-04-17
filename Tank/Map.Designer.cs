@@ -1,7 +1,7 @@
 ﻿
 namespace Tank
 {
-    partial class Form1
+    partial class Map
     {
         /// <summary>
         ///  Required designer variable.

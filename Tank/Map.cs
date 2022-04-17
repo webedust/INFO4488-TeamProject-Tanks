@@ -11,21 +11,22 @@ using System.Windows.Forms;
 
 namespace Tank
 {
-    public partial class Form1 : Form
+    public partial class Map : Form
     {
         Tank player;
-        int kills;
-        int level;
-        public Form1()
+        GameHandler gh;
+        public Map()
         {
             InitializeComponent();
-
-            GameHandler gh = new(this);
+            gh = new(this);
             player = gh.Player;
             
         }
         void GameTimer_Tick(object sender, EventArgs e)
-        {  
+        {
+            lblKills.Text = "Kills: " + gh.killCount;
+            lblLevel.Text = "Level: " + gh.level;
+
             if (player.Health > 1)
             {
                 healthBar.Value = player.Health;
