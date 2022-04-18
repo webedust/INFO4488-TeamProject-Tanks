@@ -63,6 +63,36 @@ namespace Tank.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap BulletHitEffect1 {
+            get {
+                object obj = ResourceManager.GetObject("BulletHitEffect1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BulletHitEffect2 {
+            get {
+                object obj = ResourceManager.GetObject("BulletHitEffect2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap BulletHitEffect3 {
+            get {
+                object obj = ResourceManager.GetObject("BulletHitEffect3", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap EnemyTankDown {
             get {
                 object obj = ResourceManager.GetObject("EnemyTankDown", resourceCulture);
