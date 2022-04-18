@@ -63,7 +63,7 @@ namespace Tank
             currentIndex++;
 
             // Ensure the index doesn't go beyond the sequence.
-            if (currentIndex >= sequence.Length - 1)
+            if (currentIndex >= sequence.Length)
             {
                 timer.Stop();
                 OnFinish?.Invoke(this, EventArgs.Empty);

@@ -66,7 +66,7 @@ namespace Tank
         public bool gameOver;
 
         public const int PlayerFireRate = 450;
-        public const int AIFireRate = 900;
+        public const int AIFireRate = 1200;
         bool canShoot = true;
         Size originalSize;
         Timer rofTimer = new();
