@@ -13,8 +13,12 @@ namespace Tank
 {
     public partial class Map : Form
     {
+        #region References
         Tank player;
         GameHandler gh;
+        #endregion
+
+
         public Map()
         {
             InitializeComponent();
@@ -36,7 +40,7 @@ namespace Tank
                 GameTimer.Stop();
                 GameTimer.Dispose();
                 player.gameOver = true;
-                this.Close();
+                Close();
                 GameOver gameOver = new GameOver();
                 gameOver.Show();
             }
@@ -149,10 +153,9 @@ namespace Tank
         {
             base.OnFormClosing(e);
 
-            if (e.CloseReason == CloseReason.WindowsShutDown)
-            {
+            if (player.gameOver
+                || e.CloseReason == CloseReason.WindowsShutDown)
                 return;
-            }
 
             //Test this to see if it works
             if (e.CloseReason == CloseReason.UserClosing)
