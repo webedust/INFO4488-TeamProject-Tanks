@@ -71,7 +71,7 @@ namespace Tank
             timer = new();
             timer.Interval = interval;
             timer.Tick += AISpawnInterval;
-            timer.Tick += NextLevel;
+            //timer.Tick += NextLevel;
             timer.Start();
 
             InstantiatePlayer();
@@ -103,7 +103,7 @@ namespace Tank
                             pic
                         );
                     rocks.Add(rock);
-                } else if(ctrl != null && (string)ctrl.Tag == "Rock2" && level == 2)
+                } else if(ctrl != null && (string)ctrl.Tag == "Rock2" && level % 2 == 0)
                 {
                     //Add level 2 layout
                     PictureBox pic = (PictureBox)ctrl;
@@ -114,7 +114,7 @@ namespace Tank
                             pic
                         );
                     rocks.Add(rock);
-                } else if(ctrl != null && (string)ctrl.Tag == "Rock3" && level == 3)
+                } else if(ctrl != null && (string)ctrl.Tag == "Rock3" && level % 3 == 0)
                 {
                     //Add level 3 layout
                     PictureBox pic = (PictureBox)ctrl;
@@ -126,7 +126,7 @@ namespace Tank
                         );
                     rocks.Add(rock);
                 }
-                else if (ctrl != null && (string)ctrl.Tag == "Rock4" && level == 4)
+                else if (ctrl != null && (string)ctrl.Tag == "Rock4" && level % 4 == 0)
                 {
                     //Add level 4 layout
                     PictureBox pic = (PictureBox)ctrl;
@@ -159,6 +159,7 @@ namespace Tank
 
             rocks.Clear();
         }
+
         /// <summary>
         /// Instantiates the player game logic on the form control named <c>playerTank</c>.
         /// This is case-sensitive.
@@ -252,6 +253,7 @@ namespace Tank
         {
             currentTanks.Remove(casualty.SelfTank);
             killCount++;
+            GoNextLevel();
         }
         void Player_OnDeath(object sender, EventArgs e)
         {
@@ -303,10 +305,11 @@ namespace Tank
         {
             GoNextLevel();
         }
+
         public int GoNextLevel()
         {
             // Moved all from NextLevel to this function
-             if (killCount % 1 == 1)
+             if (killCount % 2 == 0 && killCount != 0)
             {
                 level++;
                 DestroyRocks();
