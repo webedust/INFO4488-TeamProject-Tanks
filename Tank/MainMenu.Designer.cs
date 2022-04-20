@@ -174,7 +174,8 @@
             this.txtCreditsDesc.ReadOnly = true;
             this.txtCreditsDesc.Size = new System.Drawing.Size(238, 202);
             this.txtCreditsDesc.TabIndex = 12;
-            this.txtCreditsDesc.Text = "Need to add credits";
+            this.txtCreditsDesc.Text = "All credit for the tanks sprites goes to https://opengameart.org/content/2d-tanks" +
+    "-top-down";
             // 
             // btnCreditsReturn
             // 
