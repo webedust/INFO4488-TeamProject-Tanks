@@ -48,7 +48,7 @@
             this.ClientSize = new System.Drawing.Size(334, 361);
             this.Controls.Add(this.btnReturn);
             this.Name = "GameOver";
-            this.Text = "GameOver";
+            this.Text = "Game Over";
             this.ResumeLayout(false);
 
         }

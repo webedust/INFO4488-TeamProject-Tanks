@@ -12,28 +12,31 @@ namespace Tank
 {
     public partial class GameOver : Form
     {
-        public GameOver()
+        #region Attributes
+        /// <summary> Determines where to go after the Game Over form is closed. </summary>
+        bool closingToMenu;
+        #endregion
+
+
+        public GameOver() => InitializeComponent();
+        void btnReturn_Click(object sender, EventArgs e)
         {
-            InitializeComponent();
+            closingToMenu = true;
+
+            MainMenu menu = new();
+            menu.Show();
+
+            Close();
         }
-        MainMenu frm = new MainMenu();
-
-
-        private void btnReturn_Click(object sender, EventArgs e)
-        {
-            frm.Show();
-            this.Close();
-        }
-
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
 
-            if (e.CloseReason == CloseReason.WindowsShutDown)
-            {
+            if (closingToMenu)
                 return;
-            }
-            else if (e.CloseReason == CloseReason.UserClosing)
+
+            else if (e.CloseReason == CloseReason.UserClosing
+                || e.CloseReason == CloseReason.WindowsShutDown)
             {
                 Application.Exit();
             }
