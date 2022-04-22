@@ -126,21 +126,9 @@ namespace Tank
                         );
                     rocks.Add(rock);
                 }
-                else if (ctrl != null && (string)ctrl.Tag == "Rock4" && level % 4 == 0)
+                else if (ctrl != null && (string)ctrl.Tag == "Rock4" && level % 5 == 0)
                 {
                     //Add level 4 layout
-                    PictureBox pic = (PictureBox)ctrl;
-                    pic.Image = Properties.Resources.Rock;
-                    Rock rock = new
-                        (
-                            this,
-                            pic
-                        );
-                    rocks.Add(rock);
-                }
-                else if (ctrl != null && (string)ctrl.Tag == "Rock5" && level == 5)
-                {
-                    //Add level 5 layout
                     PictureBox pic = (PictureBox)ctrl;
                     pic.Image = Properties.Resources.Rock;
                     Rock rock = new
@@ -299,11 +287,6 @@ namespace Tank
                     return tank;
 
             return null;
-        }
-
-        public void NextLevel(object sender, EventArgs e)
-        {
-            GoNextLevel();
         }
 
         public int GoNextLevel()

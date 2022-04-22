@@ -10,6 +10,8 @@ using System.Windows.Forms;
 
 namespace Tank
 {
+    
+
     public partial class GameOver : Form
     {
         #region Attributes
@@ -18,7 +20,12 @@ namespace Tank
         #endregion
 
 
-        public GameOver() => InitializeComponent();
+        public GameOver(GameHandler gh)
+        {
+            InitializeComponent();
+            lblFinalKills.Text = "Total Kills: " + gh.killCount;
+            lblFinalLevel.Text = "Level: " + gh.level;
+        }
         void btnReturn_Click(object sender, EventArgs e)
         {
             closingToMenu = true;
@@ -41,5 +48,7 @@ namespace Tank
                 Application.Exit();
             }
         }
+
+ 
     }
 }

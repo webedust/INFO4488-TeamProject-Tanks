@@ -41,7 +41,7 @@ namespace Tank
                 GameTimer.Dispose();
                 player.gameOver = true;
                 Close();
-                GameOver gameOver = new GameOver();
+                GameOver gameOver = new GameOver(gh);
                 gameOver.Show();
             }
             //Used for testing the game over logic

@@ -58,6 +58,12 @@ namespace Tank
             this.pictureBox20 = new System.Windows.Forms.PictureBox();
             this.pictureBox21 = new System.Windows.Forms.PictureBox();
             this.pictureBox22 = new System.Windows.Forms.PictureBox();
+            this.pictureBox23 = new System.Windows.Forms.PictureBox();
+            this.pictureBox24 = new System.Windows.Forms.PictureBox();
+            this.pictureBox25 = new System.Windows.Forms.PictureBox();
+            this.pictureBox26 = new System.Windows.Forms.PictureBox();
+            this.pictureBox27 = new System.Windows.Forms.PictureBox();
+            this.pictureBox28 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.playerTank)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -81,6 +87,12 @@ namespace Tank
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox23)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox25)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox28)).BeginInit();
             this.SuspendLayout();
             // 
             // healthLabel
@@ -260,7 +272,8 @@ namespace Tank
             // 
             // pictureBox10
             // 
-            this.pictureBox10.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(94)))), ((int)(((byte)(64)))));
+            this.pictureBox10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox10.Location = new System.Drawing.Point(536, 203);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(100, 50);
@@ -395,11 +408,77 @@ namespace Tank
             this.pictureBox22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pictureBox22.Location = new System.Drawing.Point(104, 295);
             this.pictureBox22.Name = "pictureBox22";
-            this.pictureBox22.Size = new System.Drawing.Size(231, 45);
+            this.pictureBox22.Size = new System.Drawing.Size(118, 45);
             this.pictureBox22.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox22.TabIndex = 26;
             this.pictureBox22.TabStop = false;
             this.pictureBox22.Tag = "Rock4";
+            // 
+            // pictureBox23
+            // 
+            this.pictureBox23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox23.Location = new System.Drawing.Point(847, 286);
+            this.pictureBox23.Name = "pictureBox23";
+            this.pictureBox23.Size = new System.Drawing.Size(71, 94);
+            this.pictureBox23.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox23.TabIndex = 27;
+            this.pictureBox23.TabStop = false;
+            this.pictureBox23.Tag = "Rock4";
+            // 
+            // pictureBox24
+            // 
+            this.pictureBox24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox24.Location = new System.Drawing.Point(327, 132);
+            this.pictureBox24.Name = "pictureBox24";
+            this.pictureBox24.Size = new System.Drawing.Size(51, 94);
+            this.pictureBox24.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox24.TabIndex = 28;
+            this.pictureBox24.TabStop = false;
+            this.pictureBox24.Tag = "Rock4";
+            // 
+            // pictureBox25
+            // 
+            this.pictureBox25.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox25.Location = new System.Drawing.Point(346, 534);
+            this.pictureBox25.Name = "pictureBox25";
+            this.pictureBox25.Size = new System.Drawing.Size(32, 115);
+            this.pictureBox25.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox25.TabIndex = 29;
+            this.pictureBox25.TabStop = false;
+            this.pictureBox25.Tag = "Rock4";
+            // 
+            // pictureBox26
+            // 
+            this.pictureBox26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox26.Location = new System.Drawing.Point(793, 507);
+            this.pictureBox26.Name = "pictureBox26";
+            this.pictureBox26.Size = new System.Drawing.Size(118, 45);
+            this.pictureBox26.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox26.TabIndex = 30;
+            this.pictureBox26.TabStop = false;
+            this.pictureBox26.Tag = "Rock4";
+            // 
+            // pictureBox27
+            // 
+            this.pictureBox27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox27.Location = new System.Drawing.Point(904, 42);
+            this.pictureBox27.Name = "pictureBox27";
+            this.pictureBox27.Size = new System.Drawing.Size(199, 94);
+            this.pictureBox27.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox27.TabIndex = 31;
+            this.pictureBox27.TabStop = false;
+            this.pictureBox27.Tag = "Rock4";
+            // 
+            // pictureBox28
+            // 
+            this.pictureBox28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox28.Location = new System.Drawing.Point(391, 295);
+            this.pictureBox28.Name = "pictureBox28";
+            this.pictureBox28.Size = new System.Drawing.Size(127, 75);
+            this.pictureBox28.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox28.TabIndex = 32;
+            this.pictureBox28.TabStop = false;
+            this.pictureBox28.Tag = "Rock4";
             // 
             // Map
             // 
@@ -409,6 +488,9 @@ namespace Tank
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.CausesValidation = false;
             this.ClientSize = new System.Drawing.Size(1184, 661);
+            this.Controls.Add(this.pictureBox28);
+            this.Controls.Add(this.pictureBox25);
+            this.Controls.Add(this.pictureBox24);
             this.Controls.Add(this.pictureBox22);
             this.Controls.Add(this.pictureBox21);
             this.Controls.Add(this.pictureBox20);
@@ -436,6 +518,9 @@ namespace Tank
             this.Controls.Add(this.playerTank);
             this.Controls.Add(this.healthBar);
             this.Controls.Add(this.healthLabel);
+            this.Controls.Add(this.pictureBox23);
+            this.Controls.Add(this.pictureBox26);
+            this.Controls.Add(this.pictureBox27);
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -466,6 +551,12 @@ namespace Tank
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox20)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox21)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox22)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox23)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox24)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox25)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox26)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox27)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox28)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -501,6 +592,12 @@ namespace Tank
         private System.Windows.Forms.PictureBox pictureBox20;
         private System.Windows.Forms.PictureBox pictureBox21;
         private System.Windows.Forms.PictureBox pictureBox22;
+        private System.Windows.Forms.PictureBox pictureBox23;
+        private System.Windows.Forms.PictureBox pictureBox24;
+        private System.Windows.Forms.PictureBox pictureBox25;
+        private System.Windows.Forms.PictureBox pictureBox26;
+        private System.Windows.Forms.PictureBox pictureBox27;
+        private System.Windows.Forms.PictureBox pictureBox28;
     }
 }
 
