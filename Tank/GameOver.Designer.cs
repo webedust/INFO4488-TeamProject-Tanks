@@ -36,12 +36,14 @@
             // 
             // btnReturn
             // 
+            this.btnReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnReturn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnReturn.Location = new System.Drawing.Point(107, 300);
             this.btnReturn.Name = "btnReturn";
             this.btnReturn.Size = new System.Drawing.Size(120, 30);
             this.btnReturn.TabIndex = 0;
             this.btnReturn.Text = "Back to Main Menu";
-            this.btnReturn.UseVisualStyleBackColor = true;
+            this.btnReturn.UseVisualStyleBackColor = false;
             this.btnReturn.Click += new System.EventHandler(this.btnReturn_Click);
             // 
             // lblGameOver
@@ -78,11 +80,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(26)))));
             this.ClientSize = new System.Drawing.Size(334, 361);
             this.Controls.Add(this.lblFinalLevel);
             this.Controls.Add(this.lblFinalKills);
             this.Controls.Add(this.lblGameOver);
             this.Controls.Add(this.btnReturn);
+            this.ForeColor = System.Drawing.SystemColors.Control;
             this.Name = "GameOver";
             this.Text = "Game Over";
             this.ResumeLayout(false);

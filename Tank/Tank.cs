@@ -11,6 +11,7 @@ namespace Tank
 {
     public class Tank
     {
+        /// <summary> Factions a tank can belong to. </summary>
         public enum Faction
         {
             Player = 0,
@@ -210,7 +211,7 @@ namespace Tank
                     NoCollide = false;
             }
             else
-                col.TryMove(loc);
+                colAtPos = col.TryMove(loc);
 
             // Only turn the tank if moving succeeded to prevent getting stuck in rocks
             if (colAtPos == null)
@@ -223,7 +224,7 @@ namespace Tank
                 SuccessiveFailedMoves++;
 
                 // Test if stuck when failing to move numerous times
-                if (successiveFailedMoves > 10)
+                if (SuccessiveFailedMoves > 5)
                 {
                     // If the tank is stuck then allow ForceMove to escape
                     NoCollide = Col.IsStuck(speed);

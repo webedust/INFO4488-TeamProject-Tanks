@@ -107,7 +107,7 @@ namespace Tank
                 {
                     //Add level 2 layout
                     PictureBox pic = (PictureBox)ctrl;
-                    pic.Image = Properties.Resources.Rock;
+                    pic.Image = Resources.Rock;
                     Rock rock = new
                         (
                             this,
@@ -118,7 +118,7 @@ namespace Tank
                 {
                     //Add level 3 layout
                     PictureBox pic = (PictureBox)ctrl;
-                    pic.Image = Properties.Resources.Rock;
+                    pic.Image = Resources.Rock;
                     Rock rock = new
                         (
                             this,
@@ -130,7 +130,7 @@ namespace Tank
                 {
                     //Add level 4 layout
                     PictureBox pic = (PictureBox)ctrl;
-                    pic.Image = Properties.Resources.Rock;
+                    pic.Image = Resources.Rock;
                     Rock rock = new
                         (
                             this,
@@ -140,7 +140,7 @@ namespace Tank
                 }
         }
         /// <summary> Destroys all rocks currently present in the level. </summary>
-        public void DestroyRocks()
+        void DestroyRocks()
         {
             foreach (Rock rock in rocks)
                 rock.Collider.Destroy();
@@ -160,7 +160,6 @@ namespace Tank
                     Collider col = new(this, ctrl);
                     player = new(col, this, (PictureBox)ctrl, Tank.Faction.Player, Tank.PlayerFireRate);
                     player.TankSprites = Tank.PlayerTankSprites;
-                    player.OnDeath += Player_OnDeath;
                     return;
                 }
         }
@@ -233,19 +232,38 @@ namespace Tank
             }
         }
         /// <summary>
+        /// Set true when DestroyTanks is called and is set back to false after all
+        /// tanks on the map have been destroyed.
+        /// This can be used to prevent player kill count or other variables
+        /// from being incremented.
+        /// </summary>
+        bool destroyingTanks;
+        /// <summary> Destroys all <b>enemy</b> tanks currently present on the map. </summary>
+        /// <remarks> This does not count towards the player's kill count. </remarks>
+        void DestroyTanks()
+        {
+            destroyingTanks = true;
+
+            foreach (Tank tank in currentTanks)
+                tank.TakeDamage(tank.Health);
+
+            currentTanks.Clear();
+
+            destroyingTanks = false;
+        }
+        /// <summary>
         /// Call whenever an AI-controlled tank has been killed/destroyed
         /// to remove reference to it in the GameHandler.
         /// </summary>
         /// <param name="casualty"> The AI tank that has been destroyed. </param>
         public void OnAITankDeath(AI_TankController casualty)
         {
+            if (destroyingTanks)
+                return;
+
             currentTanks.Remove(casualty.SelfTank);
             killCount++;
             GoNextLevel();
-        }
-        void Player_OnDeath(object sender, EventArgs e)
-        {
-            // To-do
         }
         #endregion
         void AISpawnInterval(object sender, EventArgs e)
@@ -296,6 +314,7 @@ namespace Tank
             {
                 level++;
                 DestroyRocks();
+                DestroyTanks();
                 InstantiateRocks();
             }
             return level;

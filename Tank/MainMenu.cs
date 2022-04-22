@@ -20,14 +20,14 @@ namespace Tank
         }
 
 
-        private void btnStartGame_Click(object sender, EventArgs e)
+        void btnStartGame_Click(object sender, EventArgs e)
         {
             Map frm  = new Map();
             frm.Show();
-            this.Hide();
+            Hide();
         }
 
-        private void btnExitGame_Click(object sender, EventArgs e)
+        void btnExitGame_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
@@ -37,7 +37,7 @@ namespace Tank
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnInstructions_Click(object sender, EventArgs e)
+        void btnInstructions_Click(object sender, EventArgs e)
         {
             instructionsPanel.Visible = true;
             menuPanel.Visible = false;
@@ -48,10 +48,10 @@ namespace Tank
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnCredits_Click(object sender, EventArgs e)
+        void btnCredits_Click(object sender, EventArgs e)
         {
             creditsPanel.Visible = true;
-            menuPanel.Visible=false;
+            menuPanel.Visible = false;
         }
         /// <summary>
         /// Swaps panel focus back to the main menu panel 
@@ -59,7 +59,7 @@ namespace Tank
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void ReturnEvent(object sender, EventArgs e)
+        void ReturnEvent(object sender, EventArgs e)
         {
             instructionsPanel.Visible = false;
             creditsPanel.Visible = false;
@@ -69,7 +69,6 @@ namespace Tank
         /// When the X is clicked on the form, open the main menu. 
         /// Used code from https://stackoverflow.com/questions/1669318/override-standard-close-x-button-in-a-windows-form
         /// </summary>
-        /// <param name="e"></param>
         protected override void OnFormClosing(FormClosingEventArgs e)
         {
             base.OnFormClosing(e);
