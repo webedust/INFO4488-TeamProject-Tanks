@@ -50,6 +50,7 @@
             // 
             // menuPanel
             // 
+            this.menuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(26)))));
             this.menuPanel.Controls.Add(this.lblTitle);
             this.menuPanel.Controls.Add(this.btnCredits);
             this.menuPanel.Controls.Add(this.btnInstructions);
@@ -64,7 +65,9 @@
             // lblTitle
             // 
             this.lblTitle.AutoSize = true;
+            this.lblTitle.BackColor = System.Drawing.Color.Transparent;
             this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblTitle.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(207)))), ((int)(((byte)(211)))), ((int)(((byte)(165)))));
             this.lblTitle.Location = new System.Drawing.Point(100, 10);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(158, 37);
@@ -73,46 +76,59 @@
             // 
             // btnCredits
             // 
+            this.btnCredits.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCredits.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCredits.ForeColor = System.Drawing.SystemColors.Control;
             this.btnCredits.Location = new System.Drawing.Point(129, 286);
             this.btnCredits.Name = "btnCredits";
             this.btnCredits.Size = new System.Drawing.Size(100, 30);
-            this.btnCredits.TabIndex = 9;
+            this.btnCredits.TabIndex = 8;
             this.btnCredits.Text = "Credits";
-            this.btnCredits.UseVisualStyleBackColor = true;
+            this.btnCredits.UseVisualStyleBackColor = false;
             this.btnCredits.Click += new System.EventHandler(this.btnCredits_Click);
             // 
             // btnInstructions
             // 
+            this.btnInstructions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnInstructions.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnInstructions.ForeColor = System.Drawing.SystemColors.Control;
             this.btnInstructions.Location = new System.Drawing.Point(129, 250);
             this.btnInstructions.Name = "btnInstructions";
             this.btnInstructions.Size = new System.Drawing.Size(100, 30);
-            this.btnInstructions.TabIndex = 8;
+            this.btnInstructions.TabIndex = 7;
             this.btnInstructions.Text = "Instructions";
-            this.btnInstructions.UseVisualStyleBackColor = true;
+            this.btnInstructions.UseVisualStyleBackColor = false;
             this.btnInstructions.Click += new System.EventHandler(this.btnInstructions_Click);
             // 
             // btnExitGame
             // 
+            this.btnExitGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnExitGame.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnExitGame.ForeColor = System.Drawing.SystemColors.Control;
             this.btnExitGame.Location = new System.Drawing.Point(129, 322);
             this.btnExitGame.Name = "btnExitGame";
             this.btnExitGame.Size = new System.Drawing.Size(100, 30);
-            this.btnExitGame.TabIndex = 7;
+            this.btnExitGame.TabIndex = 9;
             this.btnExitGame.Text = "Exit Game";
-            this.btnExitGame.UseVisualStyleBackColor = true;
+            this.btnExitGame.UseVisualStyleBackColor = false;
             this.btnExitGame.Click += new System.EventHandler(this.btnExitGame_Click);
             // 
             // btnStartGame
             // 
+            this.btnStartGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnStartGame.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnStartGame.ForeColor = System.Drawing.SystemColors.Control;
             this.btnStartGame.Location = new System.Drawing.Point(129, 214);
             this.btnStartGame.Name = "btnStartGame";
             this.btnStartGame.Size = new System.Drawing.Size(100, 30);
             this.btnStartGame.TabIndex = 6;
             this.btnStartGame.Text = "Start Game";
-            this.btnStartGame.UseVisualStyleBackColor = true;
+            this.btnStartGame.UseVisualStyleBackColor = false;
             this.btnStartGame.Click += new System.EventHandler(this.btnStartGame_Click);
             // 
             // instructionsPanel
             // 
+            this.instructionsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(26)))));
             this.instructionsPanel.Controls.Add(this.txtControlDesc);
             this.instructionsPanel.Controls.Add(this.btnInstructionReturn);
             this.instructionsPanel.Controls.Add(this.lblInstructions);
@@ -125,6 +141,8 @@
             // 
             // txtControlDesc
             // 
+            this.txtControlDesc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(26)))));
+            this.txtControlDesc.ForeColor = System.Drawing.SystemColors.Control;
             this.txtControlDesc.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtControlDesc.Location = new System.Drawing.Point(60, 114);
             this.txtControlDesc.Multiline = true;
@@ -136,6 +154,8 @@
             // 
             // btnInstructionReturn
             // 
+            this.btnInstructionReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnInstructionReturn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnInstructionReturn.Location = new System.Drawing.Point(118, 322);
             this.btnInstructionReturn.Name = "btnInstructionReturn";
             this.btnInstructionReturn.Size = new System.Drawing.Size(123, 30);
@@ -145,6 +165,7 @@
             // 
             // lblInstructions
             // 
+            this.lblInstructions.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(26)))));
             this.lblInstructions.AutoSize = true;
             this.lblInstructions.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblInstructions.Location = new System.Drawing.Point(95, 18);
@@ -155,6 +176,7 @@
             // 
             // creditsPanel
             // 
+            this.creditsPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(26)))));
             this.creditsPanel.Controls.Add(this.txtCreditsDesc);
             this.creditsPanel.Controls.Add(this.btnCreditsReturn);
             this.creditsPanel.Controls.Add(this.lblCredits);
@@ -167,6 +189,8 @@
             // 
             // txtCreditsDesc
             // 
+            this.txtCreditsDesc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(26)))));
+            this.txtCreditsDesc.ForeColor = System.Drawing.SystemColors.Control;
             this.txtCreditsDesc.Font = new System.Drawing.Font("Segoe UI", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
             this.txtCreditsDesc.Location = new System.Drawing.Point(60, 114);
             this.txtCreditsDesc.Multiline = true;
@@ -174,11 +198,14 @@
             this.txtCreditsDesc.ReadOnly = true;
             this.txtCreditsDesc.Size = new System.Drawing.Size(238, 202);
             this.txtCreditsDesc.TabIndex = 12;
-            this.txtCreditsDesc.Text = "All credit for the tanks sprites goes to https://opengameart.org/content/2d-tanks" +
-    "-top-down";
+            this.txtCreditsDesc.Text = "Tank sprites created by Alucard - https://opengameart.org/content/2d-tanks-top-do" +
+    "wn";
             // 
             // btnCreditsReturn
             // 
+            this.btnCreditsReturn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(64)))));
+            this.btnCreditsReturn.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnCreditsReturn.Location = new System.Drawing.Point(118, 322);
             this.btnCreditsReturn.Location = new System.Drawing.Point(118, 322);
             this.btnCreditsReturn.Name = "btnCreditsReturn";
             this.btnCreditsReturn.Size = new System.Drawing.Size(123, 30);
@@ -188,6 +215,7 @@
             // 
             // lblCredits
             // 
+            this.lblCredits.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(43)))), ((int)(((byte)(51)))), ((int)(((byte)(26)))));
             this.lblCredits.AutoSize = true;
             this.lblCredits.Font = new System.Drawing.Font("Segoe UI", 20.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
             this.lblCredits.Location = new System.Drawing.Point(125, 18);
@@ -204,8 +232,9 @@
             this.Controls.Add(this.menuPanel);
             this.Controls.Add(this.creditsPanel);
             this.Controls.Add(this.instructionsPanel);
+            this.ForeColor = System.Drawing.SystemColors.Control;
             this.Name = "MainMenu";
-            this.Text = "MainMenu";
+            this.Text = "Main Menu";
             this.menuPanel.ResumeLayout(false);
             this.menuPanel.PerformLayout();
             this.instructionsPanel.ResumeLayout(false);
