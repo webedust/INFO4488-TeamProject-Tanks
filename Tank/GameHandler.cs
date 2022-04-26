@@ -97,6 +97,7 @@ namespace Tank
                 if (ctrl != null && (string)ctrl.Tag == "Rock" && level == 1)
                 {
                     PictureBox pic = (PictureBox)ctrl;
+                    pic.Visible = true;
                     Rock rock = new
                         (
                             this,
@@ -107,6 +108,7 @@ namespace Tank
                 {
                     //Add level 2 layout
                     PictureBox pic = (PictureBox)ctrl;
+                    pic.Visible = true;
                     pic.Image = Resources.Rock;
                     Rock rock = new
                         (
@@ -118,6 +120,7 @@ namespace Tank
                 {
                     //Add level 3 layout
                     PictureBox pic = (PictureBox)ctrl;
+                    pic.Visible = true;
                     pic.Image = Resources.Rock;
                     Rock rock = new
                         (
@@ -130,6 +133,7 @@ namespace Tank
                 {
                     //Add level 4 layout
                     PictureBox pic = (PictureBox)ctrl;
+                    pic.Visible = true;
                     pic.Image = Resources.Rock;
                     Rock rock = new
                         (

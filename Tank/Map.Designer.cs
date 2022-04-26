@@ -143,6 +143,7 @@ namespace Tank
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Tag = "Rock";
+            this.pictureBox1.Visible = false;
             // 
             // pictureBox2
             // 
@@ -156,6 +157,7 @@ namespace Tank
             this.pictureBox2.TabIndex = 4;
             this.pictureBox2.TabStop = false;
             this.pictureBox2.Tag = "Rock";
+            this.pictureBox2.Visible = false;
             // 
             // pictureBox3
             // 
@@ -169,6 +171,7 @@ namespace Tank
             this.pictureBox3.TabIndex = 5;
             this.pictureBox3.TabStop = false;
             this.pictureBox3.Tag = "Rock";
+            this.pictureBox3.Visible = false;
             // 
             // pictureBox4
             // 
@@ -182,6 +185,7 @@ namespace Tank
             this.pictureBox4.TabIndex = 6;
             this.pictureBox4.TabStop = false;
             this.pictureBox4.Tag = "Rock";
+            this.pictureBox4.Visible = false;
             // 
             // pictureBox5
             // 
@@ -195,6 +199,7 @@ namespace Tank
             this.pictureBox5.TabIndex = 7;
             this.pictureBox5.TabStop = false;
             this.pictureBox5.Tag = "Rock";
+            this.pictureBox5.Visible = false;
             // 
             // pictureBox6
             // 
@@ -208,6 +213,7 @@ namespace Tank
             this.pictureBox6.TabIndex = 8;
             this.pictureBox6.TabStop = false;
             this.pictureBox6.Tag = "Rock";
+            this.pictureBox6.Visible = false;
             // 
             // pictureBox7
             // 
@@ -221,6 +227,7 @@ namespace Tank
             this.pictureBox7.TabIndex = 9;
             this.pictureBox7.TabStop = false;
             this.pictureBox7.Tag = "Rock";
+            this.pictureBox7.Visible = false;
             // 
             // pictureBox8
             // 
@@ -234,6 +241,7 @@ namespace Tank
             this.pictureBox8.TabIndex = 10;
             this.pictureBox8.TabStop = false;
             this.pictureBox8.Tag = "Rock";
+            this.pictureBox8.Visible = false;
             // 
             // pictureBox9
             // 
@@ -247,6 +255,7 @@ namespace Tank
             this.pictureBox9.TabIndex = 11;
             this.pictureBox9.TabStop = false;
             this.pictureBox9.Tag = "Rock";
+            this.pictureBox9.Visible = false;
             // 
             // lblLevel
             // 
@@ -272,8 +281,7 @@ namespace Tank
             // 
             // pictureBox10
             // 
-            this.pictureBox10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(94)))), ((int)(((byte)(64)))));
-            this.pictureBox10.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox10.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox10.Location = new System.Drawing.Point(536, 203);
             this.pictureBox10.Name = "pictureBox10";
             this.pictureBox10.Size = new System.Drawing.Size(100, 50);
@@ -281,10 +289,11 @@ namespace Tank
             this.pictureBox10.TabIndex = 14;
             this.pictureBox10.TabStop = false;
             this.pictureBox10.Tag = "Rock2";
+            this.pictureBox10.Visible = false;
             // 
             // pictureBox11
             // 
-            this.pictureBox11.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox11.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox11.Location = new System.Drawing.Point(414, 176);
             this.pictureBox11.Name = "pictureBox11";
             this.pictureBox11.Size = new System.Drawing.Size(84, 104);
@@ -292,10 +301,11 @@ namespace Tank
             this.pictureBox11.TabIndex = 15;
             this.pictureBox11.TabStop = false;
             this.pictureBox11.Tag = "Rock2";
+            this.pictureBox11.Visible = false;
             // 
             // pictureBox12
             // 
-            this.pictureBox12.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox12.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox12.Location = new System.Drawing.Point(613, 109);
             this.pictureBox12.Name = "pictureBox12";
             this.pictureBox12.Size = new System.Drawing.Size(57, 160);
@@ -303,10 +313,11 @@ namespace Tank
             this.pictureBox12.TabIndex = 16;
             this.pictureBox12.TabStop = false;
             this.pictureBox12.Tag = "Rock2";
+            this.pictureBox12.Visible = false;
             // 
             // pictureBox13
             // 
-            this.pictureBox13.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox13.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox13.Location = new System.Drawing.Point(150, 518);
             this.pictureBox13.Name = "pictureBox13";
             this.pictureBox13.Size = new System.Drawing.Size(152, 59);
@@ -314,10 +325,11 @@ namespace Tank
             this.pictureBox13.TabIndex = 17;
             this.pictureBox13.TabStop = false;
             this.pictureBox13.Tag = "Rock2";
+            this.pictureBox13.Visible = false;
             // 
             // pictureBox14
             // 
-            this.pictureBox14.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox14.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox14.Location = new System.Drawing.Point(692, 567);
             this.pictureBox14.Name = "pictureBox14";
             this.pictureBox14.Size = new System.Drawing.Size(57, 55);
@@ -325,10 +337,11 @@ namespace Tank
             this.pictureBox14.TabIndex = 18;
             this.pictureBox14.TabStop = false;
             this.pictureBox14.Tag = "Rock2";
+            this.pictureBox14.Visible = false;
             // 
             // pictureBox15
             // 
-            this.pictureBox15.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox15.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox15.Location = new System.Drawing.Point(847, 31);
             this.pictureBox15.Name = "pictureBox15";
             this.pictureBox15.Size = new System.Drawing.Size(139, 146);
@@ -336,10 +349,11 @@ namespace Tank
             this.pictureBox15.TabIndex = 19;
             this.pictureBox15.TabStop = false;
             this.pictureBox15.Tag = "Rock2";
+            this.pictureBox15.Visible = false;
             // 
             // pictureBox16
             // 
-            this.pictureBox16.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox16.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox16.Location = new System.Drawing.Point(104, 122);
             this.pictureBox16.Name = "pictureBox16";
             this.pictureBox16.Size = new System.Drawing.Size(84, 104);
@@ -347,10 +361,11 @@ namespace Tank
             this.pictureBox16.TabIndex = 20;
             this.pictureBox16.TabStop = false;
             this.pictureBox16.Tag = "Rock3";
+            this.pictureBox16.Visible = false;
             // 
             // pictureBox17
             // 
-            this.pictureBox17.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox17.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox17.Location = new System.Drawing.Point(978, 382);
             this.pictureBox17.Name = "pictureBox17";
             this.pictureBox17.Size = new System.Drawing.Size(84, 170);
@@ -358,10 +373,11 @@ namespace Tank
             this.pictureBox17.TabIndex = 21;
             this.pictureBox17.TabStop = false;
             this.pictureBox17.Tag = "Rock3";
+            this.pictureBox17.Visible = false;
             // 
             // pictureBox18
             // 
-            this.pictureBox18.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox18.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox18.Location = new System.Drawing.Point(433, 42);
             this.pictureBox18.Name = "pictureBox18";
             this.pictureBox18.Size = new System.Drawing.Size(142, 104);
@@ -369,10 +385,11 @@ namespace Tank
             this.pictureBox18.TabIndex = 22;
             this.pictureBox18.TabStop = false;
             this.pictureBox18.Tag = "Rock3";
+            this.pictureBox18.Visible = false;
             // 
             // pictureBox19
             // 
-            this.pictureBox19.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox19.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox19.Location = new System.Drawing.Point(518, 452);
             this.pictureBox19.Name = "pictureBox19";
             this.pictureBox19.Size = new System.Drawing.Size(66, 135);
@@ -380,10 +397,11 @@ namespace Tank
             this.pictureBox19.TabIndex = 23;
             this.pictureBox19.TabStop = false;
             this.pictureBox19.Tag = "Rock3";
+            this.pictureBox19.Visible = false;
             // 
             // pictureBox20
             // 
-            this.pictureBox20.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox20.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox20.Location = new System.Drawing.Point(793, 324);
             this.pictureBox20.Name = "pictureBox20";
             this.pictureBox20.Size = new System.Drawing.Size(48, 86);
@@ -391,10 +409,11 @@ namespace Tank
             this.pictureBox20.TabIndex = 24;
             this.pictureBox20.TabStop = false;
             this.pictureBox20.Tag = "Rock3";
+            this.pictureBox20.Visible = false;
             // 
             // pictureBox21
             // 
-            this.pictureBox21.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox21.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox21.Location = new System.Drawing.Point(209, 404);
             this.pictureBox21.Name = "pictureBox21";
             this.pictureBox21.Size = new System.Drawing.Size(110, 87);
@@ -402,10 +421,11 @@ namespace Tank
             this.pictureBox21.TabIndex = 25;
             this.pictureBox21.TabStop = false;
             this.pictureBox21.Tag = "Rock3";
+            this.pictureBox21.Visible = false;
             // 
             // pictureBox22
             // 
-            this.pictureBox22.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox22.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox22.Location = new System.Drawing.Point(104, 295);
             this.pictureBox22.Name = "pictureBox22";
             this.pictureBox22.Size = new System.Drawing.Size(118, 45);
@@ -413,10 +433,11 @@ namespace Tank
             this.pictureBox22.TabIndex = 26;
             this.pictureBox22.TabStop = false;
             this.pictureBox22.Tag = "Rock4";
+            this.pictureBox22.Visible = false;
             // 
             // pictureBox23
             // 
-            this.pictureBox23.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox23.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox23.Location = new System.Drawing.Point(847, 286);
             this.pictureBox23.Name = "pictureBox23";
             this.pictureBox23.Size = new System.Drawing.Size(71, 94);
@@ -424,10 +445,11 @@ namespace Tank
             this.pictureBox23.TabIndex = 27;
             this.pictureBox23.TabStop = false;
             this.pictureBox23.Tag = "Rock4";
+            this.pictureBox23.Visible = false;
             // 
             // pictureBox24
             // 
-            this.pictureBox24.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox24.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox24.Location = new System.Drawing.Point(327, 132);
             this.pictureBox24.Name = "pictureBox24";
             this.pictureBox24.Size = new System.Drawing.Size(51, 94);
@@ -435,10 +457,11 @@ namespace Tank
             this.pictureBox24.TabIndex = 28;
             this.pictureBox24.TabStop = false;
             this.pictureBox24.Tag = "Rock4";
+            this.pictureBox24.Visible = false;
             // 
             // pictureBox25
             // 
-            this.pictureBox25.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox25.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox25.Location = new System.Drawing.Point(346, 534);
             this.pictureBox25.Name = "pictureBox25";
             this.pictureBox25.Size = new System.Drawing.Size(32, 115);
@@ -446,10 +469,11 @@ namespace Tank
             this.pictureBox25.TabIndex = 29;
             this.pictureBox25.TabStop = false;
             this.pictureBox25.Tag = "Rock4";
+            this.pictureBox25.Visible = false;
             // 
             // pictureBox26
             // 
-            this.pictureBox26.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox26.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox26.Location = new System.Drawing.Point(793, 507);
             this.pictureBox26.Name = "pictureBox26";
             this.pictureBox26.Size = new System.Drawing.Size(118, 45);
@@ -457,10 +481,11 @@ namespace Tank
             this.pictureBox26.TabIndex = 30;
             this.pictureBox26.TabStop = false;
             this.pictureBox26.Tag = "Rock4";
+            this.pictureBox26.Visible = false;
             // 
             // pictureBox27
             // 
-            this.pictureBox27.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox27.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox27.Location = new System.Drawing.Point(904, 42);
             this.pictureBox27.Name = "pictureBox27";
             this.pictureBox27.Size = new System.Drawing.Size(199, 94);
@@ -468,10 +493,11 @@ namespace Tank
             this.pictureBox27.TabIndex = 31;
             this.pictureBox27.TabStop = false;
             this.pictureBox27.Tag = "Rock4";
+            this.pictureBox27.Visible = false;
             // 
             // pictureBox28
             // 
-            this.pictureBox28.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pictureBox28.BackColor = System.Drawing.Color.Transparent;
             this.pictureBox28.Location = new System.Drawing.Point(391, 295);
             this.pictureBox28.Name = "pictureBox28";
             this.pictureBox28.Size = new System.Drawing.Size(127, 75);
@@ -479,6 +505,7 @@ namespace Tank
             this.pictureBox28.TabIndex = 32;
             this.pictureBox28.TabStop = false;
             this.pictureBox28.Tag = "Rock4";
+            this.pictureBox28.Visible = false;
             // 
             // Map
             // 
