@@ -44,8 +44,7 @@ namespace Tank
                 GameOver gameOver = new GameOver(gh);
                 gameOver.Show();
             }
-            //Used for testing the game over logic
-            //player.playerHealth -= 1;
+           
 
             if (player.goLeft == true)
             {
@@ -145,7 +144,8 @@ namespace Tank
        
 
         /// <summary>
-        /// When the X is clicked on the form, open the main menu. 
+        /// Checks how the form was closed. If the player clicked the X and closed the form,
+        /// or if the form closed because the player died.
         /// Used code from https://stackoverflow.com/questions/1669318/override-standard-close-x-button-in-a-windows-form
         /// </summary>
         /// <param name="e"></param>
@@ -157,7 +157,6 @@ namespace Tank
                 || e.CloseReason == CloseReason.WindowsShutDown)
                 return;
 
-            //Test this to see if it works
             if (e.CloseReason == CloseReason.UserClosing)
             {
                 switch (MessageBox.Show(this, "Are you sure you want to close?", "Closing", MessageBoxButtons.YesNo))

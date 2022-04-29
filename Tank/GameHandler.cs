@@ -33,8 +33,8 @@ namespace Tank
         }
         List<Bullet> bullets = new();
         /// <summary> All bullets currently present in the map. </summary>
-        public List<Bullet> Bullets 
-        { 
+        public List<Bullet> Bullets
+        {
             get { return bullets; }
             private set { bullets = value; }
         }
@@ -92,55 +92,24 @@ namespace Tank
         /// <remarks> Should only be called once at the start to create the map/level/scene. </remarks>
         void InstantiateRocks()
         {
+            // Set all panels on the form to rocks
             foreach (Control ctrl in CurrentForm.Controls)
-                // Set all panels on the form to rocks
                 if (ctrl != null && (string)ctrl.Tag == "Rock" && level == 1)
                 {
-                    PictureBox pic = (PictureBox)ctrl;
-                    pic.Visible = true;
-                    Rock rock = new
-                        (
-                            this,
-                            pic
-                        );
-                    rocks.Add(rock);
-                } else if(ctrl != null && (string)ctrl.Tag == "Rock2" && level % 2 == 0)
+                    CreateRocks(ctrl);
+                }
+                else if (ctrl != null && (string)ctrl.Tag == "Rock2" && level % 2 == 0)
                 {
-                    //Add level 2 layout
-                    PictureBox pic = (PictureBox)ctrl;
-                    pic.Visible = true;
-                    pic.Image = Resources.Rock;
-                    Rock rock = new
-                        (
-                            this,
-                            pic
-                        );
-                    rocks.Add(rock);
-                } else if(ctrl != null && (string)ctrl.Tag == "Rock3" && level % 3 == 0)
+                    CreateRocks(ctrl);
+
+                }
+                else if (ctrl != null && (string)ctrl.Tag == "Rock3" && level % 3 == 0)
                 {
-                    //Add level 3 layout
-                    PictureBox pic = (PictureBox)ctrl;
-                    pic.Visible = true;
-                    pic.Image = Resources.Rock;
-                    Rock rock = new
-                        (
-                            this,
-                            pic
-                        );
-                    rocks.Add(rock);
+                    CreateRocks(ctrl);
                 }
                 else if (ctrl != null && (string)ctrl.Tag == "Rock4" && level % 5 == 0)
                 {
-                    //Add level 4 layout
-                    PictureBox pic = (PictureBox)ctrl;
-                    pic.Visible = true;
-                    pic.Image = Resources.Rock;
-                    Rock rock = new
-                        (
-                            this,
-                            pic
-                        );
-                    rocks.Add(rock);
+                    CreateRocks(ctrl);
                 }
         }
         /// <summary> Destroys all rocks currently present in the level. </summary>
@@ -152,6 +121,22 @@ namespace Tank
             rocks.Clear();
         }
 
+        /// <summary>
+        /// Creates rocks for new level layouts.
+        /// </summary>
+        /// <param name="ctrl"></param>
+        void CreateRocks(Control ctrl)
+        {
+            PictureBox pic = (PictureBox)ctrl;
+            pic.Visible = true;
+            pic.Image = Resources.Rock;
+            Rock rock = new
+                (
+                    this,
+                    pic
+                );
+            rocks.Add(rock);
+        }
         /// <summary>
         /// Instantiates the player game logic on the form control named <c>playerTank</c>.
         /// This is case-sensitive.
@@ -311,10 +296,13 @@ namespace Tank
             return null;
         }
 
+        /// <summary>
+        /// Checks the kill count condition so the player can progress to other levels.
+        /// </summary>
+        /// <returns></returns>
         public int GoNextLevel()
         {
-            // Moved all from NextLevel to this function
-             if (killCount % 2 == 0 && killCount != 0)
+            if (killCount % 2 == 0 && killCount != 0)
             {
                 level++;
                 DestroyRocks();
