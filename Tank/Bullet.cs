@@ -4,6 +4,10 @@ using System.Windows.Forms;
 
 namespace Tank
 {
+    /// <summary>
+    /// <include file='Authors.XML' path='Docs/Author[@name="Team"]/*' />
+    /// Bullet to be fired from tanks.
+    /// </summary>
     public class Bullet
     {
         #region Attributes
@@ -25,7 +29,10 @@ namespace Tank
 
 
         #region Initial
-        /// <summary> Creates and fires a bullet from the specified tank. </summary>
+        /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Team"]/*' />
+        /// Creates and fires a bullet from the specified tank.
+        /// </summary>
         /// <param name="gh"> Overhead game handler for the current form. </param>
         /// <param name="origin"> Tank this bullet has been fired from. </param>
         /// <param name="faction"> Faction of the tank firing this bullet. </param>

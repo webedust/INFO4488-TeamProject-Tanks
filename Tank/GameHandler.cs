@@ -12,6 +12,7 @@ using Tank.Properties;
 namespace Tank
 {
     /// <summary>
+    /// <include file='Authors.XML' path='Docs/Author[@name="Team"]/*' />
     /// Controls the game's flow
     /// and instantiates objects into the game world as needed.
     /// </summary>
@@ -59,25 +60,31 @@ namespace Tank
 
         #region Initial
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
         /// Handles all variable setting when the GameHandler is constructed.
         /// </summary>
         void BaseConstruct(Form currentForm)
         {
             this.currentForm = currentForm;
         }
-        /// <summary> Initializes the GameHandler object. </summary>
+        /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Initializes the GameHandler object. 
+        /// </summary>
         void Initialize()
         {
             timer = new();
             timer.Interval = interval;
             timer.Tick += AISpawnInterval;
-            //timer.Tick += NextLevel;
             timer.Start();
 
             InstantiatePlayer();
             InstantiateRocks();
         }
-        /// <summary> Constructs a new GameHandler for the form. </summary>
+        /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Constructs a new GameHandler for the form. 
+        /// </summary>
         /// <param name="currentForm"> The form to start the GameHandler on. </param>
         internal GameHandler(Form currentForm)
         {
@@ -87,6 +94,7 @@ namespace Tank
         #endregion
         #region Instantiation and Destruction
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Team"]/*' />
         /// Instantiates rocks as specified in a Map object.
         /// </summary>
         /// <remarks> Should only be called once at the start to create the map/level/scene. </remarks>
@@ -112,7 +120,10 @@ namespace Tank
                     CreateRocks(ctrl);
                 }
         }
-        /// <summary> Destroys all rocks currently present in the level. </summary>
+        /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Destroys all rocks currently present in the level. 
+        /// </summary>
         void DestroyRocks()
         {
             foreach (Rock rock in rocks)
@@ -122,9 +133,10 @@ namespace Tank
         }
 
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Team"]/*' />
         /// Creates rocks for new level layouts.
         /// </summary>
-        /// <param name="ctrl"></param>
+        /// <param name="ctrl"> Control to use for displaying the rock. </param>
         void CreateRocks(Control ctrl)
         {
             PictureBox pic = (PictureBox)ctrl;
@@ -138,6 +150,7 @@ namespace Tank
             rocks.Add(rock);
         }
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Team"]/*' />
         /// Instantiates the player game logic on the form control named <c>playerTank</c>.
         /// This is case-sensitive.
         /// </summary>
@@ -165,7 +178,10 @@ namespace Tank
         readonly int maxTanksAtOnce = 7;
         /// <summary> Number of alive enemy tanks currently on the screen. </summary>
         List<Tank> currentTanks = new();
-        /// <summary> Instantiates <b>enemy</b> tanks. </summary>
+        /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Instantiates <b>enemy</b> tanks. 
+        /// </summary>
         /// <remarks> Should be called on an interval to continually spawn in enemies. </remarks>
         void InstantiateTanks()
         {
@@ -227,7 +243,10 @@ namespace Tank
         /// from being incremented.
         /// </summary>
         bool destroyingTanks;
-        /// <summary> Destroys all <b>enemy</b> tanks currently present on the map. </summary>
+        /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Destroys all <b>enemy</b> tanks currently present on the map. 
+        /// </summary>
         /// <remarks> This does not count towards the player's kill count. </remarks>
         void DestroyTanks()
         {
@@ -241,6 +260,7 @@ namespace Tank
             destroyingTanks = false;
         }
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Team"]/*' />
         /// Call whenever an AI-controlled tank has been killed/destroyed
         /// to remove reference to it in the GameHandler.
         /// </summary>
@@ -258,6 +278,7 @@ namespace Tank
         void AISpawnInterval(object sender, EventArgs e)
             => InstantiateTanks();
         /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
         /// Iterates through all colliders in the current form
         /// to find the bullet that is using the collider that has been specified.
         /// </summary>
@@ -275,6 +296,7 @@ namespace Tank
             return null;
         }
         /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
         /// Iterates through all colliders in the current form
         /// to find the tank that is using the collider that has been specified.
         /// </summary>
@@ -297,9 +319,10 @@ namespace Tank
         }
 
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Kaiden"]/*' />
         /// Checks the kill count condition so the player can progress to other levels.
         /// </summary>
-        /// <returns></returns>
+        /// <returns> Level integer to go to. </returns>
         public int GoNextLevel()
         {
             if (killCount % 2 == 0 && killCount != 0)

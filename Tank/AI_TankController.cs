@@ -9,7 +9,10 @@ using System.Windows.Forms;
 
 namespace Tank
 {
-    /// <summary> Handles thinking for the enemy AI tanks. </summary>
+    /// <summary> 
+    /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+    /// Handles thinking for the enemy AI tanks. 
+    /// </summary>
     public class AI_TankController
     {
         #region Attributes
@@ -21,8 +24,6 @@ namespace Tank
         Tank tank;
         /// <summary> Tank object this AI is controlling. </summary>
         public Tank SelfTank { get { return tank; } }
-        #endregion
-        #region References
         Point destination;
         Timer makeDecisionTimer = new();
         /// <summary>
@@ -33,7 +34,10 @@ namespace Tank
 
 
         #region Initial
-        /// <summary> Attaches AI thinking to the specified tank. </summary>
+        /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Attaches AI thinking to the specified tank. 
+        /// </summary>
         /// <param name="gh"> Overhead game handler. </param>
         /// <param name="tank"> Tank this AI should be controlling. </param>
         internal AI_TankController(GameHandler gh, Tank tank)
@@ -62,7 +66,9 @@ namespace Tank
         }
         #endregion
         #region Events
-        /// <summary> AI's tank is destroyed. </summary>
+        /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// AI's tank is destroyed. </summary>
         void Die(object sender, EventArgs e)
         {
             makeDecisionTimer.Stop();
@@ -75,6 +81,7 @@ namespace Tank
         }
         void MakeDecisionLoop(object sender, EventArgs e) => MakeDecision();
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
         /// Called when the obstacle navigation timer has a tick, which,
         /// in this use case, indicates that the timer has finished.
         /// Therefore, normal navigation should resume.
@@ -85,7 +92,10 @@ namespace Tank
             obstacleNavigationTimer.Stop();
         }
         #endregion
-        /// <summary> AI makes a decision on how they should act. </summary>
+        /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// AI makes a decision on how they should act. 
+        /// </summary>
         void MakeDecision()
         {
             Point current = tank.Pic.Location;
@@ -120,6 +130,7 @@ namespace Tank
             }
         }
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
         /// Calculates a distance to move towards between the AI's current position
         /// and the specified point.
         /// </summary>
@@ -131,6 +142,10 @@ namespace Tank
             if (tank.Col.TryMove(nextPos) != null)
                 StartObstacleResolution();
         }
+        /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Overrides normal movement for the AI to try to get around an obstacle.
+        /// </summary>
         void StartObstacleResolution()
         {
             if (navigatingAroundObstacle)

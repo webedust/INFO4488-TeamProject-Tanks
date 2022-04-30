@@ -4,6 +4,10 @@ using System.Windows.Forms;
 
 namespace Tank
 {
+    /// <summary>
+    /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+    /// Plays a sequence of bitmaps at a specified interval to make an animation.
+    /// </summary>
     internal class BitmapAnimation
     {
         #region Attributes
@@ -31,6 +35,7 @@ namespace Tank
 
 
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
         /// Constructs a new bitmap animation that plays the specified sequence
         /// at the given interval.
         /// </summary>
@@ -73,9 +78,15 @@ namespace Tank
 
             SetImageToCurrentIndex();
         }
-        /// <summary> Sets the Picture Box's image to the bitmap at the current index. </summary>
+        /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Sets the Picture Box's image to the bitmap at the current index. 
+        /// </summary>
         void SetImageToCurrentIndex() => pic.Image = sequence[currentIndex];
-        /// <summary> Dispose of this bitmap animation object. </summary>
+        /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Dispose of this bitmap animation object. 
+        /// </summary>
         public void Dispose()
         {
             currentForm.Controls.Remove(pic);

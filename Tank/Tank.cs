@@ -9,6 +9,10 @@ using System.Windows.Forms;
 
 namespace Tank
 {
+    /// <summary>
+    /// <include file='Authors.XML' path='Docs/Author[@name="Team"]/*' />
+    /// A tank vehicle with movement and shooting capabilities.
+    /// </summary>
     public class Tank
     {
         /// <summary> Factions a tank can belong to. </summary>
@@ -140,7 +144,10 @@ namespace Tank
             rofTimer.Tick += GunCooldown;
         }
         #endregion
-        /// <summary> Player moves the tank in the specified direction. </summary>
+        /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Team"]/*' />
+        /// Player moves the tank in the specified direction. 
+        /// </summary>
         public void PlayerMove(Utils.CardinalDirections dir)
         {
             direction = dir;
@@ -167,6 +174,7 @@ namespace Tank
             Move(moveTo);
         }
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
         /// Turns the tank the current direction it should be facing
         /// by switching width and height.
         /// </summary>
@@ -198,6 +206,11 @@ namespace Tank
                     break;
             }
         }
+        /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Team"]/*' />
+        /// Moves the tank object to the specified location.
+        /// </summary>
+        /// <param name="loc"> Location to move the tank to. </param>
         void Move(Point loc)
         {
             Collider colAtPos = null;
@@ -232,6 +245,7 @@ namespace Tank
             }
         }
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Team"]/*' />
         /// Allows for the tank to shoot a projectile depending on the direction.
         /// </summary>
         public void Shoot()
@@ -244,13 +258,17 @@ namespace Tank
 
             Bullet bullet = new(gh, this, SelfFaction);
         }
-        /// <summary> Cooldown timer event before the tank can be fired again. </summary>
+        /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Cooldown timer event before the tank can be fired again. 
+        /// </summary>
         void GunCooldown(object sender, EventArgs e)
         {
             canShoot = true;
             rofTimer.Stop();
         }
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Kaiden"]/*' />
         /// When a tank is hit cause it to take damage
         /// </summary>
         /// <param name="damage"> How much damage a tank will take. </param>
@@ -260,6 +278,11 @@ namespace Tank
             if (health <= 0)
                 Death();
         }
+        /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Team"]/*' />
+        /// Tank is destroyed or killed.
+        /// Disposes of all associated components and removes the tank from the form.
+        /// </summary>
         void Death()
         {
             rofTimer.Stop();

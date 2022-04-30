@@ -10,6 +10,9 @@ using System.Windows.Forms;
 
 namespace Tank
 {
+    /// <summary>
+    /// <include file='Authors.XML' path='Docs/Author[@name="Kaiden"]/*' />
+    /// </summary>
     public partial class MainMenu : Form
     {
         public MainMenu()
@@ -27,12 +30,10 @@ namespace Tank
             Hide();
         }
 
-        void btnExitGame_Click(object sender, EventArgs e)
-        {
-            Application.Exit();
-        }
+        void btnExitGame_Click(object sender, EventArgs e) => Application.Exit();
 
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Kaiden"]/*' />
         /// Swaps panel focus to the instruction panel.
         /// </summary>
         /// <param name="sender"></param>
@@ -44,6 +45,7 @@ namespace Tank
         }
 
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Kaiden"]/*' />
         /// Swaps panel focus to the credits panel.
         /// </summary>
         /// <param name="sender"></param>
@@ -54,6 +56,7 @@ namespace Tank
             menuPanel.Visible = false;
         }
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Kaiden"]/*' />
         /// Swaps panel focus back to the main menu panel 
         /// when on one of the other two panels.
         /// </summary>
@@ -66,6 +69,7 @@ namespace Tank
             menuPanel.Visible = true;
         }
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Kaiden"]/*' />
         /// When the X is clicked on the form, open the main menu. 
         /// Used code from https://stackoverflow.com/questions/1669318/override-standard-close-x-button-in-a-windows-form
         /// </summary>

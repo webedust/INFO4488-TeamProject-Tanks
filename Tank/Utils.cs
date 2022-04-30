@@ -8,7 +8,10 @@ using System.Threading.Tasks;
 
 namespace Tank
 {
-    /// <summary> Common functions for use in Windows Forms applications. </summary>
+    /// <summary>
+    /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+    /// Common functions for use in Windows Forms applications. 
+    /// </summary>
     public static class Utils
     {
         public enum CardinalDirections
@@ -18,7 +21,10 @@ namespace Tank
             East,
             West
         }
-        /// <summary> Calculates the distance in pixels between two points. </summary>
+        /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Calculates the distance in pixels between two points. 
+        /// </summary>
         /// <param name="a"> Point to start measurement from. </param>
         /// <param name="b"> Point to end measurement at. </param>
         /// <returns> Distance in pixels between two points as an integer. </returns>
@@ -31,6 +37,7 @@ namespace Tank
             return (int)MathF.Sqrt(distX * distX + distY * distY);
         }
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
         /// Moves closer to a destination point,
         /// but only as close as provided by the maxDistance parameter.
         /// </summary>
@@ -65,6 +72,7 @@ namespace Tank
             return new(xPos, yPos);
         }
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
         /// Determines the direction to make the starting point face the end point.
         /// </summary>
         /// <param name="start"> Starting point of the calculation. </param>

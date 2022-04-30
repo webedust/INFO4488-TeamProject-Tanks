@@ -141,9 +141,10 @@ namespace Tank
             }
         }
 
-       
+
 
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Team"]/*' />
         /// Checks how the form was closed. If the player clicked the X and closed the form,
         /// or if the form closed because the player died.
         /// Used code from https://stackoverflow.com/questions/1669318/override-standard-close-x-button-in-a-windows-form

@@ -3,7 +3,10 @@ using System.Windows.Forms;
 
 namespace Tank
 {
-    /// <summary> A rock world object that other tanks can collide with. </summary>
+    /// <summary> 
+    /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+    /// A rock world object that other tanks can collide with. 
+    /// </summary>
     internal class Rock
     {
         #region Attributes
@@ -30,6 +33,12 @@ namespace Tank
 
 
         #region Initial
+        /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Constructs a basic rock with an associated collider.
+        /// </summary>
+        /// <param name="gh"> GameHandler creating this rock. </param>
+        /// <param name="pic"> PictureBox being used to display this rock to the UI. </param>
         internal Rock(GameHandler gh, PictureBox pic)
         {
             this.gh = gh;

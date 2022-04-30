@@ -9,7 +9,10 @@ using System.Windows.Forms;
 
 namespace Tank
 {
-    /// <summary> Allows world objects to have collisions between them. </summary>
+    /// <summary> 
+    /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+    /// Allows world objects to have collisions between them. 
+    /// </summary>
     public class Collider
     {
         #region Attributes
@@ -48,7 +51,10 @@ namespace Tank
 
 
         #region Initial
-        /// <summary> Creates a new collider object with the specified shape. </summary>
+        /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Creates a new collider object with the specified shape. 
+        /// </summary>
         /// <param name="gh"> GameHandler object. </param>
         /// <param name="ctrl"> Windows Form control to use for this collider's world space coordinates. </param>
         internal Collider(GameHandler gh, Control ctrl)
@@ -58,6 +64,11 @@ namespace Tank
             Control = ctrl;
         }
         #endregion
+        /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Checks whether this collider can move in any cardinal direction
+        /// to determine if it is stuck.
+        /// </summary>
         /// <param name="moveBy">
         /// Maximum pixel distance to test each possible movement direction.
         /// In most cases this will be the speed the collider can be moved at.
@@ -79,10 +90,15 @@ namespace Tank
 
             return north != null && south != null && east != null && west != null;
         }
-        /// <summary> Attempts to move to the specified position. </summary>
+        /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Attempts to move to the specified position. 
+        /// </summary>
         /// <param name="moveTo"> Position to move towards. </param>
-        /// <returns> Null if successfully moved.
-        /// If this collider cannot be moved then the blocking collider is returned. </returns>
+        /// <returns>
+        /// The collider at the point that is being attempted to be moved to,
+        /// or null if no colliders are blocking the move point.
+        /// </returns>
         public Collider TryMove(Point moveTo)
         {
             Collider obstacleCol = IsColliderAtPoint(moveTo);
@@ -93,10 +109,14 @@ namespace Tank
 
             return obstacleCol;
         }
-        /// <summary> Moves to the specified position even if another collider is there. </summary>
+        /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Moves to the specified position even if another collider is there. 
+        /// </summary>
         /// <param name="moveTo"> Position to move towards. </param>
         public void ForceMove(Point moveTo) => Control.Location = moveTo;
         /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
         /// Iterates through all colliders currently present on the form
         /// and checks if any are intersecting with this collider
         /// if it were to be moved to the specified point.
@@ -151,7 +171,10 @@ namespace Tank
 
             return obstacleCol;
         }
-        /// <summary> Destroys this collider and all references associated with it. </summary>
+        /// <summary> 
+        /// <include file='Authors.XML' path='Docs/Author[@name="Dustin"]/*' />
+        /// Destroys this collider and all references associated with it. 
+        /// </summary>
         public void Destroy()
         {
             gh.Colliders.Remove(this);
