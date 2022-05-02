@@ -14,6 +14,9 @@ namespace Tank
 
     public partial class GameOver : Form
     {
+        /// <summary>
+        /// <include file='Authors.XML' path='Docs/Author[@name="Team"]/*' />
+        /// </summary>
         #region Attributes
         /// <summary> Determines where to go after the Game Over form is closed. </summary>
         bool closingToMenu;

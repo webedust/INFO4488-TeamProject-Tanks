@@ -11,6 +11,9 @@ using System.Windows.Forms;
 
 namespace Tank
 {
+    /// <summary>
+    /// <include file='Authors.XML' path='Docs/Author[@name="Kaiden"]/*' />
+    /// </summary>
     public partial class Map : Form
     {
         #region References
